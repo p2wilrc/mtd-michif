@@ -97,6 +97,7 @@
     "word-modal": {
       "audio": "Audio",
       "audio-instructions": "Click on the audio below to listen to '{{value}}'",
+      "examples": "Examples",
       "exit": "exit"
     }
   }

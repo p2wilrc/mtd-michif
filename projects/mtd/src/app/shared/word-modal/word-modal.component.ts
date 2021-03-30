@@ -42,7 +42,7 @@ export class WordModalComponent implements OnInit {
     this.checkedOptions = this.optionalSelection;
 
     try {
-      this.image = 'assets/img/' + this.entry.img;
+      this.image = 'assets/img/' + this.data.entry.img;
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +84,15 @@ export class WordModalComponent implements OnInit {
         return notEmpty;
       });
       return audio.length > 0;
+    } else {
+      return false;
+    }
+  }
+
+  hasExample() {
+    console.log(this.data.entry);
+    if ('example_sentence' in this.data.entry) {
+      return true;
     } else {
       return false;
     }
