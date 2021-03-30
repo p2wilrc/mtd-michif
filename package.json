@@ -4,10 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
-    "start:prod": "npm run build:prod && npm run server",
-    "build": "ng build",
-    "build:prod": "ng build --prod",
+    "start": "npm run build:prod && npm run server",
+    "build": "ng build --prod",
     "build:ci": "ng build --prod --base-href /mothertongues-UI-Web/",
     "minify": "uglifyjs projects/mtd/src/assets/js/mtd.js projects/mtd/src/assets/js/levenshtein.js projects/mtd/src/assets/js/editDistance.js projects/mtd/src/assets/js/utility.js projects/mtd/src/assets/js/deadSearch.js -o projects/mtd/src/assets/js/mtd-ui.min.js",
     "lint": "ng lint",
