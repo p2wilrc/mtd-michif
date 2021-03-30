@@ -110,6 +110,7 @@
             "assets": [
               "projects/mtd/src/favicon.ico",
               "projects/mtd/src/assets",
+              "projects/mtd/src/assets/audio",
               "projects/mtd/src/manifest.webmanifest"
             ],
             "styles": [

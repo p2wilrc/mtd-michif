@@ -41,18 +41,17 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () =>
       import('./pages/settings/settings.module').then(m => m.SettingsModule)
-  },
-  {
-    path: '**',
-    redirectTo: 'home'
   }
+  //{
+  //  path: '**',
+  //  redirectTo: 'home'
+  //}
 ];
 
 @NgModule({
   // useHash supports github.io demo page, remove in your app
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: true,
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: PreloadAllModules
     })

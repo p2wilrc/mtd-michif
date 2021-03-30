@@ -10,7 +10,12 @@
         <button mat-icon-button aria-label="Show More information" (click)="showModal(entry)">
           <mat-icon>list</mat-icon>
         </button>
-        <button [disabled]='!hasAudio(entry)' mat-icon-button aria-label="Play Audio" (click)='playDefaultAudio(entry)'>
+        <button mat-icon-button aria-label="Play Audio" (click)='playDefaultAudio(entry)'
+          *ngIf='hasAudio(entry)'>
+          <mat-icon>audiotrack</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Play Audio" disabled
+          *ngIf='!hasAudio(entry)'>
           <mat-icon>audiotrack</mat-icon>
         </button>
 
