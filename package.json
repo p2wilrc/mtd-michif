@@ -74,6 +74,7 @@
     "tslib": "^1.10.0",
     "uuid": "^3.4.0",
     "zone.js": "~0.10.2",
+    "express": "^4.16.4",
     "@angular/cli": "~9.1.0"
   },
   "devDependencies": {
