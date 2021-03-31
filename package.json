@@ -4,10 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "lite-server --baseDir='dist/mtd'",
-    "start:prod": "lite-server --baseDir='dist/mtd'",
+    "start": "ng serve --open",
+    "start:prod": "npm run build:prod && npm run server",
     "build:prod": "ng build --prod",
-    "build": "ng build --prod",
+    "build": "ng build",
     "build:ci": "ng build --prod --base-href /mothertongues-UI-Web/",
     "minify": "uglifyjs projects/mtd/src/assets/js/mtd.js projects/mtd/src/assets/js/levenshtein.js projects/mtd/src/assets/js/editDistance.js projects/mtd/src/assets/js/utility.js projects/mtd/src/assets/js/deadSearch.js -o projects/mtd/src/assets/js/mtd-ui.min.js",
     "lint": "ng lint",
@@ -21,11 +21,12 @@
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
     "release": "standard-version && git push --follow-tags origin master",
     "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/mtd/stats-es2015.json",
-    "server": "node ./projects/server/server.js",
+    "server": "node ./server.js",
     "extract-translations": "ngx-translate-extract --input ./projects/mtd/src --output ./projects/mtd/src/assets/i18n/*.json --sort --format namespaced-json --null-as-default-value --marker _",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate && node .all-contributors-html.js",
-    "contributors:check": "all-contributors check"
+    "contributors:check": "all-contributors check",
+    "postinstall": "ng build --aot --prod"
   },
   "husky": {
     "hooks": {
@@ -91,9 +92,9 @@
     "karma-jasmine": "~3.1.0",
     "karma-jasmine-html-reporter": "^1.5.2",
     "karma-spec-reporter": "^0.0.32",
-    "lite-server": "^2.6.1",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "protractor": "^5.4.3",
@@ -144,5 +145,9 @@
     "typescript": "~3.7.5",
     "uglifyjs": "^2.4.11",
     "webpack-bundle-analyzer": "^3.6.0"
+  },
+  "engines": {
+    "node": "~15.12.0",
+    "npm": "~7.7.6"
   }
 }
