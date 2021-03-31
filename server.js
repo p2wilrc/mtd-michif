@@ -5,7 +5,7 @@ const compression = require('compression');
 const app = express();
 
 app.use(compression());
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + 'dist/mtd/'));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/mtd/index.html'));
 });
