@@ -5,7 +5,7 @@ export const environment = {
   envName: 'PROD',
   production: true,
   test: false,
-  i18nPrefix: '/mothertongues-UI-Web',
+  i18nPrefix: '',
   apiBaseURL: 'http://localhost:5000',
   remoteData: false,
   remoteConfig: false,
