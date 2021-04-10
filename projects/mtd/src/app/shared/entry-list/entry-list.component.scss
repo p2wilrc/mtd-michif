@@ -31,8 +31,8 @@
   }
 
   &__term {
+    text-align: left;
     display: table-cell;
-    text-align: center;
     vertical-align: middle;
     padding: 8px 0;
     &__container {
@@ -56,12 +56,22 @@
   }
 }
 
-.entry {
+.entry-list {
   &__audio {
     &__button {
       // color: map-deep-get($ui-colors, accent, color);
     }
-    &__container {
-    }
+  }
+  &__container {
+    min-height: 60vh;
+    max-height: 400px;
+  }
+  &__title {
+    padding: 20px;
+    text-align: center;
+  }
+  &__viewport {
+    min-height: 60vh;
+    max-height: 400px;
   }
 }

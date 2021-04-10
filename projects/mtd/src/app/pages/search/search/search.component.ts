@@ -4,8 +4,14 @@ import {
   OnInit,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import {
+  takeUntil,
+  map,
+  tap,
+  distinctUntilChanged,
+  debounceTime
+} from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { DictionaryData } from '../../../core/models';
 import {
@@ -28,9 +34,7 @@ import { slugify } from 'transliteration';
 export class SearchComponent implements OnDestroy, OnInit {
   entries: DictionaryData[];
   entries$: Observable<DictionaryData[]>;
-  matches: DictionaryData[] = [];
-  partMatches: DictionaryData[] = [];
-  maybeMatches: DictionaryData[] = [];
+  matches$: BehaviorSubject<DictionaryData[]> = new BehaviorSubject([]);
   matchThreshold = 0;
   partialThreshold = 1;
   maybeThreshold = 2;
@@ -41,6 +45,8 @@ export class SearchComponent implements OnDestroy, OnInit {
   language$: Observable<string>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   unsubscribe$ = new Subject<void>();
+  onSearchKeyUp = new Subject<string>();
+  loading$ = new BehaviorSubject<boolean>(false);
   constructor(private mtdService: MtdService) {
     this.entries$ = this.mtdService.dataDict$;
     this.searchControl = new FormControl();
@@ -55,6 +61,16 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.entries$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(entries => (this.entries = entries));
+    this.onSearchKeyUp
+      .pipe(
+        tap(x => this.loading$.next(true)),
+        map(event => event['target'].value),
+        debounceTime(200)
+      )
+      .subscribe(x => {
+        this.getResults(x);
+        this.loading$.next(false);
+      });
     // this.results$ = this.searchQuery$.pipe(
     //   distinctUntilChanged(),
     //   debounceTime(100),
@@ -91,10 +107,10 @@ export class SearchComponent implements OnDestroy, OnInit {
     return sorted_answers.slice(0, 9);
   }
 
-  onSearchKeyUp(e: KeyboardEvent) {
-    this.getResults((e.target as HTMLInputElement).value);
-    // this.searchQuery$.next((e.target as HTMLInputElement).value);
-  }
+  // onSearchKeyUp(e: KeyboardEvent) {
+  //   this.getResults((e.target as HTMLInputElement).value);
+  //   // this.searchQuery$.next((e.target as HTMLInputElement).value);
+  // }
 
   filterMatches(results) {
     return results.filter(r => r.distance <= this.matchThreshold);
@@ -259,9 +275,18 @@ export class SearchComponent implements OnDestroy, OnInit {
           ) === index
       );
       mergeMatches();
-      this.matches = matches;
-      this.partMatches = partMatches;
-      this.maybeMatches = maybeMatches;
+      this.loading$.next(false);
+      // Add headers
+      if (matches.length) {
+        matches.unshift({ title: 'mtd.pages.search.matches' });
+      }
+      if (partMatches.length) {
+        partMatches.unshift({ title: 'mtd.pages.search.partial-matches' });
+      }
+      if (maybeMatches.length) {
+        maybeMatches.unshift({ title: 'mtd.pages.search.maybe-matches' });
+      }
+      this.matches$.next(matches.concat(partMatches).concat(maybeMatches));
     }
     // console.log('get results');
     // if (searchQuery && searchQuery.length > 1) {

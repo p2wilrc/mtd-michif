@@ -44,7 +44,7 @@
           {{ example }}
         </p>
       </div>
-      <div class='container__row audio__buttons centered'>
+      <div class='container__row audio__buttons centered' *ngIf='data.entry.example_sentence_audio.filename'>
         <button class="audio__button" mat-raised-button
           (click)="playAudio(data.entry.example_sentence_audio.filename)">
           {{ data.entry.example_sentence_audio.speaker }} <mat-icon class="audio__icon">audiotrack</mat-icon>
