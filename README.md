@@ -1,4 +1,4 @@
-# Mother Tongues Dictionaries Web UI (MTD-UI-Web)
+# Mother Tongues Dictionaries Web UI for Michif
 
 _This repo is under construction and could change drastically in the coming months with breaking changes._
 
@@ -7,7 +7,11 @@ _This repo is under construction and could change drastically in the coming mont
 [![license](https://img.shields.io/github/license/MotherTongues/mothertongues-UI-Web.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-MTD is the second of two open-source tools that allow language communities and developers to quickly and inexpensively make their dictionary data digitally accessible. MTD-UI is a tool that visualizes dictionary data that is prepared with [MTD](https://github.com/roedoejet/mothertongues). This is the web version.
+MTD is the second of two open-source tools that allow language communities and
+developers to quickly and inexpensively make their dictionary data digitally
+accessible. MTD-UI is a tool that visualizes dictionary data that is prepared
+with [MTD](https://github.com/roedoejet/mothertongues). This is a web version
+constructed for the Michif language.
 
 Please visit the [website](https://www.mothertongues.org) or [docs](https://mother-tongues-dictionaries.readthedocs.io/en/latest/) for more information.
 
@@ -23,17 +27,18 @@ Please visit the [website](https://www.mothertongues.org) or [docs](https://moth
 
 ## Background
 
-This is a basic [Angular](https://angular.io/) app for displaying Mother Tongues Dictionaries data. Other frontends are in development. For the mobile version, go [here](https://github.com/roedoejet/mothertongues-UI)
+This is a basic [Angular](https://angular.io/) app for displaying Mother
+Tongues Dictionaries data for Michif. Other frontends are in development. For
+the mobile version, go [here](https://github.com/roedoejet/mothertongues-UI)
 
 **Note** - Just because you _can_ make an online dictionary does _not_ mean you _should_. Before making a dictionary, you must have clear consent from the language community in order to publish a dictionary. For some background on why this is important, please read sections 1 and 2.1 [here](http://oxfordre.com/linguistics/view/10.1093/acrefore/9780199384655.001.0001/acrefore-9780199384655-e-8)
 
 ## Usage
 
-In order to use MTD-UI you must have a generated language configuration file and generated dictionary data from [MTD](https://github.com/roedoejet/mothertongues).
-
-## Contributing
-
-PRs accepted. If you would like to create more MTD-UIs those are also accepted.
+In order to use MTD-UI you must have a generated language configuration file
+and generated dictionary data from
+[MTD](https://github.com/roedoejet/mothertongues). These have already been
+incorporated into the repository.
 
 ## Acknowledgements
 
