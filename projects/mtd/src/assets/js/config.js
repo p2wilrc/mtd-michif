@@ -65,6 +65,6 @@ var config = {
     }
   },
   L2: { name: 'English' },
-  build: '202105061508',
+  build: '202105302357',
   audio_path: 'assets/'
 };
