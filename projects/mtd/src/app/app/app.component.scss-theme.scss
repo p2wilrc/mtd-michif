@@ -36,7 +36,7 @@
       .mat-list-item {
         &.active {
           color: mat-color($accent, default-contrast);
-          background-color: mat-color($accent) !important;
+          background-color: #cd2d27;
 
           &:hover {
             background-color: mat-color($accent, darker) !important;
