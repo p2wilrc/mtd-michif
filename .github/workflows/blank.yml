@@ -29,6 +29,7 @@ jobs:
         run: npm run-script build:ci
       - name: directory check
         run: |
+             ls 
              cd projects/mtd
              ls -al
 
