@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI/CD
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -40,7 +40,17 @@ jobs:
           key: ${{ secrets.KEY }}
           source: "dist/mtd.tar"
           target: "/root/"          
-
+      - name: Moving files to target directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+                  # whoami
+                  cd /root/dist/
+                  ./server_trigger.sh
       #- name: deploy
        # uses: JamesIves/github-pages-deploy-action@3.5.7
         #with:
