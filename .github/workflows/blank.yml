@@ -44,6 +44,10 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
+      - name: make a tar file
+        run: |
+             cd dist/
+             tar -czvf mtd.tar mtd/
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
         with:
@@ -51,5 +55,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: "dist/mtd/*"
-          target: "/root/mtd"      
+          source: "dist/mtd.tar*"
+          target: "/root/"      
