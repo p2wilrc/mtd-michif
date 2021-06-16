@@ -28,9 +28,8 @@ jobs:
       - name: build
         run: npm run-script build:ci
       - name: directory check
-        run: |
-             ls dist/ 
-             cd projects/mtd
+        run: | 
+             cd dist/mtd
              ls -al
 
       #- name: deploy
@@ -40,16 +39,16 @@ jobs:
           #BRANCH: gh-pages
           #FOLDER: dist/mtd
 
-  #deploy:
-   # runs-on: ubuntu-latest
-    #steps:
-     # - uses: actions/checkout@v2
-      #- name: copy file via ssh key
-       # uses: appleboy/scp-action@master
-        #with:
-         # host: ${{ secrets.HOST }}
-          #username: ${{ secrets.USERNAME }}
-          #port: ${{ secrets.PORT }}
-          #key: ${{ secrets.KEY }}
-          #source: "docker-compose-main.yml,main-docker-deployment.sh"
-          #target: "/home/alexp/Main-Branch/"      
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: "dist/mtd/*"
+          target: "/root/mtd"      
