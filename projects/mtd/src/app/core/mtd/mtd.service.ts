@@ -102,18 +102,19 @@ export class MtdService {
   }
 
   private shuffle(array) {
+    let copy = array.map(x => x);
     let tmp,
       current,
-      top = array.length;
+      top = copy.length;
     if (top) {
       while (--top) {
         current = Math.floor(Math.random() * (top + 1));
-        tmp = array[current];
-        array[current] = array[top];
-        array[top] = tmp;
+        tmp = copy[current];
+        copy[current] = copy[top];
+        copy[top] = tmp;
       }
     }
-    return array;
+    return copy;
   }
 
   slugify(text) {
