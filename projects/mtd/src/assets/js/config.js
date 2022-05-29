@@ -2,32 +2,6 @@ var config = {
   L1: {
     name: 'Michif',
     lettersInLanguage: [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
       'a',
       'b',
       'c',
@@ -55,16 +29,9 @@ var config = {
       'y',
       'z'
     ],
-    transducers: {
-      'michif-approx': [
-        { aw: 'aa' },
-        { ay: 'ee' },
-        { ae: 'a\u00f1' },
-        { eu: 'u' }
-      ]
-    }
+    transducers: { 'michif-approx': [{ h: 'h' }] }
   },
   L2: { name: 'English' },
-  build: '202107131818',
+  build: '202205141900',
   audio_path: 'assets/'
 };

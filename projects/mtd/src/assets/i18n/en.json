@@ -51,7 +51,7 @@
         "showing": "Showing entries {{ startIndex }} to {{ endIndex }} of {{ length }}"
       },
       "home": {
-        "slogan": "Welcome to the {{ value }} Mother Tongues Dictionary!",
+        "slogan": "Welcome to the Michif Talking Dictionary, a digital adaptation of the The Michif Dictionary Turtle Mountain Chippewa Cree by Ida Rose Allard, Patline Laverdure and John Crawford, copyright Turtle Mountain Community College.",
         "sub-slogan": "To get started, click on the search button above, and start learning!"
       },
       "random": {

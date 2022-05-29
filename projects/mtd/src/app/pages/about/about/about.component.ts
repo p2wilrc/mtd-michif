@@ -21,6 +21,8 @@ export interface Contributor {
 export class AboutComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   contributors = META.contributors;
+  tmd = 'assets/tmd.png';
+  funding = 'assets/funding.png';
   constructor() {}
 
   ngOnInit() {}
