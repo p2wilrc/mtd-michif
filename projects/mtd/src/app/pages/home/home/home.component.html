@@ -2,10 +2,31 @@
     <div class="gradient">
         <div class='container page__content'>
             <div class='slogan__container' [ngClass]="routeAnimationsElements">
-                <h3 class='slogan'>{{ 'mtd.pages.home.slogan' | translate: { value: (mtdService.config$ | async)?.L1.name } }}</h3>
-                <div>
-                    <p class='sub-slogan'>{{ 'mtd.pages.home.sub-slogan' | translate }}</p>
-                </div>
+				<!-- Temporary version without translation -->
+				<h3 class='slogan'>
+					Welcome to the Michif Talking Dictionary
+				</h3>
+
+				<div>
+					<p class='sub-slogan'>
+					A digital adaptation of the <i>The Michif Dictionary Turtle
+						Mountain Chippewa Cree</i><br/>
+					by Ida Rose Allard, Patline Laverdure and John Crawford<br/>
+					&#169;1983 Turtle Mountain Community College
+					</p>
+					<p class='sub-slogan'>
+					To get started, click on the search button to start
+					learning!
+					</p>
+
+					<button class='accent-contrast' 
+							mat-raised-button
+							[routerLink]="['/search']"
+						    routerLinkActive="active"
+						    color='accent'>
+						Search
+					</button>
+				</div>
             </div>
         </div>
     </div>

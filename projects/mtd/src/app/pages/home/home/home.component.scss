@@ -1,8 +1,9 @@
 .slogan {
   font-size: xx-large;
   &__container {
-    width: fit-content;
+    width: 100%;
     padding: 15px;
     border-radius: 10px;
+    text-align: center;
   }
 }
