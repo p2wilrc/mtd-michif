@@ -1,0 +1,24 @@
+.slogan {
+  font-size: xx-large;
+  &__container {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+}
+
+.centered-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+mat-sidenav-container {
+  .wrapper {
+    .content {
+      margin: 0 !important;
+    }
+  }
+}

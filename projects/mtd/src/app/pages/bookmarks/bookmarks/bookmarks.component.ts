@@ -22,6 +22,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksComponent implements OnDestroy, OnInit {
+  displayNav = true;
   bookmarks: DictionaryData[];
   edit = false;
   unsubscribe$ = new Subject<void>();

@@ -6,17 +6,18 @@ import {
 
 @Component({
   selector: 'mtd-home',
-  templateUrl: './home.component.html',
+  templateUrl: './construction.component.html',
   styleUrls: [
-    './home.component.scss',
+    './construction.component.scss',
     '../../about/about/about.component.scss',
     '../../../../app/app/app.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
+export class ConstructionComponent implements OnInit {
+  displayNav = false;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  displayNav = true;
+  construction = 'assets/construction.png';
   constructor(public mtdService: MtdService) {}
 
   ngOnInit(): void {}

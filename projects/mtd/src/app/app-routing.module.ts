@@ -4,41 +4,48 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dev/construction',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'dev/construction',
+    loadChildren: () =>
+      import('./pages/construction/construction.module').then(
+        m => m.ConstructionModule
+      )
+  },
+  {
+    path: 'dev/home',
     loadChildren: () =>
       import('./pages/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'about',
+    path: 'dev/about',
     loadChildren: () =>
       import('./pages/about/about.module').then(m => m.AboutModule)
   },
   {
-    path: 'browse',
+    path: 'dev/browse',
     loadChildren: () =>
       import('./pages/browse/browse.module').then(m => m.BrowseModule)
   },
   {
-    path: 'bookmarks',
+    path: 'dev/bookmarks',
     loadChildren: () =>
       import('./pages/bookmarks/bookmarks.module').then(m => m.BookmarksModule)
   },
   {
-    path: 'random',
+    path: 'dev/random',
     loadChildren: () =>
       import('./pages/random/random.module').then(m => m.RandomModule)
   },
   {
-    path: 'search',
+    path: 'dev/search',
     loadChildren: () =>
       import('./pages/search/search.module').then(m => m.SearchModule)
   },
   {
-    path: 'settings',
+    path: 'dev/settings',
     loadChildren: () =>
       import('./pages/settings/settings.module').then(m => m.SettingsModule)
   }
