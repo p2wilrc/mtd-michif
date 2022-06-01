@@ -19,6 +19,7 @@ export interface Contributor {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements OnInit {
+  displayNav = true;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   contributors = META.contributors;
   tmd = 'assets/tmd.png';

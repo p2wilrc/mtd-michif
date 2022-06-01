@@ -32,6 +32,7 @@ import { slugify } from 'transliteration';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnDestroy, OnInit {
+  displayNav = true;
   entries: DictionaryData[];
   entries$: Observable<DictionaryData[]>;
   matches$: BehaviorSubject<DictionaryData[]> = new BehaviorSubject([]);

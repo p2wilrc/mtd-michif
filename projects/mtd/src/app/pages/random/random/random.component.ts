@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomComponent implements OnInit {
+  displayNav = true;
   entries$: Observable<DictionaryData[]>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   constructor(private mtdService: MtdService) {}

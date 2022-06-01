@@ -8,4 +8,6 @@ import { BrowseRoutingModule } from './browse-routing.module';
   declarations: [BrowseComponent],
   imports: [CommonModule, SharedModule, BrowseRoutingModule]
 })
-export class BrowseModule {}
+export class BrowseModule {
+  displayNav = true;
+}

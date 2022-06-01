@@ -8,4 +8,6 @@ import { BookmarksRoutingModule } from './bookmarks-routing.module';
   declarations: [BookmarksComponent],
   imports: [CommonModule, SharedModule, BookmarksRoutingModule]
 })
-export class BookmarksModule {}
+export class BookmarksModule {
+  displayNav = true;
+}

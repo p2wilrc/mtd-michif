@@ -30,6 +30,7 @@ import {
   animations: [routeAnimations]
 })
 export class AppComponent implements OnInit, OnDestroy {
+  displayNav = false;
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
@@ -38,15 +39,15 @@ export class AppComponent implements OnInit, OnDestroy {
   languages = META.languages;
   Meta = META;
   navigation = [
-    { link: 'search', label: marker('mtd.menu.search') },
-    { link: 'browse', label: marker('mtd.menu.browse') },
-    { link: 'random', label: marker('mtd.menu.random') },
-    { link: 'bookmarks', label: marker('mtd.menu.bookmarks') },
-    { link: 'about', label: marker('mtd.menu.about') }
+    { link: 'dev/search', label: marker('mtd.menu.search') },
+    { link: 'dev/browse', label: marker('mtd.menu.browse') },
+    { link: 'dev/random', label: marker('mtd.menu.random') },
+    { link: 'dev/bookmarks', label: marker('mtd.menu.bookmarks') },
+    { link: 'dev/about', label: marker('mtd.menu.about') }
   ];
   navigationSideMenu = [
     ...this.navigation,
-    { link: 'settings', label: 'mtd.menu.settings' }
+    { link: 'dev/settings', label: 'mtd.menu.settings' }
   ];
 
   isAuthenticated$: Observable<boolean>;
