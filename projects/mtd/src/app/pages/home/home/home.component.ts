@@ -16,7 +16,6 @@ import {
 })
 export class HomeComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  displayNav = true;
   constructor(public mtdService: MtdService) {}
 
   ngOnInit(): void {}
