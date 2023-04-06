@@ -32,6 +32,6 @@ var config = {
     transducers: { 'michif-approx': [{ h: 'h' }] }
   },
   L2: { name: 'English' },
-  build: '202209101047',
+  build: '202304061702',
   audio_path: 'assets/'
 };
