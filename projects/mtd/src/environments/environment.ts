@@ -10,7 +10,7 @@ export const environment = {
   envName: 'DEV',
   production: false,
   test: false,
-  i18nPrefix: '',
+  i18nPrefix: '.',
   apiBaseURL: 'http://localhost:5000',
   remoteData: false,
   remoteConfig: false,
