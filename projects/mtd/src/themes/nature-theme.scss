@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 $mtd-nature-primary: mat.define-palette(mat.$brown-palette, 700, 300, 900);
 $mtd-nature-accent: mat.define-palette(mat.$deep-purple-palette, 300);
 $mtd-nature-warn: mat.define-palette(mat.$red-palette, 600);
