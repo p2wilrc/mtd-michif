@@ -14,4 +14,4 @@ jobs:
         run: npm install
       - name: Angular test for dictionary
         run: |
-          npm run ci
+          npm test
