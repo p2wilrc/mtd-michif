@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { DictionaryData } from '../../../core/models';
 import {
   MtdService,
@@ -16,13 +16,11 @@ import { Observable } from 'rxjs';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RandomComponent implements OnInit {
+export class RandomComponent {
   displayNav = true;
   entries$: Observable<DictionaryData[]>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   constructor(private mtdService: MtdService) {}
-
-  ngOnInit(): void {}
 
   getRandom() {
     this.entries$ = this.mtdService.getRandom$(10);

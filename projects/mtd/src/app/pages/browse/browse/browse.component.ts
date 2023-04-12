@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DictionaryData } from '../../../core/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
@@ -23,7 +18,7 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BrowseComponent implements OnDestroy, OnInit {
+export class BrowseComponent implements OnDestroy {
   currentEntries$: BehaviorSubject<DictionaryData[]>;
   currentX: DictionaryData[];
   displayCategories$: Observable<any>;
@@ -68,8 +63,6 @@ export class BrowseComponent implements OnDestroy, OnInit {
       .subscribe(entries => (this.currentX = entries));
     this.initializeEntries();
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

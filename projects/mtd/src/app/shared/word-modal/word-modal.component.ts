@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Inject
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { DictionaryData } from '../../core/models';
 import {
   MatDialog,
@@ -22,7 +17,7 @@ import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.co
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordModalComponent implements OnInit {
+export class WordModalComponent {
   checkedOptions: string[];
   displayImages = true; // default show images, turns to false on 404
   entry: DictionaryData;
@@ -47,8 +42,6 @@ export class WordModalComponent implements OnInit {
       console.log(error);
     }
   }
-
-  ngOnInit(): void {}
 
   close(): void {
     this.dialogRef.close();
