@@ -146,12 +146,22 @@
               "devServerTarget": "mtd:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/mtd/**/*.ts",
+              "projects/mtd/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "defaultProject": "mtd",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }
