@@ -1,11 +1,10 @@
 {
-  "name": "p2wilrc-tmd-web-ui",
+  "name": "michif-web",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "npm run server",
-    "start:prod": "npm run server",
+    "start": "ng serve",
+    "start:prod": "ng serve --configuration production",
     "build": "ng build --configuration production --outputHashing=all",
     "build:prod": "ng build --configuration production --outputHashing=all",
     "build:ci": "ng build --configuration production --outputHashing=all",
@@ -21,7 +20,6 @@
     "format:test": "prettier projects/**/*.{ts,json,md,scss} --list-different",
     "release": "standard-version && git push --follow-tags origin master",
     "analyze": "npm run build:prod -- --stats-json && webpack-bundle-analyzer ./dist/mtd/stats-es2015.json",
-    "server": "node server.js",
     "extract-translations": "ngx-translate-extract --input ./projects/mtd/src --output ./projects/mtd/src/assets/i18n/*.json --sort --format namespaced-json --null-as-default-value --marker _",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate && node .all-contributors-html.js",
@@ -73,7 +71,6 @@
     "popper.js": "^1.16.1",
     "rxjs": "^6.6.7",
     "transliteration": "^2.1.11",
-    "uuid": "^3.4.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -90,7 +87,6 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.11.1",
-    "@types/uuid": "^3.4.7",
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
     "all-contributors-cli": "^6.13.0",
@@ -113,9 +109,8 @@
     "standard-version": "^9.5.0",
     "ts-node": "^10.9.1",
     "tslib": "^1.14.1",
-    "tslint": "~6.1.0",
     "typescript": "^4.6.4",
-    "uglifyjs": "^2.4.11",
+    "uglify-js": "^3.17.4",
     "webpack-bundle-analyzer": "^4.8.0"
   }
 }
