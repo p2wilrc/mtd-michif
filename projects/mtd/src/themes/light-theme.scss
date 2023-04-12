@@ -1,8 +1,9 @@
-$mtd-light-primary: mat-palette($mat-grey, 200, 500, 300);
-$mtd-light-accent: mat-palette($mat-brown, 200);
-$mtd-light-warn: mat-palette($mat-deep-orange, 200);
+@use '~@angular/material' as mat;
+$mtd-light-primary: mat.define-palette(mat.$grey-palette, 200, 500, 300);
+$mtd-light-accent: mat.define-palette(mat.$brown-palette, 200);
+$mtd-light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
 
-$mtd-light-theme: mat-light-theme(
+$mtd-light-theme: mat.define-light-theme(
   $mtd-light-primary,
   $mtd-light-accent,
   $mtd-light-warn

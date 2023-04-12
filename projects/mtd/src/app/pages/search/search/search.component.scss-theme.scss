@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mtd-search-component-theme($theme) {
   $primary: map-get($theme, primary);
@@ -10,7 +10,10 @@
   .search {
     &__bar {
       &__container {
-        background-color: mat-color($background-palette, background);
+        background-color: mat.get-color-from-palette(
+          $background-palette,
+          background
+        );
       }
     }
   }

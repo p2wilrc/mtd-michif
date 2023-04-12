@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -75,6 +76,7 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     MatChipsModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatListModule,
     MatMenuModule,
     MatIconModule,
