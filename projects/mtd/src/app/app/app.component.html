@@ -9,10 +9,6 @@
 		  routerLinkActive="active">
 		  {{item.label | translate}}
 		</a>
-		<!-- <a mat-list-item href="https://github.com/tomastrajan/mtd" target="_blank"
-		  rel="noopener noreferrer">
-		  Github
-		</a> -->
 	  </mat-nav-list>
 	</mat-sidenav>
 
@@ -49,32 +45,10 @@
             </button>
           </span>
 
-          <!-- <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)"
-            (click)="onLoginClick()">
-            {{ 'mtd.menu.login' | translate }}
-          </button> -->
-
-          <!-- <button *ngIf="(isAuthenticated$ | async)" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
-            <fa-icon icon="user-circle"></fa-icon>
-          </button> -->
-          <mat-menu #toolbarUserMenu="matMenu">
-            <button mat-menu-item (click)="onLogoutClick()">
-              <mat-icon>
-                <fa-icon icon="power-off"></fa-icon>
-              </mat-icon>
-              <span>{{ 'mtd.menu.logout' | translate }}</span>
-            </button>
-          </mat-menu>
-
           <button mat-icon-button routerLink="/dev/settings" class="d-none d-sm-inline">
             <fa-icon icon="cog"></fa-icon>
           </button>
 
-          <!-- <a [matTooltip]="'mtd.header.github' | translate" matTooltipPosition="before" mat-icon-button
-            class="link d-none d-sm-inline" href="https://github.com/tomastrajan/mtd"
-            target="_blank" rel="noopener noreferrer">
-            <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a> -->
           <ng-container *ngIf="languages.length > 1">
             <span *ngIf="language$ | async as language">
               <mat-select [ngModel]="language" (selectionChange)="onLanguageSelect($event)">
