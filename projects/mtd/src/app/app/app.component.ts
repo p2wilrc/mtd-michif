@@ -9,11 +9,8 @@ import { environment as env } from '../../environments/environment';
 import { META } from '../../config/config';
 
 import {
-  authLogin,
-  authLogout,
   routeAnimations,
   LocalStorageService,
-  selectIsAuthenticated,
   selectSettingsStickyHeader,
   selectSettingsLanguage,
   selectEffectiveTheme
@@ -50,7 +47,6 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'dev/settings', label: 'mtd.menu.settings' }
   ];
 
-  isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
@@ -87,18 +83,9 @@ export class AppComponent implements OnInit, OnDestroy {
           this.logo = 'assets/logo-light.svg';
         }
       });
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
-  }
-
-  onLoginClick() {
-    this.store.dispatch(authLogin());
-  }
-
-  onLogoutClick() {
-    this.store.dispatch(authLogout());
   }
 
   onLanguageSelect({ value: language }) {
