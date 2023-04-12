@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mtd-home-component-theme($theme) {
   $primary: map-get($theme, primary);
@@ -8,12 +8,12 @@
   $foreground-palette: map-get($theme, foreground);
 
   .slogan {
-    color: mat-color($foreground-palette, foreground);
+    color: mat.get-color-from-palette($foreground-palette, foreground);
     &__container {
-      background: mat-color($background-palette, background);
+      background: mat.get-color-from-palette($background-palette, background);
     }
   }
   .sub-slogan {
-    color: mat-color($foreground-palette, foreground);
+    color: mat.get-color-from-palette($foreground-palette, foreground);
   }
 }
