@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { Actions, getEffectsMetadata } from '@ngrx/effects';
@@ -19,7 +18,7 @@ import { SettingsState } from './settings.model';
 import { actionSettingsChangeTheme } from './settings.actions';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('SettingsEffects', () => {
