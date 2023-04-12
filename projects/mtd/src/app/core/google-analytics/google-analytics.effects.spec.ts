@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import { NavigationEnd } from '@angular/router';
 import { getEffectsMetadata } from '@ngrx/effects';
 import { TestScheduler } from 'rxjs/testing';
@@ -6,7 +5,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { GoogleAnalyticsEffects } from './google-analytics.effects';
 
 const scheduler = new TestScheduler((actual, expected) =>
-  assert.deepStrictEqual(actual, expected)
+  expect(actual).toEqual(expected)
 );
 
 describe('GoogleAnalyticsEffects', () => {
