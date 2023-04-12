@@ -52,12 +52,6 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ['Chrome'],
     restartOnFileChange: true,
-    customLaunchers: {
-      ChromeTravisCi: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
     browserNoActivityTimeout: 50000,
     singleRun: !isWatch
   });
