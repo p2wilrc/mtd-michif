@@ -1,8 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import {
-  MtdService,
-  ROUTE_ANIMATIONS_ELEMENTS
-} from '../../../core/core.module';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
 @Component({
   selector: 'mtd-home',
@@ -14,11 +11,8 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConstructionComponent implements OnInit {
+export class ConstructionComponent {
   displayNav = false;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   construction = 'assets/construction.png';
-  constructor(public mtdService: MtdService) {}
-
-  ngOnInit(): void {}
 }

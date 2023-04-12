@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DictionaryData } from '../../../core/models';
 import {
   BookmarksService,
@@ -21,7 +16,7 @@ import { Subject } from 'rxjs';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookmarksComponent implements OnDestroy, OnInit {
+export class BookmarksComponent implements OnDestroy {
   displayNav = true;
   bookmarks: DictionaryData[];
   edit = false;
@@ -49,5 +44,4 @@ export class BookmarksComponent implements OnDestroy, OnInit {
   toggleEdit() {
     this.edit = !this.edit;
   }
-  ngOnInit() {}
 }

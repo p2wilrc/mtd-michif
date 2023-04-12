@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { META } from '../../../../config/config';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
@@ -18,13 +18,10 @@ export interface Contributor {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
   displayNav = true;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   contributors = META.contributors;
   tmd = 'assets/tmd.png';
   funding = 'assets/funding.png';
-  constructor() {}
-
-  ngOnInit() {}
 }

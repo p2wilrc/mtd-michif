@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
   MtdService,
   ROUTE_ANIMATIONS_ELEMENTS
@@ -14,9 +14,7 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   constructor(public mtdService: MtdService) {}
-
-  ngOnInit(): void {}
 }

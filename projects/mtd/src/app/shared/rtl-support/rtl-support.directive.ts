@@ -3,7 +3,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[rtl]' // tslint:disable-line
+  selector: '[rtl]' // eslint-disable-line @angular-eslint/directive-selector
 })
 export class RtlSupportDirective implements OnInit, OnDestroy {
   private subscription: Subscription;
