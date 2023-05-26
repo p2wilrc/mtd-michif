@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  logo = 'assets/logo.svg';
+  logo = 'assets/logo.png';
   languages = META.languages;
   Meta = META;
   navigation = [
@@ -73,16 +73,6 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       );
     }
-    this.store
-      .select(selectEffectiveTheme)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(theme => {
-        if (theme === 'light-theme') {
-          this.logo = 'assets/logo-dark.svg';
-        } else {
-          this.logo = 'assets/logo-light.svg';
-        }
-      });
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
