@@ -4,15 +4,8 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dev/construction',
+    redirectTo: 'dev/home',
     pathMatch: 'full'
-  },
-  {
-    path: 'dev/construction',
-    loadChildren: () =>
-      import('./pages/construction/construction.module').then(
-        m => m.ConstructionModule
-      )
   },
   {
     path: 'dev/home',
@@ -49,19 +42,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/settings/settings.module').then(m => m.SettingsModule)
   }
-  //{
-  //  path: '**',
-  //  redirectTo: 'home'
-  //}
 ];
 
 @NgModule({
-  // useHash supports github.io demo page, remove in your app
   imports: [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: PreloadAllModules,
       relativeLinkResolution: 'legacy',
+      // For test builds without server-side redirects
       useHash: true
     })
   ],
