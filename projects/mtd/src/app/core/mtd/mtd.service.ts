@@ -143,7 +143,7 @@ export class MtdService {
   get allAudioEntries$() {
     return this._dictionary_data$
       .asObservable()
-      .pipe(map(arr => arr.filter(x => x.audio)));
+      .pipe(map(arr => arr.filter(hasAudio)));
   }
 
   get config$() {
@@ -198,7 +198,7 @@ export class MtdService {
           }
         }
 
-        const audioEntries = entries.filter(x => x.audio);
+        const audioEntries = entries.filter(hasAudio);
         if (
           audioEntries.length > 0 &&
           (audioEntries.length < entries.length * 0.75 || META.browseAudio)
@@ -214,4 +214,11 @@ export class MtdService {
   get category_keys$() {
     return this.categories$.pipe(map(cats => Object.keys(cats)));
   }
+}
+
+// Make sure there is *actually* audio there!
+function hasAudio(entry) {
+  if (!('audio' in entry)) return false;
+  const files = entry.audio.filter(audioFile => audioFile.filename);
+  return !!files.length;
 }
