@@ -1,28 +1,13 @@
 @import '../../styles-variables';
 
-$breakpoints: (
-  xsmall: null,
-  small: 480px,
-  medium: 768px,
-  // This is usually 768, but it works better with the nav bar at 910, so everything else should follow suit
-    large: 1024px,
-  xlarge: 1280px
-);
-
-@mixin mq($breakpoint, $query: 'min-width', $type: 'screen') {
-  @media #{$type} and (#{$query}: #{$breakpoint}) {
-    @content;
-  }
-}
-
 .desktop-only {
-  @include mq(map-get($breakpoints, medium), 'max-width') {
+  @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
     display: none;
   }
 }
 
 .mobile-only {
-  @include mq(map-get($breakpoints, medium)) {
+  @media (min-width: map-get($angular-breakpoints, laptop)) {
     display: none;
   }
 }
@@ -118,7 +103,8 @@ mat-sidenav-container {
       font-size: 14px;
     }
 
-    @media (max-width: map-get($grid-breakpoints, lg)) {
+    /* i.e. mobile-only */
+    @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
       .nav-button {
         min-width: 0;
         padding: 0 10px;
@@ -142,7 +128,9 @@ mat-sidenav-container {
     }
   }
 
-  @media (max-width: $toolbar-breakpoint) {
+  /* Would be nice if Angular documented this somewhere... the
+     mat-toolbar shrinks by 8 pixels on xtra-small screens */
+  @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
     .content {
       margin-top: 56px !important;
     }
@@ -172,9 +160,4 @@ mat-sidenav {
   .mat-nav-list {
     padding-top: 0;
   }
-}
-
-.copyright-link {
-  position: relative !important;
-  margin-left: 15px;
 }
