@@ -11,10 +11,11 @@
         </h4>
       </div>
       <div class="row" *ngIf="!entry.title">
-        <div class="col-sm-4">
+        <div class="col-sm">
           <button
             mat-icon-button
-            aria-label="Bookmark entry"
+            aria-label="Bookmark Entry"
+            title="Bookmark Entry"
             (click)="
               entry.favourited = !entry.favourited; toggleBookmark(entry)
             "
@@ -30,6 +31,7 @@
           <button
             mat-icon-button
             aria-label="Show More information"
+            title="Show More information"
             (click)="showModal(entry)"
           >
             <mat-icon>list</mat-icon>
@@ -38,13 +40,14 @@
             [disabled]="!hasAudio(entry)"
             mat-icon-button
             aria-label="Play Audio"
+            title="Play Audio"
             (click)="playDefaultAudio(entry)"
           >
             <mat-icon>audiotrack</mat-icon>
           </button>
         </div>
 
-        <div class="col-sm-4 match__term__container">
+        <div class="col-sm match__term__container">
           <span
             class="match__term match__term--target"
             [innerHTML]="highlight(entry, 'L1')"
@@ -53,7 +56,7 @@
             [ngClass]="{'langMatched': entry.type === 'L1' && shouldHighlight}">{{entry.word}}</span> -->
         </div>
 
-        <div class="col-sm-4 match__term__container" (click)="showModal(entry)">
+        <div class="col-sm match__term__container" (click)="showModal(entry)">
           <span
             class="match__term match__term--translation"
             [innerHTML]="highlight(entry, 'L2')"
