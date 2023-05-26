@@ -70,7 +70,6 @@ export class EntryListComponent implements OnChanges {
 
   async showModal(entry) {
     this.dialog.open(WordModalComponent, {
-      width: '40%',
       data: { entry }
     });
   }
