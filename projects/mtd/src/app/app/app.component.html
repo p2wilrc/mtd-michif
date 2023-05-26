@@ -35,7 +35,7 @@
             these are the Bootstrap identifiers, which (of course)
             don't correspond to the Material ones.  Briefly:
 
-            xs: extra-small (phone
+            xs: extra-small (phone)
             sm: small (tablet)
             md: small (tablet, presumably in landscape mode)
             lg: medium (laptop)
@@ -85,7 +85,7 @@
           >
             <fa-icon icon="cog"></fa-icon>
           </button>
-          <!-- languages links, not actually used by us -->
+          <!-- i18n languages -->
           <ng-container *ngIf="languages.length > 1">
             <span *ngIf="language$ | async as language">
               <mat-select
