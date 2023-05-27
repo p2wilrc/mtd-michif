@@ -16,7 +16,9 @@
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
 @import './app/pages/about/about/about.component.scss-theme';
+@import './app/pages/bookmarks/bookmarks/bookmarks.component.scss-theme.scss';
 @import './app/pages/browse/browse/browse.component.scss-theme.scss';
+@import './app/pages/random/random/random.component.scss-theme.scss';
 @import './app/pages/search/search/search.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/pages/home/home/home.component.scss-theme';
@@ -26,7 +28,9 @@
   @include mtd-app-component-theme($theme);
   @include mtd-about-component-theme($theme);
   @include mtd-big-input-component-theme($theme);
+  @include mtd-bookmarks-component-theme($theme);
   @include mtd-browse-component-theme($theme);
+  @include mtd-random-component-theme($theme);
   @include mtd-search-component-theme($theme);
   @include mtd-entry-list-component-theme($theme);
   @include mtd-home-component-theme($theme);

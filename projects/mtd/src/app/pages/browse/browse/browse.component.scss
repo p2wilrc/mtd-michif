@@ -1,8 +1,4 @@
-@mixin mq($breakpoint, $query: 'min-width', $type: 'screen') {
-  @media #{$type} and (#{$query}: #{$breakpoint}) {
-    @content;
-  }
-}
+@import '../../../../styles-variables';
 
 .browse {
   &__categories {
@@ -15,7 +11,7 @@
 
   &__alphabet {
     &__grid {
-      width: 90%;
+      width: 80%;
       margin: 20px auto;
       list-style-type: none;
       padding: 0;
@@ -53,13 +49,13 @@
 
   &__nav {
     &--web {
-      @include mq(900px, 'max-width', 'screen') {
+      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
         display: none !important;
       }
     }
 
     &--mobile {
-      @include mq(900px, 'min-width', 'screen') {
+      @media (min-width: map-get($angular-breakpoints, laptop)) {
         display: none !important;
       }
     }

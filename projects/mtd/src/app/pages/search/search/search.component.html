@@ -1,23 +1,43 @@
 <div class="background">
-    <div class="gradient">
-        <div class='page__content page__content--center container'>
-            <div class='search__bar__container' [ngClass]="routeAnimationsElements">
-                <mat-form-field class='search__bar' style="min-height: 40px;">
-                    <mat-icon [inline]="true" matPrefix class='search__icon'>search</mat-icon>
-                    <mat-spinner *ngIf="loading$ | async" style='position: absolute; right: 20px;' [diameter]="20">
-                    </mat-spinner>
-                    <input *ngIf='entries$ | async as entries' autocomplete="off" type="text"
-                        placeholder="Type a word here to search {{ entries.length }} {{ language$ | async }} words."
-                        aria-label="Number" matInput (keyup)="onSearchKeyUp.next($event)" [(ngModel)]="searchQuery">
-                </mat-form-field>
-            </div>
-            <!-- <ion-searchbar [formControl]="searchControl" autocapitalize="none"></ion-searchbar> -->
-            <div *ngIf='searchQuery && entries'>
-                <div class='search__results' *ngIf="matches$ | async as matches">
-                    <mtd-entry-list *ngIf='matches.length > 0' [entries]="matches" [searchTerm]="searchQuery"
-                        [threshold]="matchThreshold" [shouldHighlight]='true'>
-                    </mtd-entry-list>
-                    <!-- <div class='search__results--matches' *ngIf="matches_object.matches.length > 0">
+  <div class="gradient">
+    <div class="page__content page__content--center container">
+      <div class="search__bar__container" [ngClass]="routeAnimationsElements">
+        <mat-form-field class="search__bar" style="min-height: 40px;">
+          <mat-icon [inline]="true" matPrefix class="search__icon"
+            >search</mat-icon
+          >
+          <mat-spinner
+            *ngIf="loading$ | async"
+            style="position: absolute; right: 20px;"
+            [diameter]="20"
+          >
+          </mat-spinner>
+          <input
+            *ngIf="entries$ | async as entries"
+            autocomplete="off"
+            type="text"
+            placeholder="Type a word here to search {{ entries.length }} {{
+              language$ | async
+            }} words."
+            aria-label="Number"
+            matInput
+            (keyup)="onSearchKeyUp.next($event)"
+            [(ngModel)]="searchQuery"
+          />
+        </mat-form-field>
+      </div>
+      <!-- <ion-searchbar [formControl]="searchControl" autocapitalize="none"></ion-searchbar> -->
+      <div *ngIf="searchQuery && entries">
+        <div class="search__results" *ngIf="matches$ | async as matches">
+          <mtd-entry-list
+            *ngIf="matches.length > 0"
+            [entries]="matches"
+            [searchTerm]="searchQuery"
+            [threshold]="matchThreshold"
+            [shouldHighlight]="true"
+          >
+          </mtd-entry-list>
+          <!-- <div class='search__results--matches' *ngIf="matches_object.matches.length > 0">
                         <div class="search__results__container">
                             <h4 class='search__results__title'>{{ 'mtd.pages.search.matches' | translate }}</h4>
                             <mtd-entry-list [entries]="matches_object.matches" [searchTerm]="searchQuery"
@@ -40,14 +60,19 @@
                             </mtd-entry-list>
                         </div>
                     </div> -->
-                    <div *ngIf='matches.length === 0 && searchQuery'
-                        class='search__results--none search__results__container'>
-                        <h5 *ngIf="searchQuery">
-                            {{ 'mtd.pages.search.no-results' | translate: {value: searchQuery } }}</h5>
-                    </div>
-                </div>
-
-            </div>
+          <div
+            *ngIf="matches.length === 0 && searchQuery"
+            class="search__results--none search__results__container"
+          >
+            <h5 *ngIf="searchQuery">
+              {{
+                'mtd.pages.search.no-results'
+                  | translate: { value: searchQuery }
+              }}
+            </h5>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
