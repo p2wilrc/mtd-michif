@@ -4,16 +4,32 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $background-palette: map-get($theme, background);
-  $foreground-palette: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
 
-  .slogan {
-    color: mat.get-color-from-palette($foreground-palette, foreground);
-    &__container {
-      background: mat.get-color-from-palette($background-palette, background);
+  mtd-home {
+    .background {
+      color: mat.get-color-from-palette($foreground, text);
+      background-color: mat.get-color-from-palette($background, background);
+
+      .gradient {
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            mat.get-color-from-palette($background, background, 0) 0%,
+            mat.get-color-from-palette($background, background, 1) 100%
+          );
+        }
+      }
     }
-  }
-  .sub-slogan {
-    color: mat.get-color-from-palette($foreground-palette, foreground);
+    .slogan {
+      color: mat.get-color-from-palette($foreground, foreground);
+      &__container {
+        background: mat.get-color-from-palette($background, background);
+      }
+    }
+    .sub-slogan {
+      color: mat.get-color-from-palette($foreground, foreground);
+    }
   }
 }
