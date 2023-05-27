@@ -7,6 +7,10 @@
   $background: map-get($theme, background);
 
   mtd-bookmarks {
+    .content__container {
+      background: mat.get-color-from-palette($background, background);
+    }
+
     .background {
       color: mat.get-color-from-palette($foreground, text);
       background-color: mat.get-color-from-palette($background, background);
