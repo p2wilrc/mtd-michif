@@ -1,12 +1,12 @@
 @use '@angular/material' as mat;
 
-@mixin mtd-search-component-theme($theme) {
+@mixin mtd-random-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  mtd-search {
+  mtd-random {
     .background {
       color: mat.get-color-from-palette($foreground, text);
       background-color: mat.get-color-from-palette($background, background);
@@ -18,13 +18,6 @@
             mat.get-color-from-palette($background, background, 0) 0%,
             mat.get-color-from-palette($background, background, 1) 100%
           );
-        }
-      }
-    }
-    .search {
-      &__bar {
-        &__container {
-          background-color: mat.get-color-from-palette($background, background);
         }
       }
     }
