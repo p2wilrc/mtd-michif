@@ -1,7 +1,7 @@
 {
   "mtd": {
     "common": {
-      "title": "Mother Tongues"
+      "title": "Michif Talking Dictionary"
     },
     "file-not-found": {
       "connection": "Please check your connection and try again.",
@@ -91,14 +91,14 @@
       "title": "Settings"
     },
     "title": {
-      "long": "Mother Tongues",
-      "short": "Mother Tongues"
+      "long": "Michif Talking Dictionary",
+      "short": "Michif Dictionary"
     },
     "word-modal": {
       "audio": "Audio",
-      "audio-instructions": "Click on the audio below to listen to '{{value}}'",
+      "audio-instructions": "Click on the audio below to listen to '{{value}}':",
       "examples": "Examples",
-      "exit": "exit"
+      "exit": "Close"
     }
   }
 }

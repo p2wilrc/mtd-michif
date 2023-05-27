@@ -4,37 +4,47 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $background-palette: map-get($theme, background);
-  $foreground-palette: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
 
-  .chosen {
-    background-color: mat.get-color-from-palette($accent);
-    color: mat.get-color-from-palette($accent, default-contrast);
-  }
+  mtd-browse {
+    .background {
+      color: mat.get-color-from-palette($foreground, text);
+      background-color: mat.get-color-from-palette($background, background);
 
-  .browse {
-    &__categories {
-      background-color: mat.get-color-from-palette(
-        $background-palette,
-        background
-      );
-    }
-    &__alphabet {
-      &__grid {
-        background-color: mat.get-color-from-palette(
-          $background-palette,
-          background
-        );
-      }
-      &__letter {
-        color: mat.get-color-from-palette($foreground-palette, foreground);
+      .gradient {
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            mat.get-color-from-palette($background, background, 0) 0%,
+            mat.get-color-from-palette($background, background, 1) 100%
+          );
+        }
       }
     }
-    &__entry {
-      &__list {
-        &__container {
-          min-height: 60vh;
-          max-height: 400px;
+    .chosen {
+      background-color: mat.get-color-from-palette($accent);
+      color: mat.get-color-from-palette($accent, default-contrast);
+    }
+
+    .browse {
+      &__categories {
+        background-color: mat.get-color-from-palette($background, background);
+      }
+      &__alphabet {
+        &__grid {
+          background-color: mat.get-color-from-palette($background, background);
+        }
+        &__letter {
+          color: mat.get-color-from-palette($foreground, foreground);
+        }
+      }
+      &__entry {
+        &__list {
+          &__container {
+            min-height: 60vh;
+            max-height: 400px;
+          }
         }
       }
     }
