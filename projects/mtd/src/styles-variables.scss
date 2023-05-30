@@ -15,11 +15,18 @@ $angular-breakpoints: (
 
 $fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
 
+/*
+  Override some bootstrap stuff (see
+  https://stackoverflow.com/questions/57289966/how-can-i-use-bootstrap-grid-style-in-angular-without-disturbing-overriding-angu)
+*/
 $link-hover-decoration: none;
 $label-margin-bottom: 0;
 
-/* Define these in terms of Angular's breakpoints to (hopefully) get
-   consistent behaviour.  We will use the Angular ones elsewhere though. */
+/*
+  Define these for bootstrap in terms of Angular's breakpoints to
+  (hopefully) get consistent behaviour.  We will use the Angular ones
+  elsewhere though.
+*/
 $grid-breakpoints: (
   xs: map-get($angular-breakpoints, 'phone'),
   sm: map-get($angular-breakpoints, 'tablet'),
