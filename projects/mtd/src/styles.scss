@@ -1,3 +1,5 @@
+/* Common stylesheet for the app as a whole. */
+
 @use '@angular/material' as mat;
 @import 'styles-variables';
 
@@ -13,7 +15,10 @@
 @import './themes/black-theme';
 @import './themes/nature-theme';
 
+/* Undo bootstrap things some more */
 @import 'styles-reset.scss-theme';
+
+/* These are all mostly the same thing, unfortunately */
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
 @import './app/pages/about/about/about.component.scss-theme';
@@ -23,6 +28,7 @@
 @import './app/pages/search/search/search.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/pages/home/home/home.component.scss-theme';
+@import './app/pages/settings/settings/settings-container.component.scss-theme';
 
 @mixin custom-components-theme($theme) {
   @include mtd-styles-reset-theme($theme);
@@ -35,6 +41,7 @@
   @include mtd-search-component-theme($theme);
   @include mtd-entry-list-component-theme($theme);
   @include mtd-home-component-theme($theme);
+  @include mtd-settings-component-theme($theme);
 }
 
 .default-theme {
@@ -55,4 +62,121 @@
 .nature-theme {
   @include mat.all-component-themes($mtd-nature-theme);
   @include custom-components-theme($mtd-nature-theme);
+}
+
+.desktop-only {
+  @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+    display: none;
+  }
+}
+
+/* Things used by a bunch of components that don't belong in app.component.scss! */
+.mobile-only {
+  @media (min-width: map-get($angular-breakpoints, laptop)) {
+    display: none;
+  }
+}
+
+.page__content {
+  min-height: calc(100vh - 208px);
+}
+
+.theme-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.results,
+.entry-list-container {
+  max-height: 53em;
+  height: 60vh;
+  overflow-y: auto;
+  // width: 70%;
+  max-width: 53.125em;
+  margin: 5vh auto;
+  margin-bottom: 9.375em;
+  border-radius: 0.3125em;
+}
+
+.search__results {
+  max-height: 53em;
+  // height: 60vh;
+  overflow-y: auto;
+  // width: 70%;
+  max-width: 53.125em;
+  margin: 5vh auto;
+  margin-bottom: 9.375em;
+  border-radius: 0.3125em;
+}
+
+/* Things used in a bunch of components that don't belong in about.component.scss! */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+hr {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.content__container {
+  padding: 35px 20px;
+  border-radius: 15px;
+}
+
+.background {
+  overflow: auto;
+  padding: 80px 0 0 0;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: url('assets/intro.jpg') no-repeat center top;
+    background-size: cover;
+    // opacity: 0.7;
+    content: '';
+    z-index: 0;
+  }
+
+  .gradient {
+    &::before {
+      position: absolute;
+      top: 51%;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      content: '';
+      z-index: 0;
+    }
+  }
+
+  .container {
+    position: relative;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+  .background {
+    padding: 40px 0 0 0;
+
+    h1 {
+      line-height: 1em;
+    }
+  }
 }

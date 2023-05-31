@@ -12,10 +12,7 @@ export interface Contributor {
 @Component({
   selector: 'mtd-about',
   templateUrl: './about.component.html',
-  styleUrls: [
-    './about.component.scss',
-    '../../../../app/app/app.component.scss'
-  ],
+  styleUrls: ['./about.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent {

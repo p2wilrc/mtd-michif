@@ -11,11 +11,7 @@ import {
 @Component({
   selector: 'mtd-browse',
   templateUrl: './browse.component.html',
-  styleUrls: [
-    './browse.component.scss',
-    '../../../app/app.component.scss',
-    '../../about/about/about.component.scss'
-  ],
+  styleUrls: ['./browse.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BrowseComponent implements OnDestroy {
