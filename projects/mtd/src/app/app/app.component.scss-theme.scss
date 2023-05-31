@@ -6,21 +6,6 @@
   $warn: map-get($theme, warn);
   $background-palette: map-get($theme, background);
 
-  .results,
-  // .entry-list-container,
-  .browse__entry__list__container,
-  .search__results {
-    border: 0.125em solid mat.get-color-from-palette($accent);
-    background-color: mat.get-color-from-palette(
-      $background-palette,
-      background
-    );
-  }
-
-  .accent-contrast {
-    color: mat.get-color-from-palette($accent, default-contrast);
-  }
-
   mat-sidenav-container {
     mat-toolbar {
       button {
@@ -46,21 +31,6 @@
               $accent,
               darker
             ) !important;
-          }
-        }
-      }
-    }
-
-    .footer {
-      color: mat.get-color-from-palette($primary, lighter);
-      background-color: mat.get-color-from-palette($primary, darker);
-
-      .links,
-      .signature {
-        a {
-          color: mat.get-color-from-palette($primary, lighter);
-          &:hover {
-            color: mat.get-color-from-palette($accent);
           }
         }
       }

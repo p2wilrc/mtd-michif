@@ -7,11 +7,7 @@ import {
 @Component({
   selector: 'mtd-home',
   templateUrl: './home.component.html',
-  styleUrls: [
-    './home.component.scss',
-    '../../about/about/about.component.scss',
-    '../../../../app/app/app.component.scss'
-  ],
+  styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {

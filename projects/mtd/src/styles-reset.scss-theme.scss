@@ -14,11 +14,6 @@
     }
   }
 
-  code {
-    color: mat.get-color-from-palette($accent, lighter-contrast);
-    background-color: mat.get-color-from-palette($accent, lighter);
-  }
-
   p {
     a {
       color: mat.get-color-from-palette($accent);

@@ -24,11 +24,7 @@ import { slugify } from 'transliteration';
 @Component({
   selector: 'mtd-search',
   templateUrl: './search.component.html',
-  styleUrls: [
-    './search.component.scss',
-    '../../../app/app.component.scss',
-    '../../about/about/about.component.scss'
-  ],
+  styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnDestroy, OnInit {

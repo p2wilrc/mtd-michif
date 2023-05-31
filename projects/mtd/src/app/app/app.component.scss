@@ -1,61 +1,8 @@
 @import '../../styles-variables';
 
-.desktop-only {
-  @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
-    display: none;
-  }
-}
-
-.mobile-only {
-  @media (min-width: map-get($angular-breakpoints, laptop)) {
-    display: none;
-  }
-}
-
-.page__content {
-  min-height: calc(100vh - 208px);
-}
-
-.theme-wrapper {
-  height: 100%;
-  width: 100%;
-}
-
-.centered {
-  text-align: center;
-  margin: 0 auto;
-}
-
-.results,
-.entry-list-container {
-  max-height: 53em;
-  height: 60vh;
-  overflow-y: auto;
-  // width: 70%;
-  max-width: 53.125em;
-  margin: 5vh auto;
-  margin-bottom: 9.375em;
-  border-radius: 0.3125em;
-}
-
-.search__results {
-  max-height: 53em;
-  // height: 60vh;
-  overflow-y: auto;
-  // width: 70%;
-  max-width: 53.125em;
-  margin: 5vh auto;
-  margin-bottom: 9.375em;
-  border-radius: 0.3125em;
-}
-
 mat-sidenav-container {
   height: 100%;
   width: 100%;
-
-  .invisible {
-    display: none !important;
-  }
 
   .toolbar {
     position: fixed;
@@ -87,10 +34,6 @@ mat-sidenav-container {
         width: 48px;
         height: 48px;
       }
-    }
-
-    .mat-stroked-button {
-      margin-right: 10px;
     }
 
     .spacer {
@@ -160,4 +103,10 @@ mat-sidenav {
   .mat-nav-list {
     padding-top: 0;
   }
+}
+
+/* FIXME: really necessary? */
+.theme-wrapper {
+  height: 100%;
+  width: 100%;
 }
