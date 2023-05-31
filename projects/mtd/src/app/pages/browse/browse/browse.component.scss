@@ -31,20 +31,10 @@
   }
 
   &__entries {
-    max-height: 100vh;
-    overflow-y: none;
-
     &--progress {
       margin: 0 auto !important;
       font-size: smaller;
     }
-
-    &__container {
-      max-height: 10vh;
-    }
-  }
-
-  &__toolbar {
   }
 
   &__nav {
