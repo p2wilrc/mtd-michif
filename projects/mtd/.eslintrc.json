@@ -7,8 +7,7 @@
       "parserOptions": {
         "project": [
           "projects/mtd/tsconfig.app.json",
-          "projects/mtd/tsconfig.spec.json",
-          "projects/mtd/e2e/tsconfig.json"
+          "projects/mtd/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
