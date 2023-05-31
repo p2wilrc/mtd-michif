@@ -10,11 +10,7 @@ import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.co
 @Component({
   selector: 'mtd-word-modal',
   templateUrl: './word-modal.component.html',
-  styleUrls: [
-    './word-modal.component.scss',
-    '../../app/app.component.scss'
-    //   '../../pages/about/about/about.component.scss'
-  ],
+  styleUrls: ['./word-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WordModalComponent {
