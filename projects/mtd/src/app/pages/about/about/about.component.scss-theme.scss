@@ -25,29 +25,5 @@
         }
       }
     }
-
-    .follow-releases,
-    .contributors {
-      p {
-        background-color: mat.get-color-from-palette($background, background);
-
-        a {
-          color: mat.get-color-from-palette($accent);
-
-          &:hover {
-            color: mat.get-color-from-palette($accent, darker);
-          }
-        }
-      }
-    }
-
-    .contributors {
-      img {
-        border-color: mat.get-color-from-palette(
-          $background,
-          background
-        ) !important;
-      }
-    }
   }
 }
