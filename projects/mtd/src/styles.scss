@@ -81,37 +81,9 @@
   min-height: calc(100vh - 208px);
 }
 
-.theme-wrapper {
-  height: 100%;
-  width: 100%;
-}
-
 .centered {
   text-align: center;
   margin: 0 auto;
-}
-
-.results,
-.entry-list-container {
-  max-height: 53em;
-  height: 60vh;
-  overflow-y: auto;
-  // width: 70%;
-  max-width: 53.125em;
-  margin: 5vh auto;
-  margin-bottom: 9.375em;
-  border-radius: 0.3125em;
-}
-
-.search__results {
-  max-height: 53em;
-  // height: 60vh;
-  overflow-y: auto;
-  // width: 70%;
-  max-width: 53.125em;
-  margin: 5vh auto;
-  margin-bottom: 9.375em;
-  border-radius: 0.3125em;
 }
 
 /* Things used in a bunch of components that don't belong in about.component.scss! */
