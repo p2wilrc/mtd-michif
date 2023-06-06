@@ -31,20 +31,19 @@
         }}
       </p>
     </div>
-    <div class="container__row audio__buttons">
-      <div
+    <div
+      *ngIf="data.entry.audio"
+      class="container__row audio__buttons centered"
+    >
+      <button
         *ngFor="let audio of data.entry.audio | noNullObjectValues"
-        class="container__col centered"
+        class="audio__button"
+        mat-raised-button
+        (click)="playAudio(audio.filename)"
       >
-        <button
-          class="audio__button"
-          mat-raised-button
-          (click)="playAudio(audio.filename)"
-        >
-          {{ audio.speaker }}
-          <mat-icon class="audio__icon">audiotrack</mat-icon>
-        </button>
-      </div>
+        {{ audio.speaker }}
+        <mat-icon class="audio__icon">audiotrack</mat-icon>
+      </button>
     </div>
   </div>
   <div class="container audio__container" *ngIf="data.entry && hasExample()">
@@ -53,32 +52,34 @@
     </div>
     <div
       class="container example__desc"
-      *ngFor="let example of data.entry.example_sentence"
+      *ngFor="let example of data.entry.example_sentence; let idx = index"
     >
       <p class="container__row example__desc">
         {{ example }}
       </p>
-    </div>
-    <div
-      class="container example__desc"
-      *ngFor="let example of data.entry.example_sentence_definition"
-    >
-      <p class="container__row example__desc">
-        {{ example }}
-      </p>
-    </div>
-    <div
-      class="container__row audio__buttons centered"
-      *ngIf="data.entry.example_sentence_audio.filename"
-    >
-      <button
-        class="audio__button"
-        mat-raised-button
-        (click)="playAudio(data.entry.example_sentence_audio.filename)"
+      <p
+        *ngIf="data.entry.example_sentence_definition[idx]"
+        class="container__row example__desc"
       >
-        {{ data.entry.example_sentence_audio.speaker }}
-        <mat-icon class="audio__icon">audiotrack</mat-icon>
-      </button>
+        {{ data.entry.example_sentence_definition[idx] }}
+      </p>
+      <div
+        *ngIf="data.entry.example_sentence_audio[idx]"
+        class="container__row audio__buttons centered"
+      >
+        <button
+          *ngFor="
+            let audio of data.entry.example_sentence_audio[idx]
+              | noNullObjectValues
+          "
+          class="audio__button"
+          mat-raised-button
+          (click)="playAudio(audio.filename)"
+        >
+          {{ audio.speaker }}
+          <mat-icon class="audio__icon">audiotrack</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>

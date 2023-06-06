@@ -61,29 +61,14 @@ export class WordModalComponent {
   }
 
   hasAudio() {
-    if ('audio' in this.data.entry) {
-      const audio = this.data.entry.audio.filter(x => {
-        let notEmpty = true;
-        Object.keys(x).forEach(k => {
-          if (!x[k]) {
-            notEmpty = false;
-            return notEmpty;
-          }
-        });
-        return notEmpty;
-      });
-      return audio.length > 0;
-    } else {
-      return false;
-    }
+    return this.mtdService.hasAudio(this.data.entry);
   }
 
   hasExample() {
-    console.log(this.data.entry);
     if (!('example_sentence' in this.data.entry)) return false;
     if (this.data.entry.example_sentence instanceof Array)
       return !!this.data.entry.example_sentence.length;
-    return true;
+    return !!this.data.entry.example_sentence;
   }
 
   fileNotFound(path) {
