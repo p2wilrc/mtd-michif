@@ -1,3 +1,9 @@
 .exit {
   float: right;
 }
+
+.audio {
+  &__button {
+    margin: 1em;
+  }
+}
