@@ -142,8 +142,11 @@ export class MtdService {
 
   hasAudio(entry) {
     if (!('audio' in entry)) return false;
-    const files = entry.audio.filter(audioFile => audioFile.filename);
-    return !!files.length;
+    if (entry.audio instanceof Array) {
+      const files = entry.audio.filter(audioFile => audioFile.filename);
+      return !!files.length;
+    }
+    return !!entry.audio;
   }
 
   get allAudioEntries$() {
