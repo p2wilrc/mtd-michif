@@ -65,11 +65,10 @@ export class WordModalComponent {
   }
 
   hasExample() {
-    console.log(this.data.entry);
     if (!('example_sentence' in this.data.entry)) return false;
     if (this.data.entry.example_sentence instanceof Array)
       return !!this.data.entry.example_sentence.length;
-    return true;
+    return !!this.data.entry.example_sentence;
   }
 
   fileNotFound(path) {
