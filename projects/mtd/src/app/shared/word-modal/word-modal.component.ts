@@ -122,11 +122,11 @@ export class WordModalComponent {
     const path = this.mtdService.config_value.audio_path + audio.filename;
     const audiotag = new Audio(path);
     const starts = audio.starts.map(x => x * 0.01);
-    const definition = example.definition;
 
     audiotag.onerror = () => this.fileNotFound(path);
     // Only highlight if we have an alignment
-    if (starts.length == definition.length - 1) {
+    if (example && starts.length == example.definition.length - 1) {
+      const definition = example.definition;
       let active = 0;
       audiotag.onplaying = () => {
         if (example === null) return;
