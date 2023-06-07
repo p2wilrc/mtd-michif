@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Inject
+} from '@angular/core';
 import { DictionaryData } from '../../core/models';
 import {
   MatDialog,
@@ -7,6 +12,19 @@ import {
 } from '@angular/material/dialog';
 import { BookmarksService, MtdService } from '../../core/core.module';
 import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.component';
+
+interface ExampleAudio {
+  speaker: string;
+  filename: string;
+  starts: Array<number>;
+}
+
+interface Example {
+  text: string;
+  definition: string;
+  audio: Array<ExampleAudio>;
+}
+
 @Component({
   selector: 'mtd-word-modal',
   templateUrl: './word-modal.component.html',
@@ -16,7 +34,7 @@ import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.co
 export class WordModalComponent {
   checkedOptions: string[];
   displayImages = true; // default show images, turns to false on 404
-  entry: DictionaryData;
+  examples: Array<Example>;
   optional = false;
   optionalSelection: string[];
   objectKeys = Object.keys;
@@ -27,15 +45,37 @@ export class WordModalComponent {
     private mtdService: MtdService,
     public dialogRef: MatDialogRef<WordModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private ref: ChangeDetectorRef
   ) {
-    console.log(this.optionalSelection);
     this.checkedOptions = this.optionalSelection;
 
     try {
       this.image = 'assets/img/' + this.data.entry.img;
     } catch (error) {
       console.log(error);
+    }
+    // Restructure the examples to Help With Stuff
+    this.examples = [];
+    if ('entry' in this.data && this.data.entry.example_sentence) {
+      for (const idx in this.data.entry.example_sentence) {
+        const text = this.data.entry.example_sentence[idx];
+        let definition;
+        if (this.data.entry.example_sentence_definition)
+          definition = this.data.entry.example_sentence_definition[idx]
+            .split(/\s+/)
+            .map((w, i) => {
+              return { text: w, active: false };
+            });
+        let audio;
+        if (this.data.entry.example_sentence_audio)
+          audio = this.data.entry.example_sentence_audio[idx];
+        this.examples.push({
+          text,
+          definition,
+          audio
+        });
+      }
     }
   }
 
@@ -78,11 +118,41 @@ export class WordModalComponent {
     });
   }
 
-  playAudio(fn) {
-    const path = this.mtdService.config_value.audio_path + fn;
-    const audio = new Audio(path);
-    audio.onerror = () => this.fileNotFound(path);
-    audio.play();
+  playAudio(example, audio) {
+    const path = this.mtdService.config_value.audio_path + audio.filename;
+    const audiotag = new Audio(path);
+    const starts = audio.starts.map(x => x * 0.01);
+    const definition = example.definition;
+
+    audiotag.onerror = () => this.fileNotFound(path);
+    // Only highlight if we have an alignment
+    if (starts.length == definition.length - 1) {
+      let active = 0;
+      audiotag.onplaying = () => {
+        if (example === null) return;
+        active = 0;
+        example.definition[0].active = true;
+        this.ref.markForCheck();
+      };
+      audiotag.ontimeupdate = event => {
+        if (example === null) return;
+        let idx;
+        for (idx = 0; idx < starts.length; idx++) {
+          example.definition[idx].active = false;
+          if (audiotag.currentTime < starts[idx]) break;
+        }
+        if (idx != active) {
+          example.definition[idx].active = true;
+          active = idx;
+          this.ref.markForCheck();
+        }
+      };
+      audiotag.onended = () => {
+        example.definition[active].active = false;
+        this.ref.markForCheck();
+      };
+    }
+    audiotag.play();
   }
 
   imageError() {
