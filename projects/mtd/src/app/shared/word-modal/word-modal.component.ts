@@ -34,7 +34,6 @@ interface Example {
 export class WordModalComponent {
   checkedOptions: string[];
   displayImages = true; // default show images, turns to false on 404
-  entry: DictionaryData;
   examples: Array<Example>;
   optional = false;
   optionalSelection: string[];
@@ -56,21 +55,27 @@ export class WordModalComponent {
     } catch (error) {
       console.log(error);
     }
-    /* Restructure the examples to Help With Stuff */
+    // Restructure the examples to Help With Stuff
     this.examples = [];
-    for (const idx in this.data.entry.example_sentence) {
-      const text = this.data.entry.example_sentence[idx];
-      const audio = this.data.entry.example_sentence_audio[idx];
-      const definition = this.data.entry.example_sentence_definition[idx]
-        .split(/\s+/)
-        .map((w, i) => {
-          return { text: w, active: false };
+    if ('entry' in this.data && this.data.entry.example_sentence) {
+      for (const idx in this.data.entry.example_sentence) {
+        const text = this.data.entry.example_sentence[idx];
+        let definition;
+        if (this.data.entry.example_sentence_definition)
+          definition = this.data.entry.example_sentence_definition[idx]
+            .split(/\s+/)
+            .map((w, i) => {
+              return { text: w, active: false };
+            });
+        let audio;
+        if (this.data.entry.example_sentence_audio)
+          audio = this.data.entry.example_sentence_audio[idx];
+        this.examples.push({
+          text,
+          definition,
+          audio
         });
-      this.examples.push({
-        text,
-        definition,
-        audio
-      });
+      }
     }
   }
 
