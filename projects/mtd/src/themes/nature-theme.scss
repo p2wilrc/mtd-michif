@@ -27,8 +27,11 @@ $white: #fff;
   color: $white !important;
 }
 
+/* WTF? Aren't these supposed be styled in the 7000 different
+   *.scss-theme.scss files??? */
 .nature-theme mat-sidenav-container mat-toolbar button.active,
 .nature-theme .langMatched,
+.nature-theme .word__active,
 .nature-theme .mat-flat-button.mat-accent,
 .nature-theme .mat-raised-button.mat-accent,
 .nature-theme .mat-fab.mat-accent,
