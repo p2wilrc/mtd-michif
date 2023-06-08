@@ -3,7 +3,7 @@
 .browse {
   &__categories {
     text-align: center;
-    padding: 0 20px;
+    padding: 0 15px;
     border-radius: 5px;
     width: fit-content;
     margin: 0 auto;
@@ -13,20 +13,29 @@
     &__grid {
       width: 80%;
       margin: 20px auto;
-      list-style-type: none;
-      padding: 0;
+      padding: 5px;
       overflow: hidden;
-      opacity: 0.95;
       border-radius: 15px;
     }
 
+    &__list {
+      list-style-type: none;
+      padding: 0;
+      margin: auto;
+      opacity: 0.95;
+    }
+
     &__letter {
-      display: block;
+      display: inline-block;
       text-align: center;
       padding: 5px;
+      width: 48px;
       text-decoration: none;
-      float: left;
       cursor: pointer;
+
+      .mat-button {
+        min-width: 48px;
+      }
     }
   }
 
@@ -34,6 +43,22 @@
     &--progress {
       margin: 0 auto !important;
       font-size: smaller;
+    }
+  }
+
+  &__entry {
+    &__list {
+      &__container {
+        min-height: 55vh;
+        max-height: 400px;
+      }
+    }
+  }
+
+  &__controls {
+    &__container {
+      min-height: 55vh;
+      max-height: 400px;
     }
   }
 

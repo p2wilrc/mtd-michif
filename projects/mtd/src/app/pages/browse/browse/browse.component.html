@@ -23,17 +23,19 @@
             class="browse__alphabet__container"
             [ngClass]="routeAnimationsElements"
           >
-            <ul class="browse__alphabet__grid">
-              <li
-                class="browse__alphabet__letter"
-                [class.chosen]="highlightLetter(letter)"
-                *ngFor="let letter of displayLetters$ | async"
-              >
-                <button mat-button (click)="scrollTo(letter)">
-                  {{ letter }}
-                </button>
-              </li>
-            </ul>
+            <div class="browse__alphabet__grid">
+              <ul class="browse__alphabet__list">
+                <li
+                  class="browse__alphabet__letter"
+                  [class.chosen]="highlightLetter(letter)"
+                  *ngFor="let letter of displayLetters$ | async"
+                >
+                  <button mat-button (click)="scrollTo(letter)">
+                    {{ letter }}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div
