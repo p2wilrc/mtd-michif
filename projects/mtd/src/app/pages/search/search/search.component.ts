@@ -68,14 +68,6 @@ export class SearchComponent implements OnDestroy, OnInit {
         this.getResults(x);
         this.loading$.next(false);
       });
-    // this.results$ = this.searchQuery$.pipe(
-    //   distinctUntilChanged(),
-    //   debounceTime(100),
-    //   switchMap(term =>
-    //     this.entries$.pipe(map(entries => this.getResults(term, entries)))
-    //   )
-    // );
-    // this.results$.subscribe(x => console.log(x));
   }
 
   getRegex(re, key = 'definition') {
@@ -103,11 +95,6 @@ export class SearchComponent implements OnDestroy, OnInit {
     });
     return sorted_answers.slice(0, 9);
   }
-
-  // onSearchKeyUp(e: KeyboardEvent) {
-  //   this.getResults((e.target as HTMLInputElement).value);
-  //   // this.searchQuery$.next((e.target as HTMLInputElement).value);
-  // }
 
   filterMatches(results) {
     return results.filter(r => r.distance <= this.matchThreshold);
@@ -285,23 +272,5 @@ export class SearchComponent implements OnDestroy, OnInit {
       }
       this.matches$.next(matches.concat(partMatches).concat(maybeMatches));
     }
-    // console.log('get results');
-    // if (searchQuery && searchQuery.length > 1) {
-    //   console.log(searchQuery);
-    //   const l2_results = this.getL2(searchQuery, entries).map(x => {
-    //     x.distance = 0;
-    //     x['type'] = 'L2';
-    //     return x;
-    //   });
-    //   let l1_results = window['searchL1'](searchQuery, entries).map(x => {
-    //     // levlib returns an array with the weight and entry
-    //     x[1]['type'] = 'L1';
-    //     return x[1];
-    //   });
-    //   const results = l2_results.concat(l1_results);
-    //   return results;
-    // } else {
-    //   return [];
-    // }
   }
 }
