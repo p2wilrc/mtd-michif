@@ -29,9 +29,27 @@ var config = {
       'y',
       'z'
     ],
-    transducers: { 'michif-approx': [{ h: 'h' }] }
+    transducers: {
+      'michif-approx': [
+        { ae: 'a' },
+        { aw: 'a' },
+        { uh: 'a' },
+        { ay: 'e' },
+        { ee: 'e' },
+        { oo: 'u' },
+        { ou: 'u' },
+        { au: 'u' },
+        { uw: 'u' },
+        { hk: 'k' },
+        { ht: 't' },
+        { hp: 'p' },
+        { '\\-': '' },
+        { '\u2019': '' },
+        { "'": '' }
+      ]
+    }
   },
   L2: { name: 'English' },
-  build: '202306071418',
+  build: '202306141542',
   audio_path: 'assets/'
 };
