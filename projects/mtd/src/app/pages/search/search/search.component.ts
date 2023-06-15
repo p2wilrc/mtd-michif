@@ -206,7 +206,7 @@ export class SearchComponent implements OnDestroy, OnInit {
 
       const populateTarget = () => {
         for (const result of target) {
-          const entry = Object.assign({}, result[1]);
+          const entry = Object.assign({}, result);
           entry.type = 'L1';
           entry.distance += this.approxWeight;
           const resultIndex = allMatches.findIndex(
@@ -247,6 +247,10 @@ export class SearchComponent implements OnDestroy, OnInit {
             matches.push(entry);
           }
         }
+        const sort_on_distance = (a, b) => a.distance - b.distance;
+        matches.sort(sort_on_distance);
+        partMatches.sort(sort_on_distance);
+        maybeMatches.sort(sort_on_distance);
       };
       populateL1Exact();
       populateL2Exact();

@@ -62,15 +62,23 @@ var distanceCalculator = function(entries, target) {
     var results = [];
     var distanceFormPairs = transducer.transduce(
       query,
-      Math.max(1, Math.floor(query.length / 3.0))
+      Math.floor(query.length / 3.0)
     );
     for (var i = 0; i < distanceFormPairs.length; i++) {
       var distance = distanceFormPairs[i][1];
       var form = distanceFormPairs[i][0];
       var resultingEntries = candidates[form];
       for (var j = 0; j < resultingEntries.length; j++) {
-        resultingEntries[j]['distance'] = distance;
-        results.push([distance, resultingEntries[j]]);
+        var entry = resultingEntries[j];
+        if (typeof target != 'undefined' && target in entry) {
+          var compareForm = entry[target].toLowerCase();
+        } else {
+          var compareForm = entry['word'].toLowerCase();
+        }
+        // Penalize multi-word matches
+        if (compareForm === form) entry.distance = distance;
+        else entry.distance = distance + 0.5;
+        results.push(entry);
       }
     }
     return results;
