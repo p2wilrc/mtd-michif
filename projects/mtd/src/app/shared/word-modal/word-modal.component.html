@@ -1,4 +1,3 @@
-<!-- <h4 class='center-text' mat-dialog-title>Information for {{ data.entry.word }}</h4> -->
 <div mat-dialog-content>
   <div class="container">
     <div class="container__row">
@@ -74,9 +73,22 @@
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="container__row">
+      <a
+        class="report"
+        target="_blank"
+        href="mailto:Dictionary@p2wilr.org?subject=Problem entry: {{
+          data?.entry?.entryID
+        }}&body=See: {{ getLink() }}"
+      >
+        Report a problem with this entry
+      </a>
+    </div>
+  </div>
 </div>
-<div mat-dialog-actions class="exit">
-  <button mat-raised-button cdkFocusInitial (click)="close()">
+<div mat-dialog-actions align="end">
+  <button cdkFocusInitial mat-raised-button mat-dialog-close>
     {{ 'mtd.word-modal.exit' | translate }}
   </button>
 </div>
