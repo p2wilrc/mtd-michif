@@ -79,16 +79,16 @@ export class WordModalComponent {
     }
   }
 
-  close(): void {
-    this.dialogRef.close();
-  }
-
   getKey(obj) {
     return Object.keys(obj);
   }
 
   getVal(obj) {
     return Object.values(obj);
+  }
+
+  getLink(): string {
+    return window.location.href;
   }
 
   checkChecked(option) {
