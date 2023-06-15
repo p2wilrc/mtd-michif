@@ -36,15 +36,15 @@ export class AppComponent implements OnInit, OnDestroy {
   languages = META.languages;
   Meta = META;
   navigation = [
-    { link: 'dev/search', label: marker('mtd.menu.search') },
-    { link: 'dev/browse', label: marker('mtd.menu.browse') },
-    { link: 'dev/random', label: marker('mtd.menu.random') },
-    { link: 'dev/bookmarks', label: marker('mtd.menu.bookmarks') },
-    { link: 'dev/about', label: marker('mtd.menu.about') }
+    { link: 'search', label: marker('mtd.menu.search') },
+    { link: 'browse', label: marker('mtd.menu.browse') },
+    { link: 'random', label: marker('mtd.menu.random') },
+    { link: 'bookmarks', label: marker('mtd.menu.bookmarks') },
+    { link: 'about', label: marker('mtd.menu.about') }
   ];
   navigationSideMenu = [
     ...this.navigation,
-    { link: 'dev/settings', label: 'mtd.menu.settings' }
+    { link: 'settings', label: 'mtd.menu.settings' }
   ];
 
   stickyHeader$: Observable<boolean>;
