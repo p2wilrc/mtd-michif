@@ -3,6 +3,7 @@ import {
   Input,
   Inject,
   OnChanges,
+  OnInit,
   SimpleChange
 } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -47,7 +48,7 @@ const levenstein = function(string1, string2) {
   templateUrl: 'entry-list.component.html',
   styleUrls: ['entry-list.component.scss']
 })
-export class EntryListComponent implements OnChanges {
+export class EntryListComponent implements OnChanges, OnInit {
   pageName: string;
   edit = false;
 
@@ -66,8 +67,24 @@ export class EntryListComponent implements OnChanges {
     private router: Router
   ) {}
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if ('show' in params) {
+        const dialogRef = this.dialog.open(WordModalComponent, {
+          data: { entry: this.entries[params.show] }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.router.navigate(['.'], { relativeTo: this.route });
+        });
+      }
+    });
+  }
+
   showModal(idx) {
-    this.router.navigate([idx], { relativeTo: this.route });
+    this.router.navigate(['.'], {
+      queryParams: { show: idx },
+      relativeTo: this.route
+    });
   }
 
   playDefaultAudio(entry) {
@@ -116,14 +133,5 @@ export class EntryListComponent implements OnChanges {
 
   ngOnChanges() {
     this.edit = this.parentEdit;
-
-    if (this.showEntry !== undefined) {
-      const dialogRef = this.dialog.open(WordModalComponent, {
-        data: { entry: this.entries[this.showEntry] }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        this.router.navigate(['..'], { relativeTo: this.route });
-      });
-    }
   }
 }

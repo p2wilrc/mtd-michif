@@ -18,7 +18,6 @@ import {
 export class BrowseComponent implements OnDestroy {
   currentEntries$: BehaviorSubject<DictionaryData[]>;
   currentX: DictionaryData[];
-  showEntry?: number;
   displayCategories$: Observable<any>;
   displayLetters$: Observable<any>;
   letters: string[];
@@ -51,8 +50,6 @@ export class BrowseComponent implements OnDestroy {
       if (start !== clamped)
         this.router.navigate([clamped], { relativeTo: this.route.parent });
       else this.startIndex$.next(clamped);
-      if ('show' in params) this.showEntry = parseInt(params.show);
-      else this.showEntry = undefined;
     });
     this.route.queryParams.subscribe(params => {
       if ('default_shown' in params)

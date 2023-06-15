@@ -5,11 +5,6 @@ import { BrowseComponent } from './browse/browse.component';
 
 const routes: Routes = [
   {
-    path: ':start/:show',
-    component: BrowseComponent,
-    data: { title: 'mtd.menu.browse' }
-  },
-  {
     path: ':start',
     component: BrowseComponent,
     data: { title: 'mtd.menu.browse' }
