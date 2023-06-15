@@ -32,7 +32,13 @@ function searchL1(query_value) {
     var result_container = [];
     for (var i = 0; i < query_array.length; i++) {
       var needle = mtd.convertQuery(query_array[i]);
-      result_container = result_container.concat(l1SearchAlg(needle));
+      var compare_results = l1SearchAlg(needle);
+      // Ugh! These are partial matches by definition! They should be downweighted...
+      for (var i = 0; i < compare_results.length; i++) {
+        compare_results[i][0] += 1;
+        compare_results[i][1].distance += 1;
+      }
+      result_container = result_container.concat(compare_results);
     }
     return result_container;
     // Case for single-word query
@@ -42,6 +48,7 @@ function searchL1(query_value) {
     var compare_results = l1SearchAlg(needle);
     // Weight them lower than exact word matches (weight = 0.5)
     for (var i = 0; i < compare_results.length; i++) {
+      compare_results[i][0] += 0.5;
       compare_results[i][1].distance += 0.5;
     }
     // Find lev distance on display form
