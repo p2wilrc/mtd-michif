@@ -4,9 +4,12 @@ import {
   Inject,
   OnChanges,
   OnInit,
+  OnDestroy,
   SimpleChange
 } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { WordModalComponent } from '../word-modal/word-modal.component';
 import { DictionaryData } from '../../core/models';
 import { BookmarksService, MtdService } from '../../core/core.module';
@@ -48,9 +51,10 @@ const levenstein = function(string1, string2) {
   templateUrl: 'entry-list.component.html',
   styleUrls: ['entry-list.component.scss']
 })
-export class EntryListComponent implements OnChanges, OnInit {
+export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
   pageName: string;
   edit = false;
+  unsubscribe$ = new Subject<void>();
 
   @Input() parentEdit: boolean;
   @Input() entries: DictionaryData[];
@@ -68,18 +72,29 @@ export class EntryListComponent implements OnChanges, OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if ('show' in params) {
-        const entry = this.entries.find(entry => entry.entryID == params.show);
-        if (entry === undefined) return;
+    this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(params => {
+        if (!('show' in params)) return;
+        // Look first in the (small) list of entries if it exists, but check the full
+        // one too so that permalinks always work (as long as there's an entry list...!)
+        const entry =
+          this.entries?.find(entry => entry.entryID == params.show) ??
+          this.mtdService.dataDict_value.find(
+            entry => entry.entryID == params.show
+          );
+        if (entry === undefined) return; // FIXME: Perhaps should show an error of some sort
         const dialogRef = this.dialog.open(WordModalComponent, {
           data: { entry }
         });
         dialogRef.afterClosed().subscribe(result => {
           this.router.navigate(['.'], { relativeTo: this.route });
         });
-      }
-    });
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
   }
 
   showModal(entry) {
