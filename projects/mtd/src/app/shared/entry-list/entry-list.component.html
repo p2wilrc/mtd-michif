@@ -1,7 +1,7 @@
 <cdk-virtual-scroll-viewport itemSize="30" class="entry-list__viewport">
   <div
     class="container"
-    *cdkVirtualFor="let entry of entries; last as isLast; index as idx"
+    *cdkVirtualFor="let entry of entries; last as isLast"
     text-wrap
   >
     <div class="row" *ngIf="entry.title">
@@ -22,11 +22,12 @@
             >bookmark</mat-icon
           >
         </button>
+        <!-- ideally there would be a routerLink here but ... Angular ... -->
         <button
           mat-icon-button
           aria-label="Show More information"
           title="Show More information"
-          (click)="showModal(idx)"
+          (click)="showModal(entry)"
         >
           <mat-icon>list</mat-icon>
         </button>
@@ -48,7 +49,7 @@
         ></span>
       </div>
 
-      <div class="col-sm match__term__container" (click)="showModal(idx)">
+      <div class="col-sm match__term__container" (click)="showModal(entry)">
         <span
           class="match__term match__term--translation"
           [innerHTML]="highlight(entry, 'L2')"

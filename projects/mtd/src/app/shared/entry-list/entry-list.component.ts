@@ -70,8 +70,10 @@ export class EntryListComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if ('show' in params) {
+        const entry = this.entries.find(entry => entry.entryID == params.show);
+        if (entry === undefined) return;
         const dialogRef = this.dialog.open(WordModalComponent, {
-          data: { entry: this.entries[params.show] }
+          data: { entry }
         });
         dialogRef.afterClosed().subscribe(result => {
           this.router.navigate(['.'], { relativeTo: this.route });
@@ -80,9 +82,9 @@ export class EntryListComponent implements OnChanges, OnInit {
     });
   }
 
-  showModal(idx) {
+  showModal(entry) {
     this.router.navigate(['.'], {
-      queryParams: { show: idx },
+      queryParams: { show: entry.entryID },
       relativeTo: this.route
     });
   }
