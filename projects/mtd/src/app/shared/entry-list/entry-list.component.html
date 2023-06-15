@@ -46,8 +46,6 @@
           class="match__term match__term--target"
           [innerHTML]="highlight(entry, 'L1')"
         ></span>
-        <!-- <span class='match__term match__term--target'
-             [ngClass]="{'langMatched': entry.type === 'L1' && shouldHighlight}">{{entry.word}}</span> -->
       </div>
 
       <div class="col-sm match__term__container" (click)="showModal(entry)">
@@ -55,9 +53,6 @@
           class="match__term match__term--translation"
           [innerHTML]="highlight(entry, 'L2')"
         ></span>
-        <!-- <span *ngIf='shouldHighlight' class="match__term match__term--translation"
-             [innerHTML]="highlight(entry.definition)"></span>
-             <span *ngIf='!shouldHighlight' class="match__term match__term--translation">{{entry.definition}}</span> -->
       </div>
     </div>
     <hr *ngIf="!isLast" />
