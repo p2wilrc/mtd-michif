@@ -208,6 +208,7 @@ export class SearchComponent implements OnDestroy, OnInit {
         for (const result of target) {
           const entry = Object.assign({}, result[1]);
           entry.type = 'L1';
+          entry.distance += this.approxWeight;
           const resultIndex = allMatches.findIndex(
             match =>
               match.word === entry.word && match.definition === match.definition
@@ -217,9 +218,9 @@ export class SearchComponent implements OnDestroy, OnInit {
           } else {
             if (
               'distance' in allMatches[resultIndex] &&
-              allMatches[resultIndex].distance > result[0]
+              allMatches[resultIndex].distance > entry.distance
             ) {
-              allMatches[resultIndex].distance = result[0] + this.approxWeight;
+              allMatches[resultIndex].distance = entry.distance;
             }
           }
         }
@@ -259,6 +260,7 @@ export class SearchComponent implements OnDestroy, OnInit {
           ) === index
       );
       mergeMatches();
+      console.log(allMatches);
       this.loading$.next(false);
       // Add headers
       if (matches.length) {
