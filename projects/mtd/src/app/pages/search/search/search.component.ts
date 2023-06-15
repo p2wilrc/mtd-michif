@@ -247,10 +247,8 @@ export class SearchComponent implements OnDestroy, OnInit {
             matches.push(entry);
           }
         }
-        const sort_on_distance = (a, b) => a.distance - b.distance;
-        matches.sort(sort_on_distance);
-        partMatches.sort(sort_on_distance);
-        maybeMatches.sort(sort_on_distance);
+        // Only these actually need to be sorted by distance
+        maybeMatches.sort((a, b) => a.distance - b.distance);
       };
       populateL1Exact();
       populateL2Exact();
