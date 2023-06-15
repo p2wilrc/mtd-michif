@@ -1,4 +1,10 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DictionaryData } from '../../../core/models';
 import {
   BookmarksService,
@@ -18,7 +24,18 @@ export class BookmarksComponent implements OnDestroy {
   edit = false;
   unsubscribe$ = new Subject<void>();
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  constructor(public bookmarkService: BookmarksService) {
+  show?: string;
+  constructor(
+    public bookmarkService: BookmarksService,
+    private ref: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(params => {
+        this.show = params.show;
+        this.ref.markForCheck();
+      });
     this.bookmarkService.bookmarks
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(bookmarks => {

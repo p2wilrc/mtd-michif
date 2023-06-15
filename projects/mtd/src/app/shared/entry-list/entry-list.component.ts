@@ -3,17 +3,18 @@ import {
   Input,
   Inject,
   OnChanges,
+  OnInit,
+  OnDestroy,
   SimpleChange
 } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { WordModalComponent } from '../word-modal/word-modal.component';
 import { DictionaryData } from '../../core/models';
 import { BookmarksService, MtdService } from '../../core/core.module';
 
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.component';
 import { slugify } from 'transliteration';
@@ -50,27 +51,56 @@ const levenstein = function(string1, string2) {
   templateUrl: 'entry-list.component.html',
   styleUrls: ['entry-list.component.scss']
 })
-export class EntryListComponent implements OnChanges {
+export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
   pageName: string;
   edit = false;
+  unsubscribe$ = new Subject<void>();
 
   @Input() parentEdit: boolean;
   @Input() entries: DictionaryData[];
   @Input() searchTerm: string;
   @Input() threshold: number;
+  @Input() showEntry: number;
   @Input() shouldHighlight = false;
   @Input() searchResults: boolean = false;
   constructor(
     private bookmarkService: BookmarksService,
     public dialog: MatDialog,
-    private mtdService: MtdService
-  ) {
-    // this.pageName = modalCtrl.name
+    private mtdService: MtdService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(params => {
+        if (!('show' in params)) return;
+        // Look first in the (small) list of entries if it exists, but check the full
+        // one too so that permalinks always work (as long as there's an entry list...!)
+        const entry =
+          this.entries?.find(entry => entry.entryID == params.show) ??
+          this.mtdService.dataDict_value.find(
+            entry => entry.entryID == params.show
+          );
+        if (entry === undefined) return; // FIXME: Perhaps should show an error of some sort
+        const dialogRef = this.dialog.open(WordModalComponent, {
+          data: { entry }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.router.navigate(['.'], { relativeTo: this.route });
+        });
+      });
   }
 
-  async showModal(entry) {
-    this.dialog.open(WordModalComponent, {
-      data: { entry }
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+  }
+
+  showModal(entry) {
+    this.router.navigate(['.'], {
+      queryParams: { show: entry.entryID },
+      relativeTo: this.route
     });
   }
 

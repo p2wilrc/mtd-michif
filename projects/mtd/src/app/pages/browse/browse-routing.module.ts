@@ -5,9 +5,14 @@ import { BrowseComponent } from './browse/browse.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':start',
     component: BrowseComponent,
     data: { title: 'mtd.menu.browse' }
+  },
+  {
+    path: '',
+    redirectTo: '0',
+    pathMatch: 'full'
   }
 ];
 

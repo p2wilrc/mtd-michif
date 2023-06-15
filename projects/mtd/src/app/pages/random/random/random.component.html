@@ -15,8 +15,8 @@
         </div>
         <div class="col-lg-3"></div>
       </div>
-      <div class="results" *ngIf="entries$ | async as entries_val">
-        <mtd-entry-list [entries]="entries_val"></mtd-entry-list>
+      <div class="results" *ngIf="show || entries$">
+        <mtd-entry-list [entries]="entries$ | async"></mtd-entry-list>
       </div>
     </div>
   </div>

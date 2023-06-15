@@ -2,8 +2,10 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import {
   takeUntil,
@@ -44,10 +46,21 @@ export class SearchComponent implements OnDestroy, OnInit {
   unsubscribe$ = new Subject<void>();
   onSearchKeyUp = new Subject<string>();
   loading$ = new BehaviorSubject<boolean>(false);
-  constructor(private mtdService: MtdService) {
+  show?: string;
+  constructor(
+    private mtdService: MtdService,
+    private route: ActivatedRoute,
+    private ref: ChangeDetectorRef
+  ) {
     this.entries$ = this.mtdService.dataDict$;
     this.searchControl = new FormControl();
     this.language$ = this.mtdService.name$;
+    this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(params => {
+        this.show = params.show;
+        this.ref.markForCheck();
+      });
   }
 
   ngOnDestroy(): void {
