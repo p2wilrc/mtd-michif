@@ -34,7 +34,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   matches$: BehaviorSubject<DictionaryData[]> = new BehaviorSubject([]);
   matchThreshold = 0;
   partialThreshold = 1;
-  maybeThreshold = 2;
+  maybeThreshold = 3;
   approxWeight = 1;
   searchControl: FormControl;
   searchQuery = '';
@@ -260,7 +260,6 @@ export class SearchComponent implements OnDestroy, OnInit {
           ) === index
       );
       mergeMatches();
-      console.log(allMatches);
       this.loading$.next(false);
       // Add headers
       if (matches.length) {
