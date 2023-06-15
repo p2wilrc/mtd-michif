@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionaryData } from '../../../core/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';

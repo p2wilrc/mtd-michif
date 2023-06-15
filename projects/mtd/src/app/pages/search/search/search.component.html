@@ -26,10 +26,10 @@
           />
         </mat-form-field>
       </div>
-      <div *ngIf="searchQuery && entries">
+      <div *ngIf="show || (searchQuery && entries)">
         <div class="search__results" *ngIf="matches$ | async as matches">
           <mtd-entry-list
-            *ngIf="matches.length > 0"
+            *ngIf="show || matches.length > 0"
             [entries]="matches"
             [searchTerm]="searchQuery"
             [threshold]="matchThreshold"

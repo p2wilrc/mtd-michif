@@ -7,7 +7,7 @@
         </h1>
         <div class="results" [ngClass]="routeAnimationsElements">
           <mtd-entry-list
-            *ngIf="bookmarks.length !== 0"
+            *ngIf="show || bookmarks.length !== 0"
             [entries]="bookmarks"
             [parentEdit]="edit"
           ></mtd-entry-list>
