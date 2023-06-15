@@ -26,7 +26,6 @@
           />
         </mat-form-field>
       </div>
-      <!-- <ion-searchbar [formControl]="searchControl" autocapitalize="none"></ion-searchbar> -->
       <div *ngIf="searchQuery && entries">
         <div class="search__results" *ngIf="matches$ | async as matches">
           <mtd-entry-list
@@ -37,29 +36,6 @@
             [shouldHighlight]="true"
           >
           </mtd-entry-list>
-          <!-- <div class='search__results--matches' *ngIf="matches_object.matches.length > 0">
-                        <div class="search__results__container">
-                            <h4 class='search__results__title'>{{ 'mtd.pages.search.matches' | translate }}</h4>
-                            <mtd-entry-list [entries]="matches_object.matches" [searchTerm]="searchQuery"
-                                [threshold]="matchThreshold" [shouldHighlight]='true'>
-                            </mtd-entry-list>
-                        </div>
-                    </div>
-                    <div class='search__results--partMatches' *ngIf="matches_object.partMatches.length > 0">
-                        <div class="search__results__container">
-                            <h4 class='search__results__title'>{{ 'mtd.pages.search.partial-matches' | translate }}</h4>
-                            <mtd-entry-list [entries]="matches_object.partMatches" [searchTerm]="searchQuery"
-                                [threshold]="partialThreshold" [shouldHighlight]='true'></mtd-entry-list>
-                        </div>
-                    </div>
-                    <div class='search__results--maybeMatches' *ngIf="matches_object.maybeMatches.length > 0">
-                        <div class="search__results__container">
-                            <h4 class='search__results__title'>{{ 'mtd.pages.search.maybe-matches' | translate }}</h4>
-                            <mtd-entry-list [entries]="matches_object.maybeMatches" [searchTerm]="searchQuery"
-                                [threshold]="maybeThreshold" [shouldHighlight]='true'>
-                            </mtd-entry-list>
-                        </div>
-                    </div> -->
           <div
             *ngIf="matches.length === 0 && searchQuery"
             class="search__results--none search__results__container"

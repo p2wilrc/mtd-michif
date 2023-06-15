@@ -34,7 +34,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   matches$: BehaviorSubject<DictionaryData[]> = new BehaviorSubject([]);
   matchThreshold = 0;
   partialThreshold = 1;
-  maybeThreshold = 2;
+  maybeThreshold = 3;
   approxWeight = 1;
   searchControl: FormControl;
   searchQuery = '';
@@ -68,14 +68,6 @@ export class SearchComponent implements OnDestroy, OnInit {
         this.getResults(x);
         this.loading$.next(false);
       });
-    // this.results$ = this.searchQuery$.pipe(
-    //   distinctUntilChanged(),
-    //   debounceTime(100),
-    //   switchMap(term =>
-    //     this.entries$.pipe(map(entries => this.getResults(term, entries)))
-    //   )
-    // );
-    // this.results$.subscribe(x => console.log(x));
   }
 
   getRegex(re, key = 'definition') {
@@ -103,11 +95,6 @@ export class SearchComponent implements OnDestroy, OnInit {
     });
     return sorted_answers.slice(0, 9);
   }
-
-  // onSearchKeyUp(e: KeyboardEvent) {
-  //   this.getResults((e.target as HTMLInputElement).value);
-  //   // this.searchQuery$.next((e.target as HTMLInputElement).value);
-  // }
 
   filterMatches(results) {
     return results.filter(r => r.distance <= this.matchThreshold);
@@ -180,7 +167,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       // Collect l1Exact matches and add to allMatches
       const populateL1Exact = () => {
         for (const result of l1Exact) {
-          const entry = result;
+          const entry = Object.assign({}, result);
           entry.type = 'L1';
           entry.distance = this.matchThreshold;
           allMatches.push(entry);
@@ -190,7 +177,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       // Collect l2Exact matches and add to allMatches
       const populateL2Exact = () => {
         for (const result of l2Exact) {
-          const entry = result;
+          const entry = Object.assign({}, result);
           entry.type = 'L2';
           entry.distance = this.matchThreshold;
           allMatches.push(entry);
@@ -200,7 +187,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       // Collect l1Partial matches and add to allMatches
       const populateL1Partial = () => {
         for (const result of l1Partial.concat(l1PartialSlug)) {
-          const entry = result;
+          const entry = Object.assign({}, result);
           entry.type = 'L1';
           entry.distance = this.partialThreshold;
           allMatches.push(entry);
@@ -210,7 +197,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       // Collect l2Partial matches and add to allMatches
       const populateL2Partial = () => {
         for (const result of l2Partial) {
-          const entry = result;
+          const entry = Object.assign({}, result);
           entry.type = 'L2';
           entry.distance = this.partialThreshold;
           allMatches.push(entry);
@@ -219,8 +206,9 @@ export class SearchComponent implements OnDestroy, OnInit {
 
       const populateTarget = () => {
         for (const result of target) {
-          const entry = result[1];
+          const entry = Object.assign({}, result);
           entry.type = 'L1';
+          entry.distance += this.approxWeight;
           const resultIndex = allMatches.findIndex(
             match =>
               match.word === entry.word && match.definition === match.definition
@@ -230,9 +218,9 @@ export class SearchComponent implements OnDestroy, OnInit {
           } else {
             if (
               'distance' in allMatches[resultIndex] &&
-              allMatches[resultIndex].distance > result[0]
+              allMatches[resultIndex].distance > entry.distance
             ) {
-              allMatches[resultIndex].distance = result[0] + this.approxWeight;
+              allMatches[resultIndex].distance = entry.distance;
             }
           }
         }
@@ -259,6 +247,10 @@ export class SearchComponent implements OnDestroy, OnInit {
             matches.push(entry);
           }
         }
+        const sort_on_distance = (a, b) => a.distance - b.distance;
+        matches.sort(sort_on_distance);
+        partMatches.sort(sort_on_distance);
+        maybeMatches.sort(sort_on_distance);
       };
       populateL1Exact();
       populateL2Exact();
@@ -285,23 +277,5 @@ export class SearchComponent implements OnDestroy, OnInit {
       }
       this.matches$.next(matches.concat(partMatches).concat(maybeMatches));
     }
-    // console.log('get results');
-    // if (searchQuery && searchQuery.length > 1) {
-    //   console.log(searchQuery);
-    //   const l2_results = this.getL2(searchQuery, entries).map(x => {
-    //     x.distance = 0;
-    //     x['type'] = 'L2';
-    //     return x;
-    //   });
-    //   let l1_results = window['searchL1'](searchQuery, entries).map(x => {
-    //     // levlib returns an array with the weight and entry
-    //     x[1]['type'] = 'L1';
-    //     return x[1];
-    //   });
-    //   const results = l2_results.concat(l1_results);
-    //   return results;
-    // } else {
-    //   return [];
-    // }
   }
 }
