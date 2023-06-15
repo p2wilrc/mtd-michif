@@ -34,10 +34,8 @@ function searchL1(query_value) {
       var needle = mtd.convertQuery(query_array[i]);
       var compare_results = l1SearchAlg(needle);
       // Ugh! These are partial matches by definition! They should be downweighted...
-      for (var i = 0; i < compare_results.length; i++) {
-        compare_results[i][0] += 1;
-        compare_results[i][1].distance += 1;
-      }
+      for (var i = 0; i < compare_results.length; i++)
+        compare_results[i].distance += 1;
       result_container = result_container.concat(compare_results);
     }
     return result_container;
@@ -47,10 +45,8 @@ function searchL1(query_value) {
     var needle = mtd.convertQuery(query_value);
     var compare_results = l1SearchAlg(needle);
     // Weight them lower than exact word matches (weight = 0.5)
-    for (var i = 0; i < compare_results.length; i++) {
-      compare_results[i][0] += 0.5;
-      compare_results[i][1].distance += 0.5;
-    }
+    for (var i = 0; i < compare_results.length; i++)
+      compare_results[i].distance += 0.5;
     // Find lev distance on display form
     var word_results = l1SearchAlgWord(needle);
 
@@ -62,9 +58,8 @@ function searchL1(query_value) {
       }
       // Add the compare result only if it doesn't exist as display form match
       for (var i = 0; i < compare_results.length; i++) {
-        if (!(compare_results[i]['word'] in word_result_keys)) {
+        if (!(compare_results[i]['word'] in word_result_keys))
           results.push(compare_results[i]);
-        }
       }
       results = results.concat(compare_results);
     } else {
