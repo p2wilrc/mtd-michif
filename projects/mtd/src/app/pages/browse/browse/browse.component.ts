@@ -1,4 +1,5 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DictionaryData } from '../../../core/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
@@ -32,13 +33,28 @@ export class BrowseComponent implements OnDestroy {
   unsubscribe$ = new Subject<void>();
   constructor(
     public bookmarkService: BookmarksService,
-    private mtdService: MtdService
+    private mtdService: MtdService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.displayCategories$ = this.mtdService.category_keys$;
     this.currentEntries$ = new BehaviorSubject<DictionaryData[]>(
       this.mtdService.dataDict_value
     );
-    // this.letters = this.mtdService.config_value.L1.lettersInLanguage;
+    this.route.params.subscribe(params => {
+      const start = parseInt(params.start ?? 0);
+      const clamped = Math.max(
+        0,
+        Math.min(start, this.currentEntries$.getValue().length - 1)
+      );
+      if (start !== clamped)
+        this.router.navigate([clamped], { relativeTo: this.route.parent });
+      else this.startIndex$.next(clamped);
+    });
+    this.route.queryParams.subscribe(params => {
+      if ('default_shown' in params)
+        this.default_shown = parseInt(params.default_shown);
+    });
     this.mtdService.dataDict$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(x => {
@@ -111,9 +127,11 @@ export class BrowseComponent implements OnDestroy {
   prevX() {
     let current_val = this.startIndex$.value;
     if (current_val - this.default_shown > 0) {
-      this.startIndex$.next((current_val -= this.default_shown));
+      this.router.navigate([(current_val -= this.default_shown)], {
+        relativeTo: this.route.parent
+      });
     } else {
-      this.startIndex$.next(0);
+      this.router.navigate([0], { relativeTo: this.route.parent });
     }
   }
 
@@ -124,10 +142,18 @@ export class BrowseComponent implements OnDestroy {
       current_val + this.default_shown <
       this.currentEntries$.getValue().length
     ) {
-      this.startIndex$.next((current_val += this.default_shown));
+      this.router.navigate([current_val + this.default_shown], {
+        relativeTo: this.route.parent
+      });
     } else {
-      this.startIndex$.next(
-        Math.max(this.currentEntries$.getValue().length - this.default_shown, 0)
+      this.router.navigate(
+        [
+          Math.max(
+            this.currentEntries$.getValue().length - this.default_shown,
+            0
+          )
+        ],
+        { relativeTo: this.route.parent }
       );
     }
   }
@@ -137,7 +163,9 @@ export class BrowseComponent implements OnDestroy {
     const letterIndex = this.letters.indexOf(letter);
     for (const entry of this.currentEntries$.getValue()) {
       if (entry.sorting_form[0] === letterIndex) {
-        this.startIndex$.next(this.currentEntries$.getValue().indexOf(entry));
+        this.router.navigate([this.currentEntries$.getValue().indexOf(entry)], {
+          relativeTo: this.route.parent
+        });
         break;
       }
     }

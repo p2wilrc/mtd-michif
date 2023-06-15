@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { EntryListComponent } from './entry-list.component';
 import { SharedModule } from '../shared.module';
@@ -13,6 +14,7 @@ describe('EntryListComponent', () => {
         imports: [
           HttpClientTestingModule,
           TranslateModule.forRoot(),
+          RouterTestingModule,
           SharedModule
         ],
         declarations: [EntryListComponent]
