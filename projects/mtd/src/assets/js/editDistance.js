@@ -62,7 +62,7 @@ var distanceCalculator = function(entries, target) {
     var results = [];
     var distanceFormPairs = transducer.transduce(
       query,
-      Math.floor(query.length / 3.0)
+      Math.max(1, Math.floor(query.length / 3.0))
     );
     for (var i = 0; i < distanceFormPairs.length; i++) {
       var distance = distanceFormPairs[i][1];
