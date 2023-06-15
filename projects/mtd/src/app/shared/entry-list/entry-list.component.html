@@ -1,7 +1,7 @@
 <cdk-virtual-scroll-viewport itemSize="30" class="entry-list__viewport">
   <div
     class="container"
-    *cdkVirtualFor="let entry of entries; last as isLast"
+    *cdkVirtualFor="let entry of entries; last as isLast; index as idx"
     text-wrap
   >
     <div class="row" *ngIf="entry.title">
@@ -26,7 +26,7 @@
           mat-icon-button
           aria-label="Show More information"
           title="Show More information"
-          (click)="showModal(entry)"
+          (click)="showModal(idx)"
         >
           <mat-icon>list</mat-icon>
         </button>
@@ -48,7 +48,7 @@
         ></span>
       </div>
 
-      <div class="col-sm match__term__container" (click)="showModal(entry)">
+      <div class="col-sm match__term__container" (click)="showModal(idx)">
         <span
           class="match__term match__term--translation"
           [innerHTML]="highlight(entry, 'L2')"

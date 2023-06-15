@@ -5,15 +5,12 @@ import {
   OnChanges,
   SimpleChange
 } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { WordModalComponent } from '../word-modal/word-modal.component';
 import { DictionaryData } from '../../core/models';
 import { BookmarksService, MtdService } from '../../core/core.module';
 
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.component';
 import { slugify } from 'transliteration';
@@ -58,20 +55,19 @@ export class EntryListComponent implements OnChanges {
   @Input() entries: DictionaryData[];
   @Input() searchTerm: string;
   @Input() threshold: number;
+  @Input() showEntry: number;
   @Input() shouldHighlight = false;
   @Input() searchResults: boolean = false;
   constructor(
     private bookmarkService: BookmarksService,
     public dialog: MatDialog,
-    private mtdService: MtdService
-  ) {
-    // this.pageName = modalCtrl.name
-  }
+    private mtdService: MtdService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  async showModal(entry) {
-    this.dialog.open(WordModalComponent, {
-      data: { entry }
-    });
+  showModal(idx) {
+    this.router.navigate([idx], { relativeTo: this.route });
   }
 
   playDefaultAudio(entry) {
@@ -120,5 +116,14 @@ export class EntryListComponent implements OnChanges {
 
   ngOnChanges() {
     this.edit = this.parentEdit;
+
+    if (this.showEntry !== undefined) {
+      const dialogRef = this.dialog.open(WordModalComponent, {
+        data: { entry: this.entries[this.showEntry] }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.navigate(['..'], { relativeTo: this.route });
+      });
+    }
   }
 }
