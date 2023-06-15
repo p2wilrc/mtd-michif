@@ -1,9 +1,10 @@
-.exit {
-  float: right;
-}
-
 .audio {
   &__button {
     margin: 1em;
   }
+}
+
+.report {
+  font-size: x-small;
+  text-decoration: underline;
 }
