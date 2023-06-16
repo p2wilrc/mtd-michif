@@ -1,17 +1,42 @@
 {
-  "name": "Michif Talking Dictionary",
-  "short_name": "Michif Dictionary",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "name": "Michif Talking Dictionary",
+  "short_name": "Michif Dictionary",
+  "description": "A digital adaptation of the The Michif Dictionary Turtle Mountain Chippewa Cree by Ida Rose Allard, Patline Laverdure and John Crawford \u00a91983 Turtle Mountain Community College",
   "icons": [
     {
-      "src": "assets/logo.png",
+      "src": "assets/icon-192x192.png",
+      "sizes": "192x192",
+      "purpose": "maskable any",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-256x256.png",
+      "sizes": "256x256",
+      "purpose": "maskable any",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-384x384.png",
+      "sizes": "384x384",
+      "purpose": "maskable any",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "maskable any",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "purpose": "maskable any",
+      "type": "image/svg+xml"
     }
   ]
 }
