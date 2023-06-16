@@ -6,6 +6,7 @@
     @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
       font-size: small;
     }
+    padding: 0 15px;
     border-radius: 5px;
     width: fit-content;
     margin: 0 auto;
