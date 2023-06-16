@@ -100,14 +100,16 @@
     }
 
     &--left {
-      &--icon {
-        /* Position these normally next to the text on mobile! */
-        @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      /* Position these normally next to the text on mobile! */
+      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+        &--icon {
           margin: auto;
         }
-        /* Otherwise, they go in a box at a specific place. */
-        @media (min-width: map-get($angular-breakpoints, laptop)) {
-          width: 100px;
+      }
+      /* Otherwise, they go in a box at a specific place. */
+      @media (min-width: map-get($angular-breakpoints, laptop)) {
+        width: 100px;
+        &--icon {
           font-size: xx-large !important;
           position: absolute !important;
           left: 0 !important;
@@ -120,12 +122,14 @@
     }
 
     &--right {
-      &--icon {
-        @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+        &--icon {
           margin: auto;
         }
-        @media (min-width: map-get($angular-breakpoints, laptop)) {
-          width: 100px;
+      }
+      @media (min-width: map-get($angular-breakpoints, laptop)) {
+        width: 100px;
+        &--icon {
           font-size: xx-large !important;
           position: absolute !important;
           right: 5px !important;
