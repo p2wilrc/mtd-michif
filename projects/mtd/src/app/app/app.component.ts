@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  logo = 'assets/icon-512x512.png';
+  logo = 'assets/logo.png';
   languages = META.languages;
   Meta = META;
   navigation = [
