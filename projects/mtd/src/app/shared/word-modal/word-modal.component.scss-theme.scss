@@ -9,7 +9,7 @@
     &__active {
       background: mat.get-color-from-palette($accent);
       color: mat.get-color-from-palette($accent, default-contrast);
-      border-radius: 5px;
+      border-radius: 2px;
     }
   }
 }
