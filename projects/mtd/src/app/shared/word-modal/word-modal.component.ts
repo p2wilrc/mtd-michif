@@ -39,6 +39,7 @@ export class WordModalComponent {
   optionalSelection: string[];
   objectKeys = Object.keys;
   image: string;
+  reported = false;
 
   constructor(
     public bookmarkService: BookmarksService,
@@ -87,8 +88,19 @@ export class WordModalComponent {
     return Object.values(obj);
   }
 
-  getLink(): string {
-    return window.location.href;
+  async openReport() {
+    if (!(this.data && this.data.entry)) return;
+    if (this.reported) return;
+    const entry_id = encodeURIComponent(this.data.entry.entryID);
+    const url = encodeURIComponent(window.location.href);
+    const word = encodeURIComponent(
+      `${this.data.entry.word}: ${this.data.entry.definition}`
+    );
+    const reporter = `https://dictionary.michif.org/report.php?id=${entry_id}&url=${url}&word=${word}`;
+    console.log(reporter);
+    const response = await fetch(reporter);
+    if (response.ok) this.reported = true;
+    this.ref.markForCheck();
   }
 
   checkChecked(option) {
