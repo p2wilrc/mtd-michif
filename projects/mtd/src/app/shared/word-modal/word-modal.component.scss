@@ -7,4 +7,9 @@
 .report {
   font-size: x-small;
   text-decoration: underline;
+  cursor: pointer;
+}
+.report-done {
+  font-size: x-small;
+  color: green;
 }
