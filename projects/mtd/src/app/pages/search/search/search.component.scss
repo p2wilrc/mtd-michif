@@ -21,9 +21,13 @@
     width: 500px;
   }
 
+  /* Do not define a fixed width on small screens!!! */
   @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
     &__bar {
-      width: 400px;
+      width: 100%;
+      &__container {
+        width: auto;
+      }
     }
   }
 
