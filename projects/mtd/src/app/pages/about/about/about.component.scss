@@ -2,6 +2,14 @@
 
 .floating-img {
   float: right;
+  @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+    width: 50%;
+  }
+}
+.funding-img {
+  @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+    width: 100%;
+  }
 }
 
 h1 {

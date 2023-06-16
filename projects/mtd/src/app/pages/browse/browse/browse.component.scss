@@ -3,7 +3,7 @@
 .browse {
   &__categories {
     text-align: center;
-    @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+    @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
       font-size: small;
     }
     padding: 0 15px;
@@ -14,10 +14,10 @@
 
   &__alphabet {
     &__grid {
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         width: 100%;
       }
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         width: 80%;
       }
       margin: 20px auto;
@@ -36,10 +36,10 @@
     &__letter {
       display: inline-block;
       text-align: center;
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         width: 32px;
       }
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         padding: 5px;
         width: 48px;
       }
@@ -47,10 +47,10 @@
       cursor: pointer;
 
       .mat-button {
-        @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+        @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
           min-width: 32px;
         }
-        @media (min-width: map-get($angular-breakpoints, laptop)) {
+        @media (min-width: map-get($angular-breakpoints, tablet)) {
           min-width: 48px;
         }
       }
@@ -60,10 +60,10 @@
   &__entries {
     &--progress {
       margin: 0 auto !important;
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         font-size: small;
       }
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         font-size: smaller;
       }
     }
@@ -89,26 +89,26 @@
 
   &__nav {
     &--web {
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         display: none !important;
       }
     }
 
     &--mobile {
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         display: none !important;
       }
     }
 
     &--left {
-      /* Position these normally next to the text on mobile! */
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      /* Position these normally next to the text on phones! */
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         &--icon {
           margin: auto;
         }
       }
       /* Otherwise, they go in a box at a specific place. */
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
@@ -123,12 +123,12 @@
     }
 
     &--right {
-      @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         &--icon {
           margin: auto;
         }
       }
-      @media (min-width: map-get($angular-breakpoints, laptop)) {
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
