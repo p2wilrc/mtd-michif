@@ -22,6 +22,7 @@
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
 @import './app/pages/about/about/about.component.scss-theme';
+@import './app/pages/speakers/speakers/speakers.component.scss-theme';
 @import './app/pages/bookmarks/bookmarks/bookmarks.component.scss-theme.scss';
 @import './app/pages/browse/browse/browse.component.scss-theme.scss';
 @import './app/pages/random/random/random.component.scss-theme.scss';
@@ -35,6 +36,7 @@
   @include mtd-styles-reset-theme($theme);
   @include mtd-app-component-theme($theme);
   @include mtd-about-component-theme($theme);
+  @include mtd-speakers-component-theme($theme);
   @include mtd-big-input-component-theme($theme);
   @include mtd-bookmarks-component-theme($theme);
   @include mtd-browse-component-theme($theme);

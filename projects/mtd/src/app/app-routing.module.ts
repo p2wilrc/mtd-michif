@@ -43,6 +43,11 @@ const routes: Routes = [
       import('./pages/settings/settings.module').then(m => m.SettingsModule)
   },
   {
+    path: 'speakers',
+    loadChildren: () =>
+      import('./pages/speakers/speakers.module').then(m => m.SpeakersModule)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
