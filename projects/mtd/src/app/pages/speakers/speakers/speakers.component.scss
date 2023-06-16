@@ -1,0 +1,37 @@
+@import '../../../../styles-variables';
+
+.floating-img {
+  float: right;
+  max-width: 50%;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  clear: both;
+}
+
+h2 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  clear: both;
+  margin: 1em;
+}
+
+.content {
+  &__text {
+    padding: 2px;
+  }
+  /* Keep it on a single page, matching the size of the bookmarks (sort
+       of ... needs some external calculation here ... FIXME) on larger
+       screens */
+  @media (min-width: map-get($angular-breakpoints, tablet)) {
+    &__text {
+      max-height: 55vh;
+      overflow-y: scroll;
+    }
+  }
+}
