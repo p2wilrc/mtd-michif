@@ -11,31 +11,26 @@
     {
       "src": "assets/icon-192x192.png",
       "sizes": "192x192",
-      "purpose": "maskable any",
       "type": "image/png"
     },
     {
       "src": "assets/icon-256x256.png",
       "sizes": "256x256",
-      "purpose": "maskable any",
       "type": "image/png"
     },
     {
       "src": "assets/icon-384x384.png",
       "sizes": "384x384",
-      "purpose": "maskable any",
       "type": "image/png"
     },
     {
       "src": "assets/icon-512x512.png",
       "sizes": "512x512",
-      "purpose": "maskable any",
       "type": "image/png"
     },
     {
       "src": "assets/icon.svg",
       "sizes": "any",
-      "purpose": "maskable any",
       "type": "image/svg+xml"
     }
   ]
