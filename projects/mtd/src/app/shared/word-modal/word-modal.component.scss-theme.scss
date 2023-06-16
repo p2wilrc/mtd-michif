@@ -5,7 +5,6 @@
   $accent: map-get($theme, accent);
 
   .word {
-    padding: 2px;
     // FIXME: Should be shared with entry-list .langMatched
     &__active {
       background: mat.get-color-from-palette($accent);

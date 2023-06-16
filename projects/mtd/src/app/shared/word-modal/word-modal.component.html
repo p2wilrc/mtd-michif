@@ -55,9 +55,9 @@
       </p>
       <p class="container__row example__desc">
         <ng-template ngFor let-word [ngForOf]="example.definition">
-          <span class="word" [class.word__active]="word.active">{{
-            word.text
-          }}</span>
+          <span class="word" [class.word__active]="word.active">
+            {{ word.text }}
+          </span>
         </ng-template>
       </p>
       <div *ngIf="example.audio" class="container__row audio__buttons centered">

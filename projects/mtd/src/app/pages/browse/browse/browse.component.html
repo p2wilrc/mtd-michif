@@ -69,9 +69,20 @@
                   >navigate_before</mat-icon
                 >
               </button>
-              <p class="browse__entries--progress">
+              <p class="browse__entries--progress browse__nav--web">
                 {{
                   'mtd.pages.browse.showing'
+                    | translate
+                      : {
+                          startIndex: (startIndex$ | async) + 1,
+                          endIndex: (startIndex$ | async) + currentX.length,
+                          length: (currentEntries$ | async)?.length
+                        }
+                }}
+              </p>
+              <p class="browse__entries--progress browse__nav--mobile">
+                {{
+                  'mtd.pages.browse.showing-mobile'
                     | translate
                       : {
                           startIndex: (startIndex$ | async) + 1,

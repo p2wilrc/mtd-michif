@@ -15,7 +15,7 @@
       margin: 20px auto;
       padding: 5px;
       overflow: hidden;
-      border-radius: 15px;
+      border-radius: 5px;
     }
 
     &__list {
@@ -46,18 +46,20 @@
     }
   }
 
+  &__toolbar {
+    border-radius: 5px 5px 0 0;
+  }
+
   &__entry {
     &__list {
       &__container {
         min-height: 55vh;
-        max-height: 400px;
       }
     }
   }
 
   &__controls {
     &__container {
-      min-height: 55vh;
       max-height: 400px;
     }
   }
@@ -79,10 +81,15 @@
       width: 100px;
 
       &--icon {
-        font-size: xx-large !important;
-        position: absolute !important;
-        left: 0 !important;
-        top: 3px !important;
+        @media (min-width: map-get($angular-breakpoints, laptop)) {
+          font-size: xx-large !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 3px !important;
+        }
+        @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+          margin: auto;
+        }
       }
 
       &--text {
@@ -94,10 +101,15 @@
       width: 100px;
 
       &--icon {
-        font-size: xx-large !important;
-        position: absolute !important;
-        right: 5px !important;
-        top: 3px !important;
+        @media (min-width: map-get($angular-breakpoints, laptop)) {
+          font-size: xx-large !important;
+          position: absolute !important;
+          right: 5px !important;
+          top: 3px !important;
+        }
+        @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
+          margin: auto;
+        }
       }
 
       &--text {
