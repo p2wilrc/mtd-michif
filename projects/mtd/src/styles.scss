@@ -138,3 +138,21 @@
     }
   }
 }
+
+/* This has to be global, for Reasons (Angular always has Reasons) */
+@media (max-width: map-get($angular-breakpoints, laptop)-1) {
+  /* Fix wacky Material margins that are totally inappropriate for small phones */
+  .mtd-word-dialog {
+    .mat-dialog-container {
+      padding: 8px;
+    }
+    .mat-dialog-content {
+      margin: 0;
+      padding: 0;
+    }
+    .mat-dialog-actions {
+      margin: 0;
+      padding: 0 8px;
+    }
+  }
+}

@@ -85,6 +85,7 @@ export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
           );
         if (entry === undefined) return; // FIXME: Perhaps should show an error of some sort
         const dialogRef = this.dialog.open(WordModalComponent, {
+          panelClass: 'mtd-word-dialog',
           data: { entry }
         });
         dialogRef.afterClosed().subscribe(result => {
