@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { PronunciationGuideComponent } from './pronunciation-guide.component';
 
 describe('PronunciationGuideComponent', () => {
@@ -8,6 +9,7 @@ describe('PronunciationGuideComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot(), SharedModule],
       declarations: [PronunciationGuideComponent]
     }).compileComponents();
   });
