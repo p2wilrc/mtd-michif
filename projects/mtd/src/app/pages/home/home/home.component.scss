@@ -1,9 +1,7 @@
-.slogan {
-  font-size: xx-large;
-  &__container {
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-  }
+.centered {
+  text-align: center;
+}
+
+.intro {
+  margin-top: 1em;
 }

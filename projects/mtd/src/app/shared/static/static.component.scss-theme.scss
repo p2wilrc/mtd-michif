@@ -1,12 +1,12 @@
 @use '@angular/material' as mat;
 
-@mixin mtd-speakers-component-theme($theme) {
+@mixin mtd-static-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  mtd-speakers {
+  mtd-static {
     .content__container {
       background: mat.get-color-from-palette($background, background);
     }

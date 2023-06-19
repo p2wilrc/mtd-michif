@@ -56,7 +56,9 @@ import { BigInputActionComponent } from './big-input/big-input-action/big-input-
 import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
 import { FileNotFoundDialogComponent } from './file-not-found/file-not-found.component';
 import { WordModalComponent } from './word-modal/word-modal.component';
+import { StaticComponent } from './static/static.component';
 import { ReportDialogComponent } from './report-dialog/report-dialog.component';
+import { PronunciationGuideComponent } from './pronunciation-guide/pronunciation-guide.component';
 import {
   NoNullValuesPipe,
   NoNullObjectValuesPipe
@@ -98,6 +100,8 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     FileNotFoundDialogComponent,
     WordModalComponent,
     ReportDialogComponent,
+    StaticComponent,
+    PronunciationGuideComponent,
     NoNullObjectValuesPipe,
     NoNullValuesPipe
   ],
@@ -132,6 +136,7 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     FontAwesomeModule,
     ScrollingModule,
 
+    StaticComponent,
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective

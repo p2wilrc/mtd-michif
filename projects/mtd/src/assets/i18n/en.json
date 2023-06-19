@@ -107,6 +107,9 @@
       "comment": "Describe the issue",
       "placeholder": "e.g. Audio is cut off",
       "error": "Error connecting to server"
+    },
+    "pronunciation-guide": {
+      "exit": "Close"
     }
   }
 }

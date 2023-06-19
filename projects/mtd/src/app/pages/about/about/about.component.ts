@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { META } from '../../../../config/config';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
+import { PronunciationGuideComponent } from '../../../shared/pronunciation-guide/pronunciation-guide.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface Contributor {
   text: string;
@@ -12,13 +13,19 @@ export interface Contributor {
 @Component({
   selector: 'mtd-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss'],
+  styleUrls: [
+    '../../../shared/static/static.component.scss',
+    './about.component.scss'
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent {
-  displayNav = true;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  contributors = META.contributors;
   tmd = 'assets/tmd.png';
   funding = 'assets/funding.png';
+
+  constructor(public dialog: MatDialog) {}
+  openPronunciation() {
+    this.dialog.open(PronunciationGuideComponent);
+  }
 }
