@@ -21,22 +21,18 @@
 /* These are all mostly the same thing, unfortunately */
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/pages/about/about/about.component.scss-theme';
-@import './app/pages/speakers/speakers/speakers.component.scss-theme';
 @import './app/pages/bookmarks/bookmarks/bookmarks.component.scss-theme.scss';
 @import './app/pages/browse/browse/browse.component.scss-theme.scss';
 @import './app/pages/random/random/random.component.scss-theme.scss';
 @import './app/pages/search/search/search.component.scss-theme.scss';
+@import './app/shared/static/static.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/shared/word-modal/word-modal.component.scss-theme.scss';
-@import './app/pages/home/home/home.component.scss-theme';
 @import './app/pages/settings/settings/settings-container.component.scss-theme';
 
 @mixin custom-components-theme($theme) {
   @include mtd-styles-reset-theme($theme);
   @include mtd-app-component-theme($theme);
-  @include mtd-about-component-theme($theme);
-  @include mtd-speakers-component-theme($theme);
   @include mtd-big-input-component-theme($theme);
   @include mtd-bookmarks-component-theme($theme);
   @include mtd-browse-component-theme($theme);
@@ -44,8 +40,8 @@
   @include mtd-search-component-theme($theme);
   @include mtd-entry-list-component-theme($theme);
   @include mtd-word-modal-component-theme($theme);
-  @include mtd-home-component-theme($theme);
   @include mtd-settings-component-theme($theme);
+  @include mtd-static-component-theme($theme);
 }
 
 .default-theme {

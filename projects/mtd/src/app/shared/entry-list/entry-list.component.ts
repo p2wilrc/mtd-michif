@@ -11,6 +11,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { WordModalComponent } from '../word-modal/word-modal.component';
+import { PronunciationGuideComponent } from '../pronunciation-guide/pronunciation-guide.component';
 import { DictionaryData } from '../../core/models';
 import { BookmarksService, MtdService } from '../../core/core.module';
 
@@ -103,6 +104,10 @@ export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
       queryParams: { show: entry.entryID },
       relativeTo: this.route
     });
+  }
+
+  openPronunciation() {
+    this.dialog.open(PronunciationGuideComponent);
   }
 
   playDefaultAudio(entry) {
