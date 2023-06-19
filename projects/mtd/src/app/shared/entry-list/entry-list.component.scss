@@ -26,10 +26,18 @@
 }
 
 .guide {
+  &__floating {
+    z-index: 99;
+    position: absolute;
+    right: 4em;
+    background: white;
+    padding: 2px;
+  }
+  text-align: right;
+}
+
+.guide-button {
   font-size: x-small;
   line-height: inherit;
-  z-index: 99;
   padding: 0 1em;
-  position: absolute;
-  right: 4em;
 }
