@@ -97,7 +97,12 @@
       "audio": "Audio",
       "audio-instructions": "Click on the audio below to listen to '{{value}}':",
       "examples": "Examples",
-      "exit": "Close"
+      "exit": "Close",
+      "report": "Report an issue with this entry"
+    },
+    "report-dialog": {
+      "send": "Send",
+      "cancel": "Cancel"
     }
   }
 }
