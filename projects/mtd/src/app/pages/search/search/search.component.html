@@ -28,12 +28,14 @@
       </div>
       <div *ngIf="show || (searchQuery && entries)">
         <div class="search__results" *ngIf="matches$ | async as matches">
+          <!-- we can float the guide because of the "Matches" header line -->
           <mtd-entry-list
             *ngIf="show || matches.length > 0"
             [entries]="matches"
             [searchTerm]="searchQuery"
             [threshold]="matchThreshold"
             [shouldHighlight]="true"
+            floatingGuide="true"
           >
           </mtd-entry-list>
           <div

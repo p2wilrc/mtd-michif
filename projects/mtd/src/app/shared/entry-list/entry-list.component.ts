@@ -64,6 +64,7 @@ export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
   @Input() showEntry: number;
   @Input() shouldHighlight = false;
   @Input() searchResults: boolean = false;
+  @Input() floatingGuide: boolean = false;
   constructor(
     private bookmarkService: BookmarksService,
     public dialog: MatDialog,

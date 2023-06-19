@@ -1,6 +1,8 @@
-<button class="guide" mat-raised-button (click)="openPronunciation()">
-  Pronunciation Guide
-</button>
+<div class="guide" [class.guide__floating]="floatingGuide">
+  <button class="guide-button" mat-raised-button (click)="openPronunciation()">
+    Pronunciation Guide
+  </button>
+</div>
 <cdk-virtual-scroll-viewport itemSize="30" class="entry-list__viewport">
   <div
     class="container"
