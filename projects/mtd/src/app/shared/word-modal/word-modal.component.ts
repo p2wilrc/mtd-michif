@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { BookmarksService, MtdService } from '../../core/core.module';
 import { FileNotFoundDialogComponent } from '../file-not-found/file-not-found.component';
+import { ReportDialogComponent } from '../report-dialog/report-dialog.component';
 
 interface ExampleAudio {
   speaker: string;
@@ -88,19 +89,18 @@ export class WordModalComponent {
     return Object.values(obj);
   }
 
-  async openReport() {
+  openReport() {
     if (!(this.data && this.data.entry)) return;
     if (this.reported) return;
-    const entry_id = encodeURIComponent(this.data.entry.entryID);
-    const url = encodeURIComponent(window.location.href);
-    const word = encodeURIComponent(
-      `${this.data.entry.word}: ${this.data.entry.definition}`
-    );
-    const reporter = `https://dictionary.michif.org/report.php?id=${entry_id}&url=${url}&word=${word}`;
-    console.log(reporter);
-    const response = await fetch(reporter);
-    if (response.ok) this.reported = true;
-    this.ref.markForCheck();
+    const dialogRef = this.dialog.open(ReportDialogComponent, {
+      data: this.data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reported = true;
+        this.ref.markForCheck();
+      }
+    });
   }
 
   checkChecked(option) {
