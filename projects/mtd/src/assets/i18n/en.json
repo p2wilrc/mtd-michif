@@ -58,7 +58,7 @@
       },
       "search": {
         "matches": "Matches",
-        "maybe-matches": "Approximate Matches",
+        "maybe-matches": "Approximate Matches by Similar Letter Combinations",
         "no-results": "Sorry, we couldn't find any words that match '{{ value }}'.",
         "partial-matches": "Partial Matches"
       }
