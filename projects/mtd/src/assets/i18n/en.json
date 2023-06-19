@@ -101,8 +101,12 @@
       "report": "Report an issue with this entry"
     },
     "report-dialog": {
+      "title": "Report an issue",
       "send": "Send",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "comment": "Describe the issue",
+      "placeholder": "e.g. Audio is cut off",
+      "error": "Error connecting to server"
     }
   }
 }

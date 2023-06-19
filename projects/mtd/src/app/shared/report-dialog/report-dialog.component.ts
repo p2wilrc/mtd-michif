@@ -2,6 +2,7 @@ import {
   Component,
   Inject,
   OnInit,
+  ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
 import {
@@ -17,31 +18,38 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReportDialogComponent implements OnInit {
+  error: boolean;
+  message: string;
+
   constructor(
     public dialogRef: MatDialogRef<ReportDialogComponent>,
+    private ref: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
   ngOnInit(): void {}
 
-  /*
-  async openReport() {
+  async send(): Promise<void> {
     if (!(this.data && this.data.entry)) return;
-    if (this.reported) return;
     const entry_id = encodeURIComponent(this.data.entry.entryID);
     const url = encodeURIComponent(window.location.href);
     const word = encodeURIComponent(
       `${this.data.entry.word}: ${this.data.entry.definition}`
     );
-    const reporter = `https://dictionary.michif.org/report.php?id=${entry_id}&url=${url}&word=${word}`;
-    console.log(reporter);
-    const response = await fetch(reporter);
-    if (response.ok) this.reported = true;
-    this.ref.markForCheck();
-  }
-*/
-
-  send(): void {
-    this.dialogRef.close('reported');
+    const msg = encodeURIComponent(this.message);
+    const reporter = `https://dictionary.michif.org/report.php?id=${entry_id}&url=${url}&word=${word}&desc=${msg}`;
+    try {
+      const response = await fetch(reporter);
+      if (response.ok) this.dialogRef.close('reported');
+      else {
+        this.error = true;
+        this.ref.markForCheck();
+      }
+    } catch (err) {
+      // But we'll see it anyway
+      console.log(err);
+      this.error = true;
+      this.ref.markForCheck();
+    }
   }
 }
