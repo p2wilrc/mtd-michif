@@ -1,7 +1,6 @@
 import {
   Component,
   Inject,
-  OnInit,
   ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -17,7 +16,7 @@ import {
   styleUrls: ['./report-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReportDialogComponent implements OnInit {
+export class ReportDialogComponent {
   error: boolean;
   message: string;
 
@@ -26,8 +25,6 @@ export class ReportDialogComponent implements OnInit {
     private ref: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
-
-  ngOnInit(): void {}
 
   async send(): Promise<void> {
     if (!(this.data && this.data.entry)) return;
