@@ -56,6 +56,7 @@ import { BigInputActionComponent } from './big-input/big-input-action/big-input-
 import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
 import { FileNotFoundDialogComponent } from './file-not-found/file-not-found.component';
 import { WordModalComponent } from './word-modal/word-modal.component';
+import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 import {
   NoNullValuesPipe,
   NoNullObjectValuesPipe
@@ -96,6 +97,7 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     EntryListComponent,
     FileNotFoundDialogComponent,
     WordModalComponent,
+    ReportDialogComponent,
     NoNullObjectValuesPipe,
     NoNullValuesPipe
   ],
