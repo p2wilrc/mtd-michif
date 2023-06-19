@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'mtd-pronunciation-guide',
@@ -6,8 +6,4 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./pronunciation-guide.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PronunciationGuideComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class PronunciationGuideComponent {}
