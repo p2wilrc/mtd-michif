@@ -1,0 +1,10 @@
+<h1 mat-dialog-tile>Report an issue</h1>
+<div mat-dialog-content></div>
+<div mat-dialog-actions>
+  <button mat-raised-button cdkFocusInitial (click)="send()">
+    {{ 'mtd.report-dialog.send' | translate }}
+  </button>
+  <button mat-raised-button mat-dialog-close>
+    {{ 'mtd.report-dialog.cancel' | translate }}
+  </button>
+</div>
