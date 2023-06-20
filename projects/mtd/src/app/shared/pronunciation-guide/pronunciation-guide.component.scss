@@ -1,12 +1,14 @@
+@import '../../../styles-variables';
+
 .c15,
 .c8,
 .c26 {
   font-style: italic;
 }
 .c120 {
-  margin-left: 3em;
-  border-spacing: 0;
-  border-collapse: collapse;
+  @media (min-width: map-get($angular-breakpoints, tablet)) {
+    margin-left: 3em;
+  }
   margin-right: auto;
 }
 .c3 {
