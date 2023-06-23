@@ -1,15 +1,23 @@
 <?php
 
-/* Allow a few origins including a not entirely secure one for testing. */
+/* Only run if there is an origin (this is a REST API and nothing else) */
+if (!isset($_SERVER["HTTP_ORIGIN"])) {
+    http_response_code(401);
+    return;
+}
+
+/* Restrict origins and send CORS header */
 if ($_SERVER["HTTP_ORIGIN"] == "https://michif.ecolingui.ca")
     header("Access-Control-Allow-Origin: https://michif.ecolingui.ca");
-else if (str_starts_with($_SERVER["HTTP_ORIGIN"], "http://192.168"))
-    header("Access-Control-Allow-Origin: " . $_SERVER["HTTP_ORIGIN"]);
-else
+else if ($_SERVER["HTTP_ORIGIN"] == "https://dictionary.michif.org")
     header("Access-Control-Allow-Origin: https://dictionary.michif.org");
+else {
+    http_response_code(401);
+    return;
+}
 
 if (!isset($_GET["id"])) {
-    http_reponse_code(400);
+    http_response_code(400);
 }
 else {
     $entry_id = urlencode($_GET["id"]);
