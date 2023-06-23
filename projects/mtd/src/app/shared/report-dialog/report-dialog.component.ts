@@ -34,7 +34,7 @@ export class ReportDialogComponent {
       `${this.data.entry.word}: ${this.data.entry.definition}`
     );
     const msg = encodeURIComponent(this.message);
-    const reporter = `https://dictionary.michif.org/report.php?id=${entry_id}&url=${url}&word=${word}&desc=${msg}`;
+    const reporter = `https://michif.org/report.php?id=${entry_id}&url=${url}&word=${word}&desc=${msg}`;
     try {
       const response = await fetch(reporter);
       if (response.ok) this.dialogRef.close('reported');
