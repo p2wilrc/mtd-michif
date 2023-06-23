@@ -6,7 +6,7 @@ export const environment = {
   production: true,
   test: false,
   i18nPrefix: '.',
-  apiBaseURL: 'http://localhost:4200',
+  apiBaseURL: 'http://dictionary.michif.org/',
   remoteData: false,
   remoteConfig: false,
   versions: {
