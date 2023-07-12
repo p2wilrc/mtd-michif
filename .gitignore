@@ -53,8 +53,8 @@ debug.log
 
 # generated files
 /projects/mtd/src/assets/data/audio
-/projects/mtd/src/assets/js/config.js
-/projects/mtd/src/assets/js/dict_cached.js
+/projects/mtd/src/assets/js/config*.js
+/projects/mtd/src/assets/js/dict_cached*.js
 
 # junk
 *~

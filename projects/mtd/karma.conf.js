@@ -6,14 +6,14 @@ module.exports = function(config) {
   config.set({
     files: [
       {
-        pattern: 'src/assets/js/config.js',
+        pattern: 'src/assets/js/config*.js',
         watched: false,
         included: true,
         served: true,
         nocache: false
       },
       {
-        pattern: 'src/assets/js/dict_cached.js',
+        pattern: 'src/assets/js/dict_cached*.js',
         watched: false,
         included: true,
         served: true,
