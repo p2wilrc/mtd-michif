@@ -67,15 +67,40 @@
           >
           <!-- navigation links on horizontal tablet and up -->
           <span class="d-none d-md-inline">
-            <button
-              mat-button
-              class="nav-button"
-              *ngFor="let item of navigation"
-              [routerLink]="[item.link]"
-              routerLinkActive="active"
-            >
-              {{ item.label | translate }}
-            </button>
+            <ng-template #navlink let-item="item">
+              <button
+                mat-button
+                class="nav-button"
+                [routerLink]="[item.link]"
+                routerLinkActive="active"
+              >
+                {{ item.label | translate }}
+              </button>
+            </ng-template>
+            <ng-template #navmenu let-item="item">
+              <button mat-button class="nav-button" [matMenuTriggerFor]="menu">
+                {{ item.label | translate }}
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  *ngFor="let item of item.children"
+                  mat-menu-item
+                  class="nav-button"
+                  [routerLink]="[item.link]"
+                  routerLinkActive="active"
+                >
+                  {{ item.label | translate }}
+                </button>
+              </mat-menu>
+            </ng-template>
+            <ng-container *ngFor="let item of navigation">
+              <!-- this syntax is very confusing -->
+              <ng-container
+                [ngTemplateOutlet]="item.children ? navmenu : navlink"
+                [ngTemplateOutletContext]="{ item: item }"
+              >
+              </ng-container>
+            </ng-container>
           </span>
           <!-- settings button on tablet and up -->
           <button
