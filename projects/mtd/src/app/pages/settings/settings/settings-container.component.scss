@@ -1,16 +1,36 @@
-h1 {
-  text-align: center;
-  font-size: 3em;
-  text-transform: uppercase;
-}
+@import '../../../../styles-variables';
 
-h2 {
-  font-size: 1.5em;
-  text-transform: uppercase;
-}
+@media (min-width: map-get($angular-breakpoints, tablet)) {
+  h1 {
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+  }
 
-.group {
-  margin: 0 0 40px 0;
+  h2 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+  .group {
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 1em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .group {
+    margin-bottom: 10px;
+  }
 }
 
 .icon-form-field {
