@@ -109,6 +109,11 @@ mat-sidenav {
     padding: 0 16px;
     font-size: 16px;
   }
+  /* Likewise!  Did it not occur to them that people might want submenus
+     in sidenavs?  Google Quality Software as usual! */
+  ::ng-deep .mat-expansion-panel-body {
+    padding-bottom: 0;
+  }
 }
 
 /* FIXME: really necessary? */
