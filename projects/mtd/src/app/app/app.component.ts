@@ -2,7 +2,6 @@ import browser from 'browser-detect';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
 import { environment as env } from '../../environments/environment';
@@ -41,7 +40,16 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'random', label: marker('mtd.menu.random') },
     { link: 'bookmarks', label: marker('mtd.menu.bookmarks') },
     { link: 'about', label: marker('mtd.menu.about') },
-    { link: 'speakers', label: marker('mtd.menu.speakers') }
+    {
+      link: 'speakers',
+      label: marker('mtd.menu.speakers'),
+      children: [
+        /* FIXME: Import these names from data here and in speakers component. */
+        { link: 'speakers/verna', label: 'Verna DeMontigny' },
+        { link: 'speakers/sandra', label: 'Sandra Houle' },
+        { link: 'speakers/albert', label: 'Albert Parisien, Sr.' }
+      ]
+    }
   ];
   navigationSideMenu = [
     ...this.navigation,

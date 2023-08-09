@@ -55,6 +55,11 @@ const routes: Routes = [
       import('./pages/speakers/speakers.module').then(m => m.SpeakersModule)
   },
   {
+    path: 'speakers/:speaker',
+    loadChildren: () =>
+      import('./pages/speakers/speakers.module').then(m => m.SpeakersModule)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
