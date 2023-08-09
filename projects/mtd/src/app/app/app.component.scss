@@ -103,6 +103,12 @@ mat-sidenav {
   .mat-nav-list {
     padding-top: 0;
   }
+
+  /* This should not be, but Material is dumb. */
+  ::ng-deep .mat-expansion-panel-header {
+    padding: 0 16px;
+    font-size: 16px;
+  }
 }
 
 /* FIXME: really necessary? */
