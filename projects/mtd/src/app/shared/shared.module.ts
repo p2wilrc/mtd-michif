@@ -63,6 +63,7 @@ import {
   NoNullValuesPipe,
   NoNullObjectValuesPipe
 } from './no-null-values/no-null-values';
+import { SingleSpeakerPipe } from './single-speaker/single-speaker.pipe';
 import { EntryListComponent } from './entry-list/entry-list.component';
 
 @NgModule({
@@ -103,7 +104,8 @@ import { EntryListComponent } from './entry-list/entry-list.component';
     StaticComponent,
     PronunciationGuideComponent,
     NoNullObjectValuesPipe,
-    NoNullValuesPipe
+    NoNullValuesPipe,
+    SingleSpeakerPipe
   ],
   exports: [
     CommonModule,

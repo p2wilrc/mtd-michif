@@ -35,7 +35,9 @@
       class="container__row audio__buttons centered"
     >
       <button
-        *ngFor="let audio of data.entry.audio | noNullObjectValues"
+        *ngFor="
+          let audio of data.entry.audio | noNullObjectValues | singleSpeaker
+        "
         class="audio__button"
         mat-raised-button
         (click)="playAudio(null, audio)"
@@ -64,7 +66,9 @@
       </p>
       <div *ngIf="example.audio" class="container__row audio__buttons centered">
         <button
-          *ngFor="let audio of example.audio | noNullObjectValues"
+          *ngFor="
+            let audio of example.audio | noNullObjectValues | singleSpeaker
+          "
           class="audio__button"
           mat-raised-button
           (click)="playAudio(example, audio)"
