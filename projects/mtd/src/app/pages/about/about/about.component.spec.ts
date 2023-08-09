@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '../../../shared/shared.module';
 
 import { AboutComponent } from './about.component';
@@ -16,7 +16,8 @@ describe('AboutComponent', () => {
         imports: [
           SharedModule,
           NoopAnimationsModule,
-          TranslateModule.forRoot()
+          TranslateModule.forRoot(),
+          RouterTestingModule
         ],
         declarations: [AboutComponent]
       }).compileComponents();
