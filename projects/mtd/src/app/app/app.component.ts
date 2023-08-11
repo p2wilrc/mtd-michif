@@ -18,6 +18,7 @@ import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
+import { SPEAKERS } from '../pages/speakers/speakers/speakers.component';
 
 @Component({
   selector: 'mtd-root',
@@ -43,12 +44,9 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       link: 'speakers',
       label: marker('mtd.menu.speakers'),
-      children: [
-        /* FIXME: Import these names from data here and in speakers component. */
-        { link: 'speakers/verna', label: 'Verna DeMontigny' },
-        { link: 'speakers/sandra', label: 'Sandra Houle' },
-        { link: 'speakers/albert', label: 'Albert Parisien, Sr.' }
-      ]
+      children: Object.entries(SPEAKERS).map(([id, name]) => {
+        return { link: `speakers/${id}`, label: name };
+      })
     }
   ];
   navigationSideMenu = [

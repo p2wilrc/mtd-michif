@@ -7,6 +7,16 @@ import {
 } from '@angular/core';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
+interface Speakers {
+  [id: string]: string;
+}
+export const SPEAKERS: Speakers = {
+  vid: 'Verna DeMontigny',
+  srh: 'Sandra Houle',
+  afp: 'Albert Parisien Sr.',
+  clh: 'Connie Henry'
+};
+
 @Component({
   selector: 'mtd-speakers',
   templateUrl: './speakers.component.html',
@@ -15,16 +25,13 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 })
 export class SpeakersComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  speaker = 'verna';
-  fullname = {
-    verna: 'Verna DeMontigny',
-    sandra: 'Sandra Houle',
-    albert: 'Albert Parisien Sr.'
-  };
+  speaker = 'vid';
+  fullname = SPEAKERS;
   photos = {
-    verna: 'assets/Verna_DeMontigny.jpg',
-    sandra: 'assets/Sandra_Houle.jpg',
-    albert: 'assets/Albert_Parisien.jpg'
+    vid: 'assets/Verna_DeMontigny.jpg',
+    srh: 'assets/Sandra_Houle.jpg',
+    afp: 'assets/Albert_Parisien.jpg',
+    clh: 'assets/Connie_Henry.jpg'
   };
   constructor(private route: ActivatedRoute, private ref: ChangeDetectorRef) {}
 
