@@ -1,5 +1,3 @@
-import { Contributor } from '../app/pages/about/about/about.component';
-
 export interface Language {
   label: string;
   value: string;
@@ -14,7 +12,7 @@ export interface Link {
 
 export interface Meta {
   browseAudio: boolean;
-  contributors: Contributor[];
+  contributors: string[];
   languages: Language[];
   links: {
     github: Link;
@@ -30,20 +28,90 @@ export interface Meta {
 
 export const META: Meta = {
   browseAudio: true,
-  contributors: [
-    {
-      name: 'Aidan Pine',
-      title: 'Lead Developer',
-      text:
-        /* tslint:disable */
-        "Aidan is an application development specialist on the NRC's Indigenous Language Technology project. Aidan is interested in language revitalization because of its inherently multidisplinary nature and because of the social justice component at the centre of the work. Aidan is humbled and excited to be working with such an accomplished and dynamic team and hopes to continue improving the WordWeaver for years to come.",
-      img: false
-    }
-  ],
+  contributors: `
+Abby Graham
+Aiden Pine
+Alaa Sarji
+Albert Parisien
+Alexa Little
+Anna Belew
+Awanigiizhik Bruce
+Bamidele Olowo-okere
+Breanne Beaubien
+Briana Faubert
+Caitlin Bergin
+Carly Sommerlot
+Carmen Leeming
+Cassandra Gaudard
+Chantelle Jackson
+Christi Belcourt
+Christopher Cox
+Connie Henry
+Conor Quinn
+Dale McCreery
+David Delorme
+David Huggins-Daines
+Deanna Garand
+Delaney Lothian
+Dominique Simard
+Eddie Santos
+Elvis Demontigny
+Fineen Davis
+Gail Welburn
+George Peltier
+Grace (Ledoux) Zoldy
+Harvey Pelletier
+India Schlegel
+Itziri Moreno
+Iwona Gniadek
+Jacob Collard
+James Lavallee
+Janelle Zazalak
+Jarle Kvale
+Jennifer Bright
+Jessica Charest
+Jessica Lagimodiere
+Julie Flett
+Kade Ferris
+Kai Pyle
+Kaitlyn Foley
+Kayleigh Jeannette
+Kellie Hall
+Kim Laberinto
+Lacie Allary
+Laura Forsythe
+Laura Grant
+Mackenzie Elliot
+Marlee Paterson
+Melanie Lavallee
+Michif Dictionary Proofreaders and Annotators
+Mira Kolodka
+Nicole Reel
+Our Volunteers
+Patrick Littel
+Rebecca Kirkpatrick
+Roland Kuhn
+Ruth Ireland-Dejarlais
+Samantha Cornelius
+Samantha Nock
+Samantha Schwab
+Sandra Houle (The late)
+Stephen Demontigny
+Talula Schlegel
+Teresa Delorme
+Terri Martin-Parisien
+Terry Ireland
+Tiara Opissinow
+Vasiliki Vita
+Vivian Smith
+Wanda Smith
+`
+    .trim()
+    .split('\n'),
   languages: [{ label: 'en', value: 'en' }],
   copyright: {
-    name: 'Mother Tongues',
-    url: 'https://mothertongues.org'
+    name: 'Turtle Mountain Community College',
+    url: 'https://www.tm.edu'
   },
   links: {
     github: {

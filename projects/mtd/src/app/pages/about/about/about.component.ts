@@ -3,13 +3,6 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 import { PronunciationGuideComponent } from '../../../shared/pronunciation-guide/pronunciation-guide.component';
 import { MatDialog } from '@angular/material/dialog';
 
-export interface Contributor {
-  text: string;
-  img: string | false;
-  name: string;
-  title: string;
-}
-
 @Component({
   selector: 'mtd-about',
   templateUrl: './about.component.html',
