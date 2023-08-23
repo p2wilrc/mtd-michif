@@ -44,6 +44,7 @@
       </mat-nav-list>
     </mat-sidenav>
 
+    <!-- Wrapper that covers *the entire viewport* -->
     <div class="wrapper">
       <div
         class="toolbar"
@@ -150,6 +151,7 @@
         </mat-toolbar>
       </div>
 
+      <!-- Content that covers the area under the toolbar -->
       <div
         class="content"
         [@routeAnimations]="
@@ -158,8 +160,16 @@
           o.activatedRoute.routeConfig.data.title
         "
       >
-        <router-outlet #o="outlet"></router-outlet>
+        <!-- Wrapper for page components, restoring relative
+	     position and adding top spacing. -->
+        <div class="content-wrapper">
+          <router-outlet #o="outlet"></router-outlet>
+        </div>
+        <!-- content-wrapper -->
       </div>
+      <!-- content -->
     </div>
+    <!-- wrapper -->
   </mat-sidenav-container>
 </div>
+<!-- theme-wrapper -->

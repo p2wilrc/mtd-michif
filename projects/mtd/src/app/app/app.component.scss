@@ -55,6 +55,9 @@ mat-sidenav-container {
     }
   }
 
+  /* A wrapper that covers *the* *entire* *viewport* and gives
+     flex-magic to its innards. Not convinced this is the best way to
+     do this!!! */
   .wrapper {
     position: absolute;
     top: 0;
@@ -63,19 +66,48 @@ mat-sidenav-container {
     bottom: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: url('../../assets/background.jpg') no-repeat center top;
+      background-size: cover;
+      content: '';
+      z-index: 0;
+    }
+
+    /* See above, which is why we have to set margin-top.  Should cover
+       the entire viewport minus the toolbar. */
     .content {
       flex: 1 0 auto;
-      margin-top: 64px;
-      overflow: hidden;
-    }
-  }
+      margin-top: $notphone-toolbar-height;
+      @media (max-width: $phone-max-width) {
+        margin-top: $phone-toolbar-height;
+      }
+      overflow: auto;
 
-  /* Would be nice if Angular documented this somewhere... the
-     mat-toolbar shrinks by 8 pixels on xtra-small screens */
-  @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-    .content {
-      margin-top: 56px !important;
+      &::before {
+        position: absolute;
+        top: 51%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: '';
+        z-index: 0;
+      }
+
+      .content-wrapper {
+        position: relative;
+        /* Could be margin or padding, no difference here */
+        margin-top: $notphone-top-margin;
+        @media (max-width: $phone-max-width) {
+          margin-top: $phone-top-margin;
+        }
+      }
     }
   }
 }

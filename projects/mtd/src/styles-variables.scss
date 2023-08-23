@@ -4,6 +4,9 @@
 /* Angular doesn't expose its breakpoints in SCSS but thankfully they
    are documented here:
    https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints
+   Notably, unlike the bootstrap breakpoints below, *you* *can* *not*
+   *change* *these* *they* *are* *hardcoded* by some brain genius in
+   California.
    */
 $angular-breakpoints: (
   phone: 0,
@@ -37,3 +40,15 @@ $grid-breakpoints: (
 
 $success-colors: mat.define-palette(mat.$green-palette, 400);
 $warning-colors: mat.define-palette(mat.$amber-palette, 400);
+
+/* Used for the definitions below */
+$phone-max-width: map-get($angular-breakpoints, 'tablet') - 1;
+$notphone-min-width: map-get($angular-breakpoints, 'tablet');
+
+/* Magically defined somewhere by Angular */
+$notphone-toolbar-height: 64px;
+$phone-toolbar-height: 56px;
+
+/* Margin between the toolbar and the content */
+$notphone-top-margin: 32px;
+$phone-top-margin: 16px;

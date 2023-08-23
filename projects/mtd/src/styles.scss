@@ -83,55 +83,8 @@
   margin: 0 auto;
 }
 
-.content__container {
-  padding: 15px;
-  border-radius: 15px;
-}
-
-.background {
-  overflow: auto;
-  padding: 80px 0 0 0;
-  position: relative;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: url('assets/background.jpg') no-repeat center top;
-    background-size: cover;
-    // opacity: 0.7;
-    content: '';
-    z-index: 0;
-  }
-
-  .gradient {
-    &::before {
-      position: absolute;
-      top: 51%;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      content: '';
-      z-index: 0;
-    }
-    min-height: calc(100vh - 208px);
-  }
-
-  .container {
-    position: relative;
-  }
-}
-
-@media (max-width: map-get($angular-breakpoints, laptop)) {
-  .background {
-    padding: 1em 0 0 0;
-  }
-}
-
 /* This has to be global, for Reasons (Angular always has Reasons) */
-@media (max-width: map-get($angular-breakpoints, tablet)-1) {
+@media (max-width: $phone-max-width) {
   /* Fix wacky Material margins that are totally inappropriate for small phones */
   .mtd-word-dialog {
     .mat-dialog-container {

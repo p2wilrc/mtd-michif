@@ -4,7 +4,8 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $background-palette: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
 
   mat-sidenav-container {
     mat-toolbar {
@@ -32,6 +33,21 @@
               darker
             ) !important;
           }
+        }
+      }
+    }
+
+    .wrapper {
+      color: mat.get-color-from-palette($foreground, text);
+      background-color: mat.get-color-from-palette($background, background);
+
+      .content {
+        &::before {
+          background: linear-gradient(
+            to bottom,
+            mat.get-color-from-palette($background, background, 0) 0%,
+            mat.get-color-from-palette($background, background, 1) 100%
+          );
         }
       }
     }

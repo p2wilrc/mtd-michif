@@ -36,16 +36,7 @@ h2 {
   }
 }
 
-.content {
-  &__text {
-    padding: 2px;
-  }
-  /* Keep on a single page, matching the min-height of the enclosing
-     element (for some reason). */
-  @media (min-width: map-get($angular-breakpoints, laptop)) {
-    &__text {
-      height: calc(100vh - 208px - 3em - 80px);
-      overflow-y: scroll;
-    }
-  }
+.content__container {
+  padding: 15px;
+  border-radius: 15px;
 }
