@@ -1,7 +1,7 @@
 <mtd-single>
   <h1 title>{{ 'mtd.settings.title' | translate }}</h1>
   <ng-container *ngIf="settings$ | async as settings">
-    <div class="row">
+    <div class="row" *ngIf="languages.length > 1">
       <div class="col-md-6 group">
         <h2>{{ 'mtd.settings.general.title' | translate }}</h2>
         <div class="icon-form-field" *ngIf="languages.length > 1">
@@ -31,19 +31,6 @@
               </ng-container>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="icon-form-field">
-          <mat-icon color="accent"
-            ><fa-icon icon="bars" color="accent"></fa-icon
-          ></mat-icon>
-          <mat-placeholder
-            >{{ 'mtd.settings.themes.sticky-header' | translate }}
-          </mat-placeholder>
-          <mat-slide-toggle
-            [checked]="settings.stickyHeader"
-            (change)="onStickyHeaderToggle($event)"
-          >
-          </mat-slide-toggle>
         </div>
       </div>
     </div>
