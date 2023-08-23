@@ -1,11 +1,7 @@
 <div class="page__content container">
   <div class="row">
-    <div class="browse__controls__container col-lg-4">
-      <!-- No space for this on phones! -->
-      <div
-        class="browse__categories desktop-only"
-        [ngClass]="routeAnimationsElements"
-      >
+    <div class="browse__controls__container col-sm-4">
+      <div class="browse__categories" [ngClass]="routeAnimationsElements">
         <mat-form-field>
           <mat-label>{{
             'mtd.pages.browse.select-category' | translate
@@ -41,7 +37,7 @@
       </div>
     </div>
     <div
-      class="browse__entries__container col-lg-8"
+      class="browse__entries__container col-sm-8"
       [ngClass]="routeAnimationsElements"
     >
       <div class="browse__entries" *ngIf="currentX">

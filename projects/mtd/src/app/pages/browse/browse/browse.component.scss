@@ -1,14 +1,10 @@
 @import '../../../../styles-variables';
 
-/* FIXME: Set the width of the alphabet grid to always be some fixed
-   multiple of $width instead of some Bootstrap column width minus
-   whatever padding etc etc */
+$phone-alphabet-height: 108px;
+$tablet-max-width: map-get($angular-breakpoints, 'laptop') - 1;
+$desktop-min-width: map-get($angular-breakpoints, 'laptop');
+
 @mixin letters($width) {
-  @if $width < 32px {
-    .mat-button {
-      font-size: x-small;
-    }
-  }
   width: $width;
   .mat-button {
     padding: 0;
@@ -24,15 +20,28 @@
     border-radius: 5px;
     width: fit-content;
     margin: 0 auto;
+    @media (max-width: $tablet-max-width) {
+      width: 100%;
+      font-size: smaller;
+    }
+    @media (max-width: $phone-max-width) {
+      display: none;
+    }
   }
 
   &__alphabet {
     &__grid {
       width: 80%;
       margin: $notphone-margin auto;
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
+        /* Give it a bit more space */
         width: 100%;
-        margin: $phone-margin auto;
+      }
+      @media (max-width: $phone-max-width) {
+        /* No top margin, as there is no box above it */
+        margin: 0 auto $phone-margin auto;
+        /* FIXME: fixed height because ugh argh ugh argh */
+        height: $phone-alphabet-height;
       }
       padding: 5px;
       overflow: hidden;
@@ -56,7 +65,7 @@
       cursor: pointer;
       /* FIXME: these widths are somewhat arbitrary */
       @include letters(36px);
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
         @include letters(24px);
       }
     }
@@ -66,7 +75,7 @@
     &--progress {
       margin: 0 auto !important;
       font-size: smaller;
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
         font-size: small;
       }
     }
@@ -78,26 +87,26 @@
 
   &__nav {
     &--web {
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
         display: none !important;
       }
     }
 
     &--mobile {
-      @media (min-width: $notphone-min-width) {
+      @media (min-width: $desktop-min-width) {
         display: none !important;
       }
     }
 
     &--left {
       /* Position these normally next to the text on phones! */
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
         &--icon {
           margin: auto;
         }
       }
       /* Otherwise, they go in a box at a specific place. */
-      @media (min-width: $notphone-min-width) {
+      @media (min-width: $desktop-min-width) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
@@ -112,12 +121,12 @@
     }
 
     &--right {
-      @media (max-width: $phone-max-width) {
+      @media (max-width: $tablet-max-width) {
         &--icon {
           margin: auto;
         }
       }
-      @media (min-width: $notphone-min-width) {
+      @media (min-width: $desktop-min-width) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
@@ -142,7 +151,8 @@
         );
         @media (max-width: $phone-max-width) {
           max-height: calc(
-            $phone-content-height - $phone-margin - $phone-toolbar-height
+            $phone-content-height - $phone-margin - $phone-toolbar-height -
+              $phone-alphabet-height - $phone-margin
           );
         }
         overflow-y: auto;
