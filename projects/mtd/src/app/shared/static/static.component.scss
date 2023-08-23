@@ -24,6 +24,18 @@ h2 {
   text-transform: uppercase;
 }
 
+@media (max-width: map-get($angular-breakpoints, laptop)) {
+  h1 {
+    font-size: 1.5em;
+    line-height: 32px;
+    margin-bottom: 0;
+  }
+  h2 {
+    line-height: 1em;
+    font-size: 1.15em;
+  }
+}
+
 .content {
   &__text {
     padding: 2px;

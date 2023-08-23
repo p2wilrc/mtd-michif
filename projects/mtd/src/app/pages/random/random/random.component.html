@@ -1,23 +1,16 @@
-<div class="background">
-  <div class="gradient">
-    <div class="container page__content">
-      <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6 centered" [ngClass]="routeAnimationsElements">
-          <button
-            class="accent-contrast"
-            mat-raised-button
-            color="accent"
-            (click)="getRandom()"
-          >
-            {{ 'mtd.pages.random.button' | translate }}
-          </button>
-        </div>
-        <div class="col-lg-3"></div>
-      </div>
-      <div class="results" *ngIf="show || entries$">
-        <mtd-entry-list [entries]="entries$ | async"></mtd-entry-list>
-      </div>
-    </div>
+<mtd-static>
+  <div title class="centered random-header">
+    <button
+      title
+      class="accent-contrast"
+      mat-raised-button
+      color="accent"
+      (click)="getRandom()"
+    >
+      {{ 'mtd.pages.random.button' | translate }}
+    </button>
   </div>
-</div>
+  <div class="results" *ngIf="show || entries$">
+    <mtd-entry-list [entries]="entries$ | async"></mtd-entry-list>
+  </div>
+</mtd-static>
