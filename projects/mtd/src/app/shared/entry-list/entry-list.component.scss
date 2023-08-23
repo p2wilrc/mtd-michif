@@ -20,12 +20,10 @@
 }
 
 .entry-list {
+  overflow-y: scroll;
   &__title {
     padding: 20px;
     text-align: center;
-  }
-  &__viewport {
-    min-height: 55vh;
   }
   &__info {
     @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
