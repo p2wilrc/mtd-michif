@@ -1,6 +1,9 @@
 @import '../../../../styles-variables';
 
-$phone-alphabet-height: 108px;
+/* FIXME: Need to calculate this dynamically somehow */
+$mini-alphabet-height: 108px;
+$phone-alphabet-height: 84px;
+$mini-max-width: 360px;
 $tablet-max-width: map-get($angular-breakpoints, 'laptop') - 1;
 $desktop-min-width: map-get($angular-breakpoints, 'laptop');
 
@@ -42,6 +45,10 @@ $desktop-min-width: map-get($angular-breakpoints, 'laptop');
         margin: 0 auto $phone-margin auto;
         /* FIXME: fixed height because ugh argh ugh argh */
         height: $phone-alphabet-height;
+      }
+      @media (max-width: $mini-max-width) {
+        /* FIXME: even worse! */
+        height: $mini-alphabet-height;
       }
       padding: 5px;
       overflow: hidden;
@@ -153,6 +160,12 @@ $desktop-min-width: map-get($angular-breakpoints, 'laptop');
           max-height: calc(
             $phone-content-height - $phone-margin - $phone-toolbar-height -
               $phone-alphabet-height - $phone-margin
+          );
+        }
+        @media (max-width: $mini-max-width) {
+          max-height: calc(
+            $phone-content-height - $phone-margin - $phone-toolbar-height -
+              $mini-alphabet-height - $phone-margin
           );
         }
         overflow-y: auto;

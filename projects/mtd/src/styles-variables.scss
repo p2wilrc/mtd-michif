@@ -38,6 +38,13 @@ $grid-breakpoints: (
   xl: map-get($angular-breakpoints, 'desktop')
 );
 
+$container-max-widths: (
+  sm: 560px,
+  md: 840px,
+  lg: 1140px,
+  xl: 1320px
+);
+
 $success-colors: mat.define-palette(mat.$green-palette, 400);
 $warning-colors: mat.define-palette(mat.$amber-palette, 400);
 
