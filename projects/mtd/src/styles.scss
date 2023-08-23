@@ -25,7 +25,7 @@
 @import './app/pages/browse/browse/browse.component.scss-theme.scss';
 @import './app/pages/random/random/random.component.scss-theme.scss';
 @import './app/pages/search/search/search.component.scss-theme.scss';
-@import './app/shared/static/static.component.scss-theme.scss';
+@import './app/shared/layout/single/single.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/shared/word-modal/word-modal.component.scss-theme.scss';
 @import './app/pages/settings/settings/settings-container.component.scss-theme';
@@ -41,7 +41,7 @@
   @include mtd-entry-list-component-theme($theme);
   @include mtd-word-modal-component-theme($theme);
   @include mtd-settings-component-theme($theme);
-  @include mtd-static-component-theme($theme);
+  @include mtd-single-component-theme($theme);
 }
 
 .default-theme {

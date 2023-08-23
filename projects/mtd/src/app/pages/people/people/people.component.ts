@@ -5,7 +5,10 @@ import { META } from '../../../../config/config';
 @Component({
   selector: 'mtd-people',
   templateUrl: './people.component.html',
-  styleUrls: ['./people.component.scss'],
+  styleUrls: [
+    './people.component.scss',
+    '../../../shared/layout/single/single.component.scss'
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PeopleComponent {

@@ -16,7 +16,10 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'mtd-random',
   templateUrl: './random.component.html',
-  styleUrls: ['./random.component.scss'],
+  styleUrls: [
+    './random.component.scss',
+    '../../../shared/layout/single/single.component.scss'
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomComponent {

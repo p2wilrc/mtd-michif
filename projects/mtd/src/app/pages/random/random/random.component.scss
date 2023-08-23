@@ -1,6 +1,6 @@
 @import '../../../../styles-variables';
 
-/* Match the h1 we would normally have in mtd-static */
+/* Match the height of the h1 we would normally have in mtd-single */
 @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
   .random-header {
     height: 32px;

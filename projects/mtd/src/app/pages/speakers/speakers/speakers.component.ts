@@ -20,7 +20,10 @@ export const SPEAKERS: Speakers = {
 @Component({
   selector: 'mtd-speakers',
   templateUrl: './speakers.component.html',
-  styleUrls: ['./speakers.component.scss'],
+  styleUrls: [
+    './speakers.component.scss',
+    '../../../shared/layout/single/single.component.scss'
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpeakersComponent implements OnInit {
