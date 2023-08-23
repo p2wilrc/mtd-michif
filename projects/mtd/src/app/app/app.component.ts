@@ -45,8 +45,8 @@ export class AppComponent implements OnInit, OnDestroy {
       label: marker('mtd.menu.about'),
       children: [
         { link: 'about', label: marker('mtd.menu.about') },
-        { link: 'people', label: marker('mtd.menu.people') },
-        { link: 'introduction', label: marker('mtd.menu.introduction') }
+        { link: 'introduction', label: marker('mtd.menu.introduction') },
+        { link: 'people', label: marker('mtd.menu.people') }
       ]
     },
     {

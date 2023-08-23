@@ -31,13 +31,7 @@
       "settings": "Settings"
     },
     "pages": {
-      "about": {
-        "contributors": {
-          "title": "Contributors"
-        },
-        "slogan": "Quickly build customized dictionaries for your language!",
-        "text": "Mother Tongues Dictionaries (MTD) is the first dictionary app suite for low-resource languages that combines a language agnostic design, customizable approximate search, cross-platform deployability (Web/Android/iOS), and open-source access."
-      },
+      "about": {},
       "bookmarks": {
         "body": "Sorry, you don't have any bookmarks.",
         "bookmarked-instructions": "To save an entry to your bookmarks, click on the bookmark icon beside it that looks like this: ",
