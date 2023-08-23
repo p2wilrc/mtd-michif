@@ -48,7 +48,6 @@ import { BookmarksService } from './bookmarks/bookmarks.service';
 import { CustomSerializer } from './router/custom-serializer';
 import { LocalStorageService } from './local-storage/local-storage.service';
 import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
-import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effects';
 import { MtdService } from './mtd/mtd.service';
 import { NotificationService } from './notifications/notification.service';
 import { SettingsEffects } from './settings/settings.effects';
@@ -120,7 +119,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([SettingsEffects, GoogleAnalyticsEffects]),
+    EffectsModule.forRoot([SettingsEffects]),
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
