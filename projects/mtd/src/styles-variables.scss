@@ -58,3 +58,7 @@ $notphone-content-height: calc(
   100vh - $notphone-toolbar-height - $notphone-margin
 );
 $phone-content-height: calc(100vh - $phone-toolbar-height - $phone-margin);
+
+/* For horrific iOS 15+ awfulness ("dynamic" address bar that is
+   actually always there) */
+$phone-content-height: calc(100svh - $phone-toolbar-height - $phone-margin);

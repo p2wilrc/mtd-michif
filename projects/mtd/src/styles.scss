@@ -78,6 +78,13 @@
   }
 }
 
+/* Hack for *really* small screens like original iPhone SE */
+.not-for-tiny-phone {
+  @media (max-width: 320px) {
+    display: none;
+  }
+}
+
 .centered {
   text-align: center;
   margin: 0 auto;
