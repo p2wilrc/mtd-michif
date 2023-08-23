@@ -20,7 +20,10 @@ import { selectSettings } from '../../../core/settings/settings.selectors';
 @Component({
   selector: 'mtd-settings',
   templateUrl: './settings-container.component.html',
-  styleUrls: ['./settings-container.component.scss'],
+  styleUrls: [
+    './settings-container.component.scss',
+    '../../../shared/layout/single/single.component.scss'
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsContainerComponent implements OnInit {

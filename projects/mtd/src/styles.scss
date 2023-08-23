@@ -28,7 +28,6 @@
 @import './app/shared/layout/single/single.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/shared/word-modal/word-modal.component.scss-theme.scss';
-@import './app/pages/settings/settings/settings-container.component.scss-theme';
 
 @mixin custom-components-theme($theme) {
   @include mtd-styles-reset-theme($theme);
@@ -40,7 +39,6 @@
   @include mtd-search-component-theme($theme);
   @include mtd-entry-list-component-theme($theme);
   @include mtd-word-modal-component-theme($theme);
-  @include mtd-settings-component-theme($theme);
   @include mtd-single-component-theme($theme);
 }
 

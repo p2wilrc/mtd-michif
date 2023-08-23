@@ -65,6 +65,7 @@ $phone-padding: 10px;
         $phone-content-height - 32px - $phone-margin - 2 * $phone-padding
       );
     }
+    overflow-x: hidden;
     overflow-y: auto;
   }
 }
