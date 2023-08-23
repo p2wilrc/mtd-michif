@@ -25,7 +25,7 @@
 @import './app/pages/browse/browse/browse.component.scss-theme.scss';
 @import './app/pages/random/random/random.component.scss-theme.scss';
 @import './app/pages/search/search/search.component.scss-theme.scss';
-@import './app/shared/static/static.component.scss-theme.scss';
+@import './app/shared/layout/single/single.component.scss-theme.scss';
 @import './app/shared/entry-list/entry-list.component.scss-theme.scss';
 @import './app/shared/word-modal/word-modal.component.scss-theme.scss';
 @import './app/pages/settings/settings/settings-container.component.scss-theme';
@@ -41,7 +41,7 @@
   @include mtd-entry-list-component-theme($theme);
   @include mtd-word-modal-component-theme($theme);
   @include mtd-settings-component-theme($theme);
-  @include mtd-static-component-theme($theme);
+  @include mtd-single-component-theme($theme);
 }
 
 .default-theme {
@@ -78,60 +78,22 @@
   }
 }
 
+/* Hack for small screens like iPhone SE (FIXME: should not be
+   necessary if we could use flexbox properly instead of hardcoding
+   content height but I haven't figured that out yet) */
+.not-for-tiny-phone {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
 .centered {
   text-align: center;
   margin: 0 auto;
 }
 
-.content__container {
-  padding: 15px;
-  border-radius: 15px;
-}
-
-.background {
-  overflow: auto;
-  padding: 80px 0 0 0;
-  position: relative;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: url('assets/background.jpg') no-repeat center top;
-    background-size: cover;
-    // opacity: 0.7;
-    content: '';
-    z-index: 0;
-  }
-
-  .gradient {
-    &::before {
-      position: absolute;
-      top: 51%;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      content: '';
-      z-index: 0;
-    }
-    min-height: calc(100vh - 208px);
-  }
-
-  .container {
-    position: relative;
-  }
-}
-
-@media (max-width: map-get($angular-breakpoints, laptop)) {
-  .background {
-    padding: 1em 0 0 0;
-  }
-}
-
 /* This has to be global, for Reasons (Angular always has Reasons) */
-@media (max-width: map-get($angular-breakpoints, tablet)-1) {
+@media (max-width: $phone-max-width) {
   /* Fix wacky Material margins that are totally inappropriate for small phones */
   .mtd-word-dialog {
     .mat-dialog-container {

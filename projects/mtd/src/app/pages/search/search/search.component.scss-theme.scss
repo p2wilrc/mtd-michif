@@ -7,20 +7,6 @@
   $background: map-get($theme, background);
 
   mtd-search {
-    .background {
-      color: mat.get-color-from-palette($foreground, text);
-      background-color: mat.get-color-from-palette($background, background);
-
-      .gradient {
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            mat.get-color-from-palette($background, background, 0) 0%,
-            mat.get-color-from-palette($background, background, 1) 100%
-          );
-        }
-      }
-    }
     .search {
       &__bar {
         &__container {

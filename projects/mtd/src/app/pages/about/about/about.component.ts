@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'mtd-about',
   templateUrl: './about.component.html',
   styleUrls: [
-    '../../../shared/static/static.component.scss',
+    '../../../shared/layout/single/single.component.scss',
     './about.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -4,6 +4,9 @@
 /* Angular doesn't expose its breakpoints in SCSS but thankfully they
    are documented here:
    https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints
+   Notably, unlike the bootstrap breakpoints below, *you* *can* *not*
+   *change* *these* *they* *are* *hardcoded* by some brain genius in
+   California.
    */
 $angular-breakpoints: (
   phone: 0,
@@ -35,5 +38,38 @@ $grid-breakpoints: (
   xl: map-get($angular-breakpoints, 'desktop')
 );
 
+$container-max-widths: (
+  sm: 560px,
+  md: 840px,
+  lg: 1140px,
+  xl: 1320px
+);
+
 $success-colors: mat.define-palette(mat.$green-palette, 400);
 $warning-colors: mat.define-palette(mat.$amber-palette, 400);
+
+/* Used for the definitions below */
+$phone-max-width: map-get($angular-breakpoints, 'tablet') - 1;
+$notphone-min-width: map-get($angular-breakpoints, 'tablet');
+
+/* Magically defined somewhere by Angular */
+$notphone-toolbar-height: 64px;
+$phone-toolbar-height: 56px;
+
+/* Top and bottom margins of content boxes */
+$notphone-margin: 32px;
+$phone-margin: 16px;
+
+/* Padding to use for main content */
+$notphone-padding: 15px;
+$phone-padding: 10px;
+
+/* Fixed height of content area */
+$notphone-content-height: calc(
+  100vh - $notphone-toolbar-height - $notphone-margin
+);
+$phone-content-height: calc(100vh - $phone-toolbar-height - $phone-margin);
+
+/* For horrific iOS 15+ awfulness ("dynamic" address bar that is
+   actually always there) */
+$phone-content-height: calc(100svh - $phone-toolbar-height - $phone-margin);

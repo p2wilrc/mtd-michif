@@ -2,14 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
 @Component({
-  selector: 'mtd-home',
-  templateUrl: './home.component.html',
-  styleUrls: [
-    '../../../shared/layout/single/single.component.scss',
-    './home.component.scss'
-  ],
+  selector: 'mtd-single',
+  styleUrls: ['./single.component.scss'],
+  templateUrl: './single.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class SingleComponent {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 }
