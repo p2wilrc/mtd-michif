@@ -57,7 +57,7 @@ mat-sidenav-container {
 
   /* A wrapper that covers *the* *entire* *viewport* and gives
      flex-magic to its innards. Not convinced this is the best way to
-     do this!!! */
+     do this!!! (actually not even sure what it really does) */
   .wrapper {
     position: absolute;
     top: 0;

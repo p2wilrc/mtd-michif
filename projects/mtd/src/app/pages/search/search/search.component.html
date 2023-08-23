@@ -22,9 +22,8 @@
       />
     </mat-form-field>
   </div>
-  <div *ngIf="show || (searchQuery && entries)">
-    <div class="search__results" *ngIf="matches$ | async as matches">
-      <!-- we can float the guide because of the "Matches" header line -->
+  <div class="search__results" *ngIf="show || (searchQuery && entries)">
+    <div class="search__results__container" *ngIf="matches$ | async as matches">
       <mtd-entry-list
         *ngIf="show || matches.length > 0"
         [entries]="matches"
@@ -36,7 +35,7 @@
       </mtd-entry-list>
       <div
         *ngIf="matches.length === 0 && searchQuery"
-        class="search__results--none search__results__container"
+        class="search__results--none"
       >
         <h5 *ngIf="searchQuery">
           {{

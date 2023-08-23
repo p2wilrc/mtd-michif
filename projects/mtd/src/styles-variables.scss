@@ -49,9 +49,13 @@ $notphone-min-width: map-get($angular-breakpoints, 'tablet');
 $notphone-toolbar-height: 64px;
 $phone-toolbar-height: 56px;
 
-/* Top and bottom margins of the content */
+/* Top and bottom margins of content boxes */
 $notphone-margin: 32px;
 $phone-margin: 16px;
+
+/* Padding to use for main content */
+$notphone-padding: 15px;
+$phone-padding: 10px;
 
 /* Fixed height of content area */
 $notphone-content-height: calc(
