@@ -25,7 +25,7 @@
     text-align: center;
   }
   &__info {
-    @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+    @media (max-width: $phone-max-width) {
       display: none !important;
     }
   }
@@ -39,6 +39,7 @@
     background: white;
     padding: 2px;
   }
+  line-height: 1em;
   text-align: right;
 }
 

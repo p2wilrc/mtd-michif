@@ -40,6 +40,8 @@ $search-bar-height: 65px;
   }
 
   &__results {
+    /* Needed to get the guide popup in the right place */
+    position: relative;
     margin: $notphone-margin auto;
     padding: $notphone-padding;
     border-radius: $notphone-padding;
