@@ -36,7 +36,35 @@ h2 {
   }
 }
 
-.content__container {
-  padding: 15px;
-  border-radius: 15px;
+$notphone-padding: 15px;
+$phone-padding: 10px;
+
+.content {
+  &__container {
+    padding: $notphone-padding;
+    border-radius: $notphone-padding;
+    @media (max-width: $phone-max-width) {
+      padding: $phone-padding;
+      border-radius: $phone-padding;
+    }
+  }
+
+  &__title {
+    height: 48px;
+    @media (max-width: $phone-max-width) {
+      height: 32px;
+    }
+  }
+
+  &__text {
+    max-height: calc(
+      $notphone-content-height - 48px - $notphone-margin - 2 * $notphone-padding
+    );
+    @media (max-width: $phone-max-width) {
+      max-height: calc(
+        $phone-content-height - 32px - $phone-margin - 2 * $phone-padding
+      );
+    }
+    overflow-y: auto;
+  }
 }

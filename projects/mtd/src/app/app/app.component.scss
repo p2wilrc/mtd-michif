@@ -68,6 +68,7 @@ mat-sidenav-container {
     flex-direction: column;
     overflow: hidden;
 
+    /* This shows the background. */
     &::before {
       position: absolute;
       top: 0;
@@ -80,16 +81,19 @@ mat-sidenav-container {
       z-index: 0;
     }
 
-    /* See above, which is why we have to set margin-top.  Should cover
-       the entire viewport minus the toolbar. */
+    /* Absolutely positioned, which is why we have to set margin-top.
+       Should cover the entire viewport minus the toolbar. Not sure
+       why this is flex and that is absolute. Not sure the original
+       author was either. */
     .content {
       flex: 1 0 auto;
       margin-top: $notphone-toolbar-height;
       @media (max-width: $phone-max-width) {
         margin-top: $phone-toolbar-height;
       }
-      overflow: auto;
+      overflow: hidden;
 
+      /* This does the gradient over the background. */
       &::before {
         position: absolute;
         top: 51%;
@@ -100,13 +104,21 @@ mat-sidenav-container {
         z-index: 0;
       }
 
+      /* Exists to restore relative positioning.  Really not sure about this. */
       .content-wrapper {
         position: relative;
         /* Could be margin or padding, no difference here */
-        margin-top: $notphone-top-margin;
+        margin-top: $notphone-margin;
         @media (max-width: $phone-max-width) {
-          margin-top: $phone-top-margin;
+          margin-top: $phone-margin;
         }
+        height: $notphone-content-height;
+        @media (max-width: $phone-max-width) {
+          height: $phone-content-height;
+        }
+        /* Page components *MUST* handle scrolling. We will not scroll the
+	   main app UI, no we will not. */
+        overflow: hidden;
       }
     }
   }
@@ -148,7 +160,7 @@ mat-sidenav {
   }
 }
 
-/* FIXME: really necessary? */
+/* FIXME: really necessary? what does this do? */
 .theme-wrapper {
   height: 100%;
   width: 100%;
