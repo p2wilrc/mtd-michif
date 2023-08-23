@@ -7,7 +7,6 @@ import {
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeHour,
   actionSettingsChangeLanguage,
-  actionSettingsChangeStickyHeader,
   actionSettingsChangeTheme
 } from './settings.actions';
 
@@ -61,14 +60,6 @@ describe('SettingsReducer', () => {
     });
     const state = settingsReducer(undefined, action);
     expect(state.autoNightMode).toEqual(true);
-  });
-
-  it('should update stickyHeader', () => {
-    const action = actionSettingsChangeStickyHeader({
-      stickyHeader: false
-    });
-    const state = settingsReducer(undefined, action);
-    expect(state.stickyHeader).toEqual(false);
   });
 
   it('should update hour', () => {

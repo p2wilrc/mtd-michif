@@ -46,11 +46,7 @@
 
     <!-- Wrapper that covers *the entire viewport* -->
     <div class="wrapper">
-      <div
-        class="toolbar"
-        [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"
-        [class.mat-elevation-z4]="stickyHeader$ | async"
-      >
+      <div class="toolbar">
         <!--
             Complicated display logic here... may or may not match
             the Material design guidelines, which even Angular team

@@ -8,11 +8,6 @@ export const selectSettings = createSelector(
   (state: SettingsState) => state
 );
 
-export const selectSettingsStickyHeader = createSelector(
-  selectSettings,
-  (state: SettingsState) => state.stickyHeader
-);
-
 export const selectSettingsLanguage = createSelector(
   selectSettings,
   (state: SettingsState) => state.language

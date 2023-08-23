@@ -24,7 +24,6 @@ import {
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeLanguage,
   actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader,
   actionSettingsChangeHour
 } from './settings.actions';
 import {
@@ -75,7 +74,6 @@ export class SettingsEffects {
           actionSettingsChangeAnimationsPageDisabled,
           actionSettingsChangeAutoNightMode,
           actionSettingsChangeLanguage,
-          actionSettingsChangeStickyHeader,
           actionSettingsChangeTheme
         ),
         withLatestFrom(this.store.pipe(select(selectSettingsState))),

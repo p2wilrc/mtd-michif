@@ -16,11 +16,6 @@ export const actionSettingsChangeAutoNightMode = createAction(
   props<{ autoNightMode: boolean }>()
 );
 
-export const actionSettingsChangeStickyHeader = createAction(
-  '[Settings] Change Sticky Header',
-  props<{ stickyHeader: boolean }>()
-);
-
 export const actionSettingsChangeAnimationsPage = createAction(
   '[Settings] Change Animations Page',
   props<{ pageAnimations: boolean }>()

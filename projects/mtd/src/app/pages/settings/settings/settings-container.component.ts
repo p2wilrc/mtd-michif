@@ -11,8 +11,7 @@ import {
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeLanguage,
-  actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader
+  actionSettingsChangeTheme
 } from '../../../core/settings/settings.actions';
 import { SettingsState, State } from '../../../core/settings/settings.model';
 import { selectSettings } from '../../../core/settings/settings.selectors';
@@ -61,10 +60,6 @@ export class SettingsContainerComponent implements OnInit {
 
   onAutoNightModeToggle({ checked: autoNightMode }) {
     this.store.dispatch(actionSettingsChangeAutoNightMode({ autoNightMode }));
-  }
-
-  onStickyHeaderToggle({ checked: stickyHeader }) {
-    this.store.dispatch(actionSettingsChangeStickyHeader({ stickyHeader }));
   }
 
   onPageAnimationsToggle({ checked: pageAnimations }) {

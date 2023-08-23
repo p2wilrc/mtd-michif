@@ -6,8 +6,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import {
   selectEffectiveTheme,
-  selectSettingsLanguage,
-  selectSettingsStickyHeader
+  selectSettingsLanguage
 } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -30,7 +29,6 @@ describe('AppComponent', () => {
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      store.overrideSelector(selectSettingsStickyHeader, true);
       store.overrideSelector(selectSettingsLanguage, 'en');
       store.overrideSelector(selectEffectiveTheme, 'default');
     })

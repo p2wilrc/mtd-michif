@@ -10,7 +10,6 @@ import { META } from '../../config/config';
 import {
   routeAnimations,
   LocalStorageService,
-  selectSettingsStickyHeader,
   selectSettingsLanguage,
   selectEffectiveTheme
 } from '../core/core.module';
@@ -62,7 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'settings', label: 'mtd.menu.settings' }
   ];
 
-  stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
   unsubscribe$ = new Subject<void>();
@@ -88,7 +86,6 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       );
     }
-    this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
   }

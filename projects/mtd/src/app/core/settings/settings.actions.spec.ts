@@ -5,7 +5,6 @@ import {
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeHour,
   actionSettingsChangeLanguage,
-  actionSettingsChangeStickyHeader,
   actionSettingsChangeTheme
 } from './settings.actions';
 import { NIGHT_MODE_THEME } from './settings.model';
@@ -65,15 +64,6 @@ describe('Settings Actions', () => {
 
     expect(action.type).toEqual(actionSettingsChangeLanguage.type);
     expect(action.language).toEqual('en');
-  });
-
-  it('should create ActionSettingsChangeStickyHeader action', () => {
-    const action = actionSettingsChangeStickyHeader({
-      stickyHeader: true
-    });
-
-    expect(action.type).toEqual(actionSettingsChangeStickyHeader.type);
-    expect(action.stickyHeader).toEqual(true);
   });
 
   it('should create ActionSettingsChangeHour action', () => {

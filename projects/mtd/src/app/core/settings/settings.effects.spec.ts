@@ -67,7 +67,6 @@ describe('SettingsEffects', () => {
         theme: 'default',
         nightTheme: 'default',
         autoNightMode: false,
-        stickyHeader: false,
         pageAnimationsDisabled: true,
         hour: 12
       };
