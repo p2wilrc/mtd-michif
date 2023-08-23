@@ -1,9 +1,14 @@
+@import '../../../styles-variables';
+
 .match {
+  cursor: default;
+
   &__term {
     text-align: left;
     display: table-cell;
     vertical-align: middle;
     padding: 8px 0;
+
     &--target {
       margin: 2.5em 0 0.75em 0;
     }
@@ -21,7 +26,11 @@
   }
   &__viewport {
     min-height: 55vh;
-    max-height: 400px;
+  }
+  &__info {
+    @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      display: none !important;
+    }
   }
 }
 
