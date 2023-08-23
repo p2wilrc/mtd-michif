@@ -1,10 +1,25 @@
 @import '../../../../styles-variables';
 
+@mixin letters($width) {
+  @if $width < 32px {
+    .mat-button {
+      font-size: x-small;
+    }
+  }
+  width: $width;
+  .mat-button {
+    padding: 0;
+    border-radius: 0;
+    min-width: $width;
+  }
+}
+
 .browse {
   &__categories {
     text-align: center;
     @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-      font-size: small;
+      /* So unnecessary! */
+      display: none !important;
     }
     padding: 0 15px;
     border-radius: 5px;
@@ -16,11 +31,12 @@
     &__grid {
       @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
         width: 100%;
+        margin: auto 0 1em 0;
       }
       @media (min-width: map-get($angular-breakpoints, tablet)) {
         width: 80%;
+        margin: 20px auto;
       }
-      margin: 20px auto;
       padding: 5px;
       overflow: hidden;
       border-radius: 5px;
@@ -36,23 +52,13 @@
     &__letter {
       display: inline-block;
       text-align: center;
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-        width: 32px;
-      }
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
-        padding: 5px;
-        width: 48px;
-      }
       text-decoration: none;
       cursor: pointer;
-
-      .mat-button {
-        @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-          min-width: 32px;
-        }
-        @media (min-width: map-get($angular-breakpoints, tablet)) {
-          min-width: 48px;
-        }
+      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+        @include letters(26px);
+      }
+      @media (min-width: map-get($angular-breakpoints, tablet)) {
+        @include letters(46px);
       }
     }
   }
