@@ -15,7 +15,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'mtd-bookmarks',
   templateUrl: './bookmarks.component.html',
-  styleUrls: ['./bookmarks.component.scss'],
+  styleUrls: ['../../../shared/static/static.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksComponent implements OnDestroy {
