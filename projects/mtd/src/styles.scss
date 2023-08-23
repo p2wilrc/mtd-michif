@@ -78,9 +78,11 @@
   }
 }
 
-/* Hack for *really* small screens like original iPhone SE */
+/* Hack for small screens like iPhone SE (FIXME: should not be
+   necessary if we could use flexbox properly instead of hardcoding
+   content height but I haven't figured that out yet) */
 .not-for-tiny-phone {
-  @media (max-width: 320px) {
+  @media (max-width: 480px) {
     display: none;
   }
 }

@@ -20,10 +20,6 @@
 .browse {
   &__categories {
     text-align: center;
-    @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-      /* So unnecessary! */
-      display: none !important;
-    }
     padding: 0 15px;
     border-radius: 5px;
     width: fit-content;
@@ -32,13 +28,11 @@
 
   &__alphabet {
     &__grid {
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      width: 80%;
+      margin: $notphone-margin auto;
+      @media (max-width: $phone-max-width) {
         width: 100%;
-        margin: auto 0 1em 0;
-      }
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
-        width: 80%;
-        margin: 20px auto;
+        margin: $phone-margin auto;
       }
       padding: 5px;
       overflow: hidden;
@@ -50,6 +44,9 @@
       padding: 0;
       margin: auto;
       opacity: 0.95;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     &__letter {
@@ -57,11 +54,10 @@
       text-align: center;
       text-decoration: none;
       cursor: pointer;
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
-        @include letters(26px);
-      }
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
-        @include letters(46px);
+      /* FIXME: these widths are somewhat arbitrary */
+      @include letters(36px);
+      @media (max-width: $phone-max-width) {
+        @include letters(24px);
       }
     }
   }
@@ -69,11 +65,9 @@
   &__entries {
     &--progress {
       margin: 0 auto !important;
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      font-size: smaller;
+      @media (max-width: $phone-max-width) {
         font-size: small;
-      }
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
-        font-size: smaller;
       }
     }
   }
@@ -82,34 +76,28 @@
     border-radius: 5px 5px 0 0;
   }
 
-  &__controls {
-    &__container {
-      max-height: 400px;
-    }
-  }
-
   &__nav {
     &--web {
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      @media (max-width: $phone-max-width) {
         display: none !important;
       }
     }
 
     &--mobile {
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
+      @media (min-width: $notphone-min-width) {
         display: none !important;
       }
     }
 
     &--left {
       /* Position these normally next to the text on phones! */
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      @media (max-width: $phone-max-width) {
         &--icon {
           margin: auto;
         }
       }
       /* Otherwise, they go in a box at a specific place. */
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
+      @media (min-width: $notphone-min-width) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
@@ -124,12 +112,12 @@
     }
 
     &--right {
-      @media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+      @media (max-width: $phone-max-width) {
         &--icon {
           margin: auto;
         }
       }
-      @media (min-width: map-get($angular-breakpoints, tablet)) {
+      @media (min-width: $notphone-min-width) {
         width: 100px;
         &--icon {
           font-size: xx-large !important;
@@ -141,6 +129,23 @@
 
       &--text {
         margin-right: 15px;
+      }
+    }
+  }
+
+  /* Ludicrous nesting... totally unnecessary... */
+  &__entry {
+    &__list {
+      &__container {
+        max-height: calc(
+          $notphone-content-height - $notphone-margin - $notphone-toolbar-height
+        );
+        @media (max-width: $phone-max-width) {
+          max-height: calc(
+            $phone-content-height - $phone-margin - $phone-toolbar-height
+          );
+        }
+        overflow-y: auto;
       }
     }
   }
