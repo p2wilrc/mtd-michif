@@ -1,5 +1,8 @@
 @import '../../../../styles-variables';
 
+/* FIXME: Set the width of the alphabet grid to always be some fixed
+   multiple of $width instead of some Bootstrap column width minus
+   whatever padding etc etc */
 @mixin letters($width) {
   @if $width < 32px {
     .mat-button {

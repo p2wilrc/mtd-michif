@@ -64,21 +64,18 @@
   @include custom-components-theme($mtd-nature-theme);
 }
 
+/* Things used in a bunch of components (they go here to avoid being
+   scoped by Angular) */
 .desktop-only {
   @media (max-width: map-get($angular-breakpoints, laptop) - 1) {
     display: none;
   }
 }
 
-/* Things used by a bunch of components that don't belong in app.component.scss! */
 .mobile-only {
   @media (min-width: map-get($angular-breakpoints, laptop)) {
     display: none;
   }
-}
-
-.page__content {
-  min-height: calc(100vh - 208px);
 }
 
 .centered {
@@ -86,7 +83,6 @@
   margin: 0 auto;
 }
 
-/* Things used in a bunch of components that don't belong in about.component.scss! */
 .content__container {
   padding: 15px;
   border-radius: 15px;
@@ -120,6 +116,7 @@
       content: '';
       z-index: 0;
     }
+    min-height: calc(100vh - 208px);
   }
 
   .container {
