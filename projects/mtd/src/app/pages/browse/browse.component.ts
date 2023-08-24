@@ -25,7 +25,7 @@ export class BrowseComponent implements OnDestroy {
   selectedCategory = 'words';
   selectedLetter: number;
   startIndex$: BehaviorSubject<number> = new BehaviorSubject(0);
-  default_shown = 8;
+  default_shown = this.guessNumEntries();
   // currentBrowsingLetter: String = this.letters[this.currentBrowsingEntries[0].sorting_form[0]];
   letterSelectOptions: Object = { header: 'Select a Letter' };
   categorySelectOptions: Object = { header: 'Select a Category' };
@@ -78,6 +78,33 @@ export class BrowseComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
+  }
+
+  /**
+   * Guess a reasonable number of entries based on the viewport size.
+   *
+   * This can't be exact because the entries may expand for long definitions.
+   */
+  guessNumEntries(): number {
+    /* FIXME: for now, we use the viewport size and not the size of
+       the content__text element - this is not very readable and has
+       to match the defitions in `styles-variables.scss` and
+       `single.component.scss`! */
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    const is_phone = vw < 600; // NOTE: not specific to phones!
+    const is_mini = vw < 360; // NOTE: hard coded and arbitrary!
+    const toolbar_height = is_phone ? 56 : 64; // Thanks, Google!
+    const margin = is_phone ? 16 : 32;
+    const guide_height = 18; // FIXME: should not actually take any space?
+    // FIXME: Totally hard coded!
+    const alphabet_height = is_mini ? 108 : is_phone ? 84 : 0;
+    const border = 7;
+    const height =
+      vh - 2 * toolbar_height - 2 * margin - alphabet_height - guide_height;
+
+    // FIXME: Really unsure where those extra 6 pixels come from.  Thanks, Google.
+    return Math.floor(is_phone ? height / 96 : height / 56);
   }
 
   getXFrom(
