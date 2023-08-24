@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { SettingsContainerComponent } from './settings-container.component';
 import {
@@ -19,9 +19,9 @@ import {
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeTheme
-} from '../../../core/settings/settings.actions';
-import { selectSettings } from '../../../core/settings/settings.selectors';
-import { SettingsState } from '../../../core/settings/settings.model';
+} from '../../core/settings/settings.actions';
+import { selectSettings } from '../../core/settings/settings.selectors';
+import { SettingsState } from '../../core/settings/settings.model';
 
 describe('SettingsComponent', () => {
   let component: SettingsContainerComponent;

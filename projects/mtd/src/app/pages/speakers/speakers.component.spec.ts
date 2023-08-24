@@ -3,13 +3,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
-import { PeopleComponent } from './people.component';
+import { SpeakersComponent } from './speakers.component';
 
-describe('PeopleComponent', () => {
-  let component: PeopleComponent;
-  let fixture: ComponentFixture<PeopleComponent>;
+describe('SpeakersComponent', () => {
+  let component: SpeakersComponent;
+  let fixture: ComponentFixture<SpeakersComponent>;
 
   beforeEach(
     waitForAsync(() => {
@@ -20,13 +20,13 @@ describe('PeopleComponent', () => {
           TranslateModule.forRoot(),
           RouterTestingModule
         ],
-        declarations: [PeopleComponent]
+        declarations: [SpeakersComponent]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PeopleComponent);
+    fixture = TestBed.createComponent(SpeakersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

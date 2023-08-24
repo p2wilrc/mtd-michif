@@ -5,7 +5,7 @@ import {
   OnInit,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/core.module';
 
 interface Speakers {
   [id: string]: string;
@@ -22,7 +22,7 @@ export const SPEAKERS: Speakers = {
   templateUrl: './speakers.component.html',
   styleUrls: [
     './speakers.component.scss',
-    '../../../shared/layout/single/single.component.scss'
+    '../../shared/layout/single/single.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

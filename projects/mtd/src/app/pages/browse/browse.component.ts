@@ -1,14 +1,14 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DictionaryData } from '../../../core/models';
+import { DictionaryData } from '../../core/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
-import { META } from '../../../../config/config';
+import { META } from '../../../config/config';
 import {
   BookmarksService,
   MtdService,
   ROUTE_ANIMATIONS_ELEMENTS
-} from '../../../core/core.module';
+} from '../../core/core.module';
 @Component({
   selector: 'mtd-browse',
   templateUrl: './browse.component.html',

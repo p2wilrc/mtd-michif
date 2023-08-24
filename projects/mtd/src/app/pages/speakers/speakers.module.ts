@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { SpeakersComponent } from './speakers/speakers.component';
+import { SpeakersComponent } from './speakers.component';
 import { SpeakersRoutingModule } from './speakers-routing.module';
 
 @NgModule({
