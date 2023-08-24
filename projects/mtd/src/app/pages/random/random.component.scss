@@ -1,17 +1,15 @@
 @import '../../../styles-variables';
 
 /* Match the height of the h1 we would normally have in mtd-single */
-@media (max-width: map-get($angular-breakpoints, tablet) - 1) {
+.random-header {
+  height: 48px;
+  margin-bottom: 32px;
+}
+@media (max-width: $phone-max-width) {
   .random-header {
     height: 32px;
     button {
       line-height: 32px;
     }
-  }
-}
-@media (min-width: map-get($angular-breakpoints, laptop)) {
-  .random-header {
-    height: 48px;
-    margin-bottom: 32px;
   }
 }
