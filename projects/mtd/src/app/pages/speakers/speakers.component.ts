@@ -42,7 +42,6 @@ export class SpeakersComponent implements OnInit {
     this.route.paramMap.subscribe(paramMap => {
       const speaker = paramMap.get('speaker');
       if (speaker !== null) {
-        console.log(`wtf ${speaker}`);
         this.speaker = speaker;
         this.ref.markForCheck();
       }
