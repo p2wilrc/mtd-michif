@@ -64,7 +64,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change auto night mode on night mode toggle', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[0];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -78,7 +78,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change animations page', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -92,7 +92,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change animations elements', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[3];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -112,7 +112,7 @@ describe('SettingsComponent', () => {
 
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
 
     console.log(slider);
     slider.triggerEventHandler('change', { checked: false });
