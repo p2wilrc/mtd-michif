@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { META } from '../../../../config/config';
+import { META } from '../../../config/config';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/core.module';
 
 import {
   actionSettingsChangeAnimationsElements,
@@ -12,16 +12,16 @@ import {
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeLanguage,
   actionSettingsChangeTheme
-} from '../../../core/settings/settings.actions';
-import { SettingsState, State } from '../../../core/settings/settings.model';
-import { selectSettings } from '../../../core/settings/settings.selectors';
+} from '../../core/settings/settings.actions';
+import { SettingsState, State } from '../../core/settings/settings.model';
+import { selectSettings } from '../../core/settings/settings.selectors';
 
 @Component({
   selector: 'mtd-settings',
   templateUrl: './settings-container.component.html',
   styleUrls: [
     './settings-container.component.scss',
-    '../../../shared/layout/single/single.component.scss'
+    '../../shared/layout/single/single.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

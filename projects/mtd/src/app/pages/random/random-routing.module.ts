@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RandomComponent } from './random/random.component';
+import { RandomComponent } from './random.component';
 
 const routes: Routes = [
   {

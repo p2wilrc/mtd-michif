@@ -6,11 +6,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DictionaryData } from '../../../core/models';
-import {
-  MtdService,
-  ROUTE_ANIMATIONS_ELEMENTS
-} from '../../../core/core.module';
+import { DictionaryData } from '../../core/models';
+import { MtdService, ROUTE_ANIMATIONS_ELEMENTS } from '../../core/core.module';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +15,7 @@ import { Observable } from 'rxjs';
   templateUrl: './random.component.html',
   styleUrls: [
     './random.component.scss',
-    '../../../shared/layout/single/single.component.scss'
+    '../../shared/layout/single/single.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

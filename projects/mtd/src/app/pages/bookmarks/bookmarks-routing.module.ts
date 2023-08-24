@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { BookmarksComponent } from './bookmarks.component';
 
 const routes: Routes = [
   {

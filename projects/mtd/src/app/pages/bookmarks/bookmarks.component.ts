@@ -5,17 +5,17 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DictionaryData } from '../../../core/models';
+import { DictionaryData } from '../../core/models';
 import {
   BookmarksService,
   ROUTE_ANIMATIONS_ELEMENTS
-} from '../../../core/core.module';
+} from '../../core/core.module';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 @Component({
   selector: 'mtd-bookmarks',
   templateUrl: './bookmarks.component.html',
-  styleUrls: ['../../../shared/layout/single/single.component.scss'],
+  styleUrls: ['../../shared/layout/single/single.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookmarksComponent implements OnDestroy {

@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { SettingsContainerComponent } from './settings-container.component';
 import {
@@ -19,9 +19,9 @@ import {
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAutoNightMode,
   actionSettingsChangeTheme
-} from '../../../core/settings/settings.actions';
-import { selectSettings } from '../../../core/settings/settings.selectors';
-import { SettingsState } from '../../../core/settings/settings.model';
+} from '../../core/settings/settings.actions';
+import { selectSettings } from '../../core/settings/settings.selectors';
+import { SettingsState } from '../../core/settings/settings.model';
 
 describe('SettingsComponent', () => {
   let component: SettingsContainerComponent;
@@ -64,7 +64,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change auto night mode on night mode toggle', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[0];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -78,7 +78,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change animations page', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -92,7 +92,7 @@ describe('SettingsComponent', () => {
   it('should dispatch change animations elements', () => {
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[3];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
 
     slider.triggerEventHandler('change', { checked: false });
     fixture.detectChanges();
@@ -112,7 +112,7 @@ describe('SettingsComponent', () => {
 
     dispatchSpy = spyOn(store, 'dispatch');
     const componentDebug = fixture.debugElement;
-    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[2];
+    const slider = componentDebug.queryAll(By.directive(MatSlideToggle))[1];
 
     console.log(slider);
     slider.triggerEventHandler('change', { checked: false });

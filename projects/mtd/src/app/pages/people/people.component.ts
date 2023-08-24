@@ -1,13 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
-import { META } from '../../../../config/config';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/core.module';
+import { META } from '../../../config/config';
 
 @Component({
   selector: 'mtd-people',
   templateUrl: './people.component.html',
   styleUrls: [
     './people.component.scss',
-    '../../../shared/layout/single/single.component.scss'
+    '../../shared/layout/single/single.component.scss'
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

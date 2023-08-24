@@ -17,7 +17,7 @@ import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
-import { SPEAKERS } from '../pages/speakers/speakers/speakers.component';
+import { SPEAKERS } from '../pages/speakers/speakers.component';
 
 @Component({
   selector: 'mtd-root',

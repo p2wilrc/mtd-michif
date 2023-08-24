@@ -15,11 +15,8 @@ import {
   debounceTime
 } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { DictionaryData } from '../../../core/models';
-import {
-  MtdService,
-  ROUTE_ANIMATIONS_ELEMENTS
-} from '../../../core/core.module';
+import { DictionaryData } from '../../core/models';
+import { MtdService, ROUTE_ANIMATIONS_ELEMENTS } from '../../core/core.module';
 
 import { slugify } from 'transliteration';
 
