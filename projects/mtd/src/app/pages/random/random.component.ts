@@ -77,7 +77,7 @@ export class RandomComponent {
       guide_height;
 
     // FIXME: Really unsure where those extra 6 pixels come from.  Thanks, Google.
-    return Math.floor(is_phone ? height / 96 : height / 56);
+    return Math.max(2, Math.floor(is_phone ? height / 96 : height / 56));
   }
 
   ngOnDestroy() {
