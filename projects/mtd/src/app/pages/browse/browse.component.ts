@@ -1,4 +1,9 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  HostListener
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DictionaryData } from '../../core/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -25,8 +30,10 @@ export class BrowseComponent implements OnDestroy {
   selectedCategory = 'words';
   selectedLetter: number;
   startIndex$: BehaviorSubject<number> = new BehaviorSubject(0);
-  default_shown = this.guessNumEntries();
-  // currentBrowsingLetter: String = this.letters[this.currentBrowsingEntries[0].sorting_form[0]];
+  numShown$: BehaviorSubject<number> = new BehaviorSubject(
+    this.guessNumEntries()
+  );
+
   letterSelectOptions: Object = { header: 'Select a Letter' };
   categorySelectOptions: Object = { header: 'Select a Category' };
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
@@ -53,7 +60,7 @@ export class BrowseComponent implements OnDestroy {
     });
     this.route.queryParams.subscribe(params => {
       if ('default_shown' in params)
-        this.default_shown = parseInt(params.default_shown);
+        this.numShown$.next(parseInt(params.default_shown));
     });
     this.mtdService.dataDict$
       .pipe(takeUntil(this.unsubscribe$))
@@ -63,13 +70,37 @@ export class BrowseComponent implements OnDestroy {
       });
     this.currentEntries$
       .pipe(
-        map(entries => this.getXFrom(this.startIndex$.value, entries)),
+        map(entries =>
+          this.getXFrom(
+            this.startIndex$.getValue(),
+            entries,
+            this.numShown$.getValue()
+          )
+        ),
         takeUntil(this.unsubscribe$)
       )
       .subscribe(entries => (this.currentX = entries));
     this.startIndex$
       .pipe(
-        map(i => this.getXFrom(i, this.currentEntries$.getValue())),
+        map(i =>
+          this.getXFrom(
+            i,
+            this.currentEntries$.getValue(),
+            this.numShown$.getValue()
+          )
+        ),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(entries => (this.currentX = entries));
+    this.numShown$
+      .pipe(
+        map(x =>
+          this.getXFrom(
+            this.startIndex$.getValue(),
+            this.currentEntries$.getValue(),
+            x
+          )
+        ),
         takeUntil(this.unsubscribe$)
       )
       .subscribe(entries => (this.currentX = entries));
@@ -78,6 +109,16 @@ export class BrowseComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
+  }
+
+  /**
+   * Update the number of entries on resize.
+   *
+   * FIXME: Sure, we could use an Observable for this.
+   */
+  @HostListener('window:resize')
+  handleResize() {
+    this.numShown$.next(this.guessNumEntries());
   }
 
   /**
@@ -107,11 +148,7 @@ export class BrowseComponent implements OnDestroy {
     return Math.floor(is_phone ? height / 96 : height / 56);
   }
 
-  getXFrom(
-    i: number,
-    entries: DictionaryData[],
-    x: number = this.default_shown
-  ): DictionaryData[] {
+  getXFrom(i: number, entries: DictionaryData[], x: number): DictionaryData[] {
     return entries.slice(i, i + x);
   }
 
@@ -153,8 +190,9 @@ export class BrowseComponent implements OnDestroy {
   // Scroll to previous X entries
   prevX() {
     let current_val = this.startIndex$.value;
-    if (current_val - this.default_shown > 0) {
-      this.router.navigate([(current_val -= this.default_shown)], {
+    const numShown = this.numShown$.value;
+    if (current_val - numShown > 0) {
+      this.router.navigate([(current_val -= numShown)], {
         relativeTo: this.route.parent
       });
     } else {
@@ -165,21 +203,14 @@ export class BrowseComponent implements OnDestroy {
   // Scroll to next X entries
   nextX() {
     let current_val = this.startIndex$.value;
-    if (
-      current_val + this.default_shown <
-      this.currentEntries$.getValue().length
-    ) {
-      this.router.navigate([current_val + this.default_shown], {
+    const numShown = this.numShown$.value;
+    if (current_val + numShown < this.currentEntries$.getValue().length) {
+      this.router.navigate([current_val + numShown], {
         relativeTo: this.route.parent
       });
     } else {
       this.router.navigate(
-        [
-          Math.max(
-            this.currentEntries$.getValue().length - this.default_shown,
-            0
-          )
-        ],
+        [Math.max(this.currentEntries$.getValue().length - numShown, 0)],
         { relativeTo: this.route.parent }
       );
     }
