@@ -7,7 +7,7 @@
       color="accent"
       (click)="getRandom()"
     >
-      {{ 'mtd.pages.random.button' | translate }}
+      {{ 'mtd.pages.random.button' | translate: { nRandom: nRandom } }}
     </button>
   </div>
   <div class="results" *ngIf="show || entries$">
