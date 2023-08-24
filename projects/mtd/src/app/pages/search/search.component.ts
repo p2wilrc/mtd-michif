@@ -139,151 +139,152 @@ export class SearchComponent implements OnDestroy, OnInit {
   }
 
   // Get l2_results (eng) and target (l1) results
-  getResults(searchQuery) {
-    if (searchQuery.length > 1) {
-      const searchQueryRe = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      // Normalize
-      const mtd = window['mtd'];
-      const originalSearchTerm = mtd.convertQuery(searchQuery);
-      // 1. Exact match
-      const searchQueryRegex = new RegExp(
-        `(\\s|^){1}${searchQueryRe}(?=([;.?!\\s]|$))`,
+  getResults(searchQuery: string): void {
+    searchQuery = searchQuery.trim();
+    if (searchQuery.length < 2) return;
+
+    const searchQueryRe = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Normalize
+    const mtd = window['mtd'];
+    const originalSearchTerm = mtd.convertQuery(searchQuery);
+    // 1. Exact match
+    const searchQueryRegex = new RegExp(
+      `(\\s|^){1}${searchQueryRe}(?=([;.?!\\s]|$))`,
+      'i'
+    );
+    const l1Exact = this.getRegex(searchQueryRegex, 'word');
+    const l2Exact = this.getRegex(searchQueryRegex);
+    // 2. Partial match
+    const searchQueryPartialRegex = new RegExp(
+      `(\\s|^){1}(${searchQueryRe})\\S|\\S(${searchQueryRe})(\\s|^){1}|\\S(${searchQueryRe})\\S`,
+      'i'
+    );
+    const l1Partial = this.getRegex(searchQueryPartialRegex, 'word');
+    const l2Partial = this.getRegex(searchQueryPartialRegex);
+    // 3. Partial match on slugified form
+    const l1PartialSlug = this.getRegexFromSlug(
+      new RegExp(
+        searchQueryPartialRegex.source + '|' + searchQueryRegex.source,
         'i'
-      );
-      const l1Exact = this.getRegex(searchQueryRegex, 'word');
-      const l2Exact = this.getRegex(searchQueryRegex);
-      // 2. Partial match
-      const searchQueryPartialRegex = new RegExp(
-        `(\\s|^){1}(${searchQueryRe})\\S|\\S(${searchQueryRe})(\\s|^){1}|\\S(${searchQueryRe})\\S`,
-        'i'
-      );
-      const l1Partial = this.getRegex(searchQueryPartialRegex, 'word');
-      const l2Partial = this.getRegex(searchQueryPartialRegex);
-      // 3. Partial match on slugified form
-      const l1PartialSlug = this.getRegexFromSlug(
-        new RegExp(
-          searchQueryPartialRegex.source + '|' + searchQueryRegex.source,
-          'i'
-        )
-      );
-      // 4. levenstein (includes compare form and display)
-      const target = window['searchL1'](originalSearchTerm);
-      // Match containers
-      let allMatches = [];
-      const matches = [];
-      const partMatches = [];
-      const maybeMatches = [];
+      )
+    );
+    // 4. levenstein (includes compare form and display)
+    const target = window['searchL1'](originalSearchTerm);
+    console.log(`target is ${target}`);
+    // Match containers
+    let allMatches = [];
+    const matches = [];
+    const partMatches = [];
+    const maybeMatches = [];
 
-      // Collect l1Exact matches and add to allMatches
-      const populateL1Exact = () => {
-        for (const result of l1Exact) {
-          const entry = Object.assign({}, result);
-          entry.type = 'L1';
-          entry.distance = this.matchThreshold;
+    // Collect l1Exact matches and add to allMatches
+    const populateL1Exact = () => {
+      for (const result of l1Exact) {
+        const entry = Object.assign({}, result);
+        entry.type = 'L1';
+        entry.distance = this.matchThreshold;
+        allMatches.push(entry);
+      }
+    };
+
+    // Collect l2Exact matches and add to allMatches
+    const populateL2Exact = () => {
+      for (const result of l2Exact) {
+        const entry = Object.assign({}, result);
+        entry.type = 'L2';
+        entry.distance = this.matchThreshold;
+        allMatches.push(entry);
+      }
+    };
+
+    // Collect l1Partial matches and add to allMatches
+    const populateL1Partial = () => {
+      for (const result of l1Partial.concat(l1PartialSlug)) {
+        const entry = Object.assign({}, result);
+        entry.type = 'L1';
+        entry.distance = this.partialThreshold;
+        allMatches.push(entry);
+      }
+    };
+
+    // Collect l2Partial matches and add to allMatches
+    const populateL2Partial = () => {
+      for (const result of l2Partial) {
+        const entry = Object.assign({}, result);
+        entry.type = 'L2';
+        entry.distance = this.partialThreshold;
+        allMatches.push(entry);
+      }
+    };
+
+    const populateTarget = () => {
+      for (const result of target) {
+        const entry = Object.assign({}, result);
+        entry.type = 'L1';
+        entry.distance += this.approxWeight;
+        const resultIndex = allMatches.findIndex(
+          match =>
+            match.word === entry.word && match.definition === match.definition
+        );
+        if (resultIndex === -1) {
           allMatches.push(entry);
-        }
-      };
-
-      // Collect l2Exact matches and add to allMatches
-      const populateL2Exact = () => {
-        for (const result of l2Exact) {
-          const entry = Object.assign({}, result);
-          entry.type = 'L2';
-          entry.distance = this.matchThreshold;
-          allMatches.push(entry);
-        }
-      };
-
-      // Collect l1Partial matches and add to allMatches
-      const populateL1Partial = () => {
-        for (const result of l1Partial.concat(l1PartialSlug)) {
-          const entry = Object.assign({}, result);
-          entry.type = 'L1';
-          entry.distance = this.partialThreshold;
-          allMatches.push(entry);
-        }
-      };
-
-      // Collect l2Partial matches and add to allMatches
-      const populateL2Partial = () => {
-        for (const result of l2Partial) {
-          const entry = Object.assign({}, result);
-          entry.type = 'L2';
-          entry.distance = this.partialThreshold;
-          allMatches.push(entry);
-        }
-      };
-
-      const populateTarget = () => {
-        for (const result of target) {
-          const entry = Object.assign({}, result);
-          entry.type = 'L1';
-          entry.distance += this.approxWeight;
-          const resultIndex = allMatches.findIndex(
-            match =>
-              match.word === entry.word && match.definition === match.definition
-          );
-          if (resultIndex === -1) {
-            allMatches.push(entry);
-          } else {
-            if (
-              'distance' in allMatches[resultIndex] &&
-              allMatches[resultIndex].distance > entry.distance
-            ) {
-              allMatches[resultIndex].distance = entry.distance;
-            }
+        } else {
+          if (
+            'distance' in allMatches[resultIndex] &&
+            allMatches[resultIndex].distance > entry.distance
+          ) {
+            allMatches[resultIndex].distance = entry.distance;
           }
         }
-      };
+      }
+    };
 
-      const mergeMatches = () => {
-        for (const entry of allMatches) {
-          if ('distance' in entry) {
-            if (entry.distance === this.matchThreshold) {
-              matches.push(entry);
-            } else if (
-              'distance' in entry &&
-              entry.distance <= this.partialThreshold &&
-              entry.distance > this.matchThreshold
-            ) {
-              partMatches.push(entry);
-            } else if (
-              entry.distance <= this.maybeThreshold &&
-              entry.distance > this.partialThreshold
-            ) {
-              maybeMatches.push(entry);
-            }
-          } else {
+    const mergeMatches = () => {
+      for (const entry of allMatches) {
+        if ('distance' in entry) {
+          if (entry.distance === this.matchThreshold) {
             matches.push(entry);
+          } else if (
+            'distance' in entry &&
+            entry.distance <= this.partialThreshold &&
+            entry.distance > this.matchThreshold
+          ) {
+            partMatches.push(entry);
+          } else if (
+            entry.distance <= this.maybeThreshold &&
+            entry.distance > this.partialThreshold
+          ) {
+            maybeMatches.push(entry);
           }
+        } else {
+          matches.push(entry);
         }
-        // Only these actually need to be sorted by distance
-        maybeMatches.sort((a, b) => a.distance - b.distance);
-      };
-      populateL1Exact();
-      populateL2Exact();
-      populateL1Partial();
-      populateL2Partial();
-      populateTarget();
-      allMatches = allMatches.filter(
-        (match, index, self) =>
-          self.findIndex(
-            t => t.word === match.word && t.definition === match.definition
-          ) === index
-      );
-      mergeMatches();
-      this.loading$.next(false);
-      // Add headers
-      if (matches.length) {
-        matches.unshift({ title: 'mtd.pages.search.matches' });
       }
-      if (partMatches.length) {
-        partMatches.unshift({ title: 'mtd.pages.search.partial-matches' });
-      }
-      if (maybeMatches.length) {
-        maybeMatches.unshift({ title: 'mtd.pages.search.maybe-matches' });
-      }
-      this.matches$.next(matches.concat(partMatches).concat(maybeMatches));
+      // Only these actually need to be sorted by distance
+      maybeMatches.sort((a, b) => a.distance - b.distance);
+    };
+    populateL1Exact();
+    populateL2Exact();
+    populateL1Partial();
+    populateL2Partial();
+    populateTarget();
+    allMatches = allMatches.filter(
+      (match, index, self) =>
+        self.findIndex(
+          t => t.word === match.word && t.definition === match.definition
+        ) === index
+    );
+    mergeMatches();
+    // Add headers
+    if (matches.length) {
+      matches.unshift({ title: 'mtd.pages.search.matches' });
     }
+    if (partMatches.length) {
+      partMatches.unshift({ title: 'mtd.pages.search.partial-matches' });
+    }
+    if (maybeMatches.length) {
+      maybeMatches.unshift({ title: 'mtd.pages.search.maybe-matches' });
+    }
+    this.matches$.next(matches.concat(partMatches).concat(maybeMatches));
   }
 }
