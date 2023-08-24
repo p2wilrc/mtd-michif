@@ -84,10 +84,8 @@ Laura Grant
 Mackenzie Elliot
 Marlee Paterson
 Melanie Lavallee
-Michif Dictionary Proofreaders and Annotators
 Mira Kolodka
 Nicole Reel
-Our Volunteers
 Patrick Littel
 Rebecca Kirkpatrick
 Roland Kuhn
