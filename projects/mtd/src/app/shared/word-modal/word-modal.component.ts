@@ -20,9 +20,14 @@ interface ExampleAudio {
   starts: Array<number>;
 }
 
+interface ExampleText {
+  text: string;
+  active: boolean;
+}
+
 interface Example {
   text: string;
-  definition: string;
+  definition: Array<ExampleText>;
   audio: Array<ExampleAudio>;
 }
 
@@ -65,7 +70,8 @@ export class WordModalComponent {
         let definition;
         if (this.data.entry.example_sentence_definition)
           definition = this.data.entry.example_sentence_definition[idx]
-            .split(/\s+/)
+            .split(/[\s.,:;()]+/)
+            .filter(w => w.length)
             .map((w, i) => {
               return { text: w, active: false };
             });
@@ -104,7 +110,6 @@ export class WordModalComponent {
   }
 
   checkChecked(option) {
-    console.log(option);
     if (this.checkedOptions.indexOf(option) >= 0) {
       return true;
     } else {
