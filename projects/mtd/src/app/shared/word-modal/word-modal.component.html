@@ -1,36 +1,4 @@
-<div mat-dialog-content>
-  <div class="container">
-    <div class="container__row">
-      <div class="container__col centered" *ngIf="data.entry">
-        <h2>
-          <span>{{ data.entry.word }}</span> -
-          <span>{{ data.entry.definition }}</span>
-        </h2>
-      </div>
-    </div>
-    <div class="container__row" *ngIf="data.entry && data.entry.optional">
-      <div class="container__col centered">
-        <span *ngFor="let opt of data.entry.optional | noNullObjectValues"
-          >{{ getKey(opt) }}: {{ getVal(opt) }}</span
-        >
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="container__row report-row">
-      <a [class.reported]="reported" class="report" (click)="openReport()">
-        {{ 'mtd.word-modal.report' | translate }}
-      </a>
-      <mat-icon
-        *ngIf="reported"
-        class="report-check"
-        aria-hidden="false"
-        aria-label="Report sent"
-        inline
-        >done</mat-icon
-      >
-    </div>
-  </div>
+<ng-template #audioPane>
   <div class="container audio__container" *ngIf="data.entry && hasAudio()">
     <div class="container__row audio__header">
       <h3 class="container__col audio__header">
@@ -62,9 +30,13 @@
       </button>
     </div>
   </div>
+</ng-template>
+<ng-template #examplePane>
   <div class="container audio__container" *ngIf="examples.length">
     <div class="container__row example__header">
-      <h3 class="container__col example__header">Examples</h3>
+      <h3 class="container__col example__header">
+        {{ 'mtd.word-modal.examples' | translate }}
+      </h3>
     </div>
     <div class="container example__desc" *ngFor="let example of examples">
       <p class="container__row example__desc">
@@ -94,8 +66,10 @@
       </div>
     </div>
   </div>
+</ng-template>
+<ng-template #report>
   <div class="container">
-    <div class="container__row">
+    <div class="container__row report-row">
       <a [class.reported]="reported" class="report" (click)="openReport()">
         {{ 'mtd.word-modal.report' | translate }}
       </a>
@@ -109,7 +83,32 @@
       >
     </div>
   </div>
+</ng-template>
+<ng-template #optional>
+  <div class="container__row" *ngIf="data.entry && data.entry.optional">
+    <div class="container__col centered">
+      <span *ngFor="let opt of data.entry.optional | noNullObjectValues"
+        >{{ getKey(opt) }}: {{ getVal(opt) }}</span
+      >
+    </div>
+  </div>
+</ng-template>
+<div mat-dialog-content>
+  <div class="container">
+    <div class="container__row">
+      <div class="container__col centered" *ngIf="data.entry">
+        <h2>
+          <span>{{ data.entry.word }}</span> -
+          <span>{{ data.entry.definition }}</span>
+        </h2>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="optional"></ng-container>
+  </div>
+  <ng-container *ngTemplateOutlet="audioPane"></ng-container>
+  <ng-container *ngTemplateOutlet="examplePane"></ng-container>
 </div>
+<ng-container *ngTemplateOutlet="report"></ng-container>
 <div mat-dialog-actions align="end">
   <button cdkFocusInitial mat-raised-button mat-dialog-close>
     {{ 'mtd.word-modal.exit' | translate }}
