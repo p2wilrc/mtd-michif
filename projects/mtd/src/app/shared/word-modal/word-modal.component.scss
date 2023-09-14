@@ -5,7 +5,7 @@
 }
 
 .report-row {
-  text-align: right;
+  text-align: left;
 }
 .report {
   font-size: x-small;
@@ -18,4 +18,11 @@
 .report-check {
   font-size: x-small;
   color: green;
+}
+
+// FIXME: Probably not supposed to do this, but Angular Material
+// seemingly gives us no choice (do any Google employees still have
+// small screens?)
+:host ::ng-deep .mat-tab-label {
+  height: 36px;
 }
