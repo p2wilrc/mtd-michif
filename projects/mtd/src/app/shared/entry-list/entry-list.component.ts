@@ -90,9 +90,12 @@ export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
           panelClass: 'mtd-word-dialog',
           data: { entry }
         });
-        dialogRef.afterClosed().subscribe(result => {
-          this.router.navigate(['.'], { relativeTo: this.route });
-        });
+        dialogRef
+          .afterClosed()
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(result => {
+            this.router.navigate(['.'], { relativeTo: this.route });
+          });
       });
   }
 

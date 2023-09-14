@@ -2,8 +2,13 @@ import {
   Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  OnInit,
+  OnDestroy,
   Inject
 } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DictionaryData } from '../../core/models';
 import {
   MatDialog,
@@ -37,7 +42,7 @@ interface Example {
   styleUrls: ['./word-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WordModalComponent {
+export class WordModalComponent implements OnInit, OnDestroy {
   checkedOptions: string[];
   displayImages = true; // default show images, turns to false on 404
   examples: Array<Example>;
@@ -46,6 +51,8 @@ export class WordModalComponent {
   objectKeys = Object.keys;
   image: string;
   reported = false;
+  tabs = false;
+  unsubscribe$ = new Subject<void>();
 
   constructor(
     public bookmarkService: BookmarksService,
@@ -53,7 +60,8 @@ export class WordModalComponent {
     public dialogRef: MatDialogRef<WordModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     public dialog: MatDialog,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.checkedOptions = this.optionalSelection;
 
@@ -85,6 +93,23 @@ export class WordModalComponent {
         });
       }
     }
+  }
+
+  ngOnInit() {
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(result => {
+        const prevTabs = this.tabs;
+        if (result.matches)
+          this.tabs = !!(this.data.entry.audio && this.examples.length);
+        else this.tabs = false;
+        if (this.tabs != prevTabs) this.ref.markForCheck();
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
   }
 
   getKey(obj) {
