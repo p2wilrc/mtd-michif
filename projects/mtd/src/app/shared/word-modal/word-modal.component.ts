@@ -52,6 +52,7 @@ export class WordModalComponent implements OnInit, OnDestroy {
   image: string;
   reported = false;
   tabs = false;
+  heightQuery: string;
   unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -93,11 +94,14 @@ export class WordModalComponent implements OnInit, OnDestroy {
         });
       }
     }
+    // NOTE: This is really quite arbitrary
+    const minHeight = 450 + 150 * this.examples.length;
+    this.heightQuery = `(max-height: ${minHeight - 1}px)`;
   }
 
   ngOnInit() {
     this.breakpointObserver
-      .observe([Breakpoints.XSmall])
+      .observe([this.heightQuery])
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(result => {
         const prevTabs = this.tabs;
