@@ -41,7 +41,7 @@ export class SearchComponent implements OnDestroy, OnInit {
   language$: Observable<string>;
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   unsubscribe$ = new Subject<void>();
-  onSearchKeyUp = new Subject<string>();
+  onSearchKeyUp$ = new Subject<KeyboardEvent>();
   loading$ = new BehaviorSubject<boolean>(false);
   show?: string;
   constructor(
@@ -68,14 +68,14 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.entries$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(entries => (this.entries = entries));
-    this.onSearchKeyUp
+    this.onSearchKeyUp$
       .pipe(
-        tap(x => this.loading$.next(true)),
-        map(event => event['target'].value),
+        tap(event => this.loading$.next(true)),
         debounceTime(200)
       )
-      .subscribe(x => {
-        this.getResults(x);
+      .subscribe(event => {
+        const value = (event.target as HTMLInputElement).value;
+        this.getResults(value);
         this.loading$.next(false);
       });
   }
@@ -170,7 +170,6 @@ export class SearchComponent implements OnDestroy, OnInit {
     );
     // 4. levenstein (includes compare form and display)
     const target = window['searchL1'](originalSearchTerm);
-    console.log(`target is ${target}`);
     // Match containers
     let allMatches = [];
     const matches = [];

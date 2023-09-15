@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'mtd-big-input-action',
@@ -20,7 +21,7 @@ export class BigInputActionComponent {
   @Input()
   fontIcon = '';
   @Input()
-  faIcon = '';
+  faIcon: IconProp = 'heart'; // could be anything!
   @Input()
   label = '';
   @Input()

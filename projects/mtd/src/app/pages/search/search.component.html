@@ -17,7 +17,7 @@
         }} words."
         aria-label="Number"
         matInput
-        (keyup)="onSearchKeyUp.next($event)"
+        (keyup)="onSearchKeyUp$.next($event)"
         [(ngModel)]="searchQuery"
       />
     </mat-form-field>
@@ -30,7 +30,7 @@
         [searchTerm]="searchQuery"
         [threshold]="matchThreshold"
         [shouldHighlight]="true"
-        floatingGuide="true"
+        [floatingGuide]="true"
       >
       </mtd-entry-list>
       <div

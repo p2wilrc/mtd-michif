@@ -19,6 +19,12 @@ import {
 } from '../core/settings/settings.actions';
 import { SPEAKERS } from '../pages/speakers/speakers.component';
 
+interface MenuItem {
+  link: string;
+  label: string;
+  children?: Array<MenuItem>;
+}
+
 @Component({
   selector: 'mtd-root',
   templateUrl: './app.component.html',
@@ -34,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
   logo = 'assets/logo.png';
   languages = META.languages;
   Meta = META;
-  navigation = [
+  navigation: Array<MenuItem> = [
     { link: 'search', label: marker('mtd.menu.search') },
     { link: 'browse', label: marker('mtd.menu.browse') },
     { link: 'random', label: marker('mtd.menu.random') },
@@ -56,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
       })
     }
   ];
-  navigationSideMenu = [
+  navigationSideMenu: Array<MenuItem> = [
     ...this.navigation,
     { link: 'settings', label: 'mtd.menu.settings' }
   ];

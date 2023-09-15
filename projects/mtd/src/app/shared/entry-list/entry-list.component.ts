@@ -138,16 +138,15 @@ export class EntryListComponent implements OnChanges, OnInit, OnDestroy {
     return this.mtdService.hasAudio(entry);
   }
 
-  highlight(entry, langType) {
+  highlight(entry: DictionaryData, langType: 'L1' | 'L2'): string {
     let text;
     if (langType === 'L1') {
       text = entry.word;
     } else if (langType === 'L2') {
       text = entry.definition;
     }
-    if (!this.searchTerm) {
-      return text;
-    }
+    if (!this.searchTerm) return text;
+    if (!text) return text;
     return text.replace(
       new RegExp(this.searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
       '<span class="langMatched">$&</span>'

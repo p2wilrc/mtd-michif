@@ -1,26 +1,21 @@
 <ng-template #audioPane>
-  <div class="container audio__container" *ngIf="data.entry && hasAudio()">
+  <div class="container audio__container" *ngIf="hasAudio()">
     <div *ngIf="!tabs" class="container__row audio__header">
       <h3 class="container__col audio__header">
         {{ 'mtd.word-modal.audio' | translate }}
       </h3>
     </div>
     <div class="container__row audio__desc">
-      <p class="container__col audio__desc" *ngIf="data.entry">
+      <p class="container__col audio__desc">
         {{
           'mtd.word-modal.audio-instructions'
-            | translate: { value: data.entry.definition }
+            | translate: { value: entry.definition }
         }}
       </p>
     </div>
-    <div
-      *ngIf="data.entry.audio"
-      class="container__row audio__buttons centered"
-    >
+    <div *ngIf="entry.audio" class="container__row audio__buttons centered">
       <button
-        *ngFor="
-          let audio of data.entry.audio | noNullObjectValues | singleSpeaker
-        "
+        *ngFor="let audio of entry.audio | noNullObjectValues | singleSpeaker"
         class="audio__button"
         mat-raised-button
         (click)="playAudio(null, audio)"
@@ -85,9 +80,9 @@
   </div>
 </ng-template>
 <ng-template #optional>
-  <div class="container__row" *ngIf="data.entry && data.entry.optional">
+  <div class="container__row" *ngIf="entry && entry.optional">
     <div class="container__col centered">
-      <span *ngFor="let opt of data.entry.optional | noNullObjectValues"
+      <span *ngFor="let opt of entry.optional | noNullObjectValues"
         >{{ getKey(opt) }}: {{ getVal(opt) }}</span
       >
     </div>
@@ -95,10 +90,10 @@
 </ng-template>
 <div class="container">
   <div class="container__row">
-    <div class="container__col centered" *ngIf="data.entry">
+    <div class="container__col centered" *ngIf="entry">
       <h2>
-        <span>{{ data.entry.word }}</span> -
-        <span>{{ data.entry.definition }}</span>
+        <span>{{ entry.word }}</span> -
+        <span>{{ entry.definition }}</span>
       </h2>
     </div>
   </div>

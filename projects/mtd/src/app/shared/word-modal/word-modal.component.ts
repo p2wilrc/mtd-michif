@@ -45,6 +45,7 @@ interface Example {
 export class WordModalComponent implements OnInit, OnDestroy {
   checkedOptions: string[];
   displayImages = true; // default show images, turns to false on 404
+  entry: DictionaryData;
   examples: Array<Example>;
   optional = false;
   optionalSelection: string[];
@@ -66,27 +67,23 @@ export class WordModalComponent implements OnInit, OnDestroy {
   ) {
     this.checkedOptions = this.optionalSelection;
 
-    try {
-      this.image = 'assets/img/' + this.data.entry.img;
-    } catch (error) {
-      console.log(error);
-    }
+    this.entry = this.data.entry!;
     // Restructure the examples to Help With Stuff
     this.examples = [];
-    if ('entry' in this.data && this.data.entry.example_sentence) {
-      for (const idx in this.data.entry.example_sentence) {
-        const text = this.data.entry.example_sentence[idx];
+    if (this.entry.example_sentence) {
+      for (const idx in this.entry.example_sentence) {
+        const text = this.entry.example_sentence[idx];
         let definition;
-        if (this.data.entry.example_sentence_definition)
-          definition = this.data.entry.example_sentence_definition[idx]
+        if (this.entry.example_sentence_definition)
+          definition = this.entry.example_sentence_definition[idx]
             .split(/[\s.,:;()]+/)
             .filter(w => w.length)
             .map((w, i) => {
               return { text: w, active: false };
             });
         let audio;
-        if (this.data.entry.example_sentence_audio)
-          audio = this.data.entry.example_sentence_audio[idx];
+        if (this.entry.example_sentence_audio)
+          audio = this.entry.example_sentence_audio[idx];
         this.examples.push({
           text,
           definition,
@@ -106,7 +103,7 @@ export class WordModalComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         const prevTabs = this.tabs;
         if (result.matches)
-          this.tabs = !!(this.data.entry.audio && this.examples.length);
+          this.tabs = !!(this.entry.audio && this.examples.length);
         else this.tabs = false;
         if (this.tabs != prevTabs) this.ref.markForCheck();
       });
@@ -125,7 +122,6 @@ export class WordModalComponent implements OnInit, OnDestroy {
   }
 
   openReport() {
-    if (!(this.data && this.data.entry)) return;
     if (this.reported) return;
     const dialogRef = this.dialog.open(ReportDialogComponent, {
       data: this.data
@@ -147,14 +143,14 @@ export class WordModalComponent implements OnInit, OnDestroy {
   }
 
   hasAudio() {
-    return this.mtdService.hasAudio(this.data.entry);
+    return this.mtdService.hasAudio(this.entry);
   }
 
   hasExample() {
-    if (!('example_sentence' in this.data.entry)) return false;
-    if (this.data.entry.example_sentence instanceof Array)
-      return !!this.data.entry.example_sentence.length;
-    return !!this.data.entry.example_sentence;
+    if (!('example_sentence' in this.entry)) return false;
+    if (this.entry.example_sentence instanceof Array)
+      return !!this.entry.example_sentence.length;
+    return !!this.entry.example_sentence;
   }
 
   fileNotFound(path) {

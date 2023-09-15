@@ -29,6 +29,7 @@ export interface DictionaryData {
   theme?: string;
   secondary_theme?: string;
   img?: string;
+  title?: string;
   audio?: any;
   definition_audio?: any;
   example_sentence?: any;
