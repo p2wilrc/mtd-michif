@@ -23,7 +23,12 @@ describe('WordModalComponent', () => {
         declarations: [WordModalComponent],
         providers: [
           { provide: MatDialogRef, useValue: {} },
-          { provide: MAT_DIALOG_DATA, useValue: {} }
+          {
+            provide: MAT_DIALOG_DATA,
+            useValue: {
+              entry: {}
+            }
+          }
         ]
       }).compileComponents();
     })

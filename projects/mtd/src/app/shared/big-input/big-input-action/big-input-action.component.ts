@@ -17,15 +17,15 @@ export class BigInputActionComponent {
   @Input()
   disabled = false;
   @Input()
-  fontSet = '';
+  fontSet?;
   @Input()
-  fontIcon = '';
+  fontIcon?;
   @Input()
-  faIcon: IconProp = 'heart'; // could be anything!
+  faIcon?;
   @Input()
-  label = '';
+  label?;
   @Input()
-  color = '';
+  color?;
 
   @Output()
   action = new EventEmitter<void>();
