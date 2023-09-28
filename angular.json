@@ -24,9 +24,10 @@
             "polyfills": "projects/mtd/src/polyfills.ts",
             "tsConfig": "projects/mtd/tsconfig.app.json",
             "assets": [
-              "projects/mtd/src/favicon.ico",
               "projects/mtd/src/assets",
-              "projects/mtd/src/manifest.webmanifest"
+              "projects/mtd/src/manifest.webmanifest",
+              "projects/mtd/src/robots.txt",
+              "projects/mtd/src/sitemap.xml"
             ],
             "styles": [
               "projects/mtd/src/styles-app-loading.scss",
@@ -113,7 +114,6 @@
             "tsConfig": "projects/mtd/tsconfig.spec.json",
             "karmaConfig": "projects/mtd/karma.conf.js",
             "assets": [
-              "projects/mtd/src/favicon.ico",
               "projects/mtd/src/assets",
               "projects/mtd/src/assets/audio",
               "projects/mtd/src/manifest.webmanifest"
