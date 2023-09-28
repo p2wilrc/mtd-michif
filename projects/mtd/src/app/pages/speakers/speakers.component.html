@@ -1,6 +1,10 @@
 <mtd-single>
   <h1 title>{{ fullname[speaker] }}</h1>
-  <img class="floating-img" [src]="photos[speaker]" />
+  <img
+    class="floating-img"
+    alt="Photo of {{ fullname[speaker] }}"
+    [src]="photos[speaker]"
+  />
   <ng-container [ngSwitch]="speaker">
     <ng-container *ngSwitchCase="'vid'">
       <p>

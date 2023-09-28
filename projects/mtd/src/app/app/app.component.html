@@ -46,7 +46,7 @@
 
     <!-- Wrapper that covers *the entire viewport* -->
     <div class="wrapper">
-      <div class="toolbar">
+      <nav class="toolbar">
         <!--
             Complicated display logic here... may or may not match
             the Material design guidelines, which even Angular team
@@ -128,6 +128,7 @@
             mat-icon-button
             routerLink="/settings"
             class="d-none d-sm-inline"
+            aria-label="Settings"
           >
             <fa-icon icon="cog"></fa-icon>
           </button>
@@ -145,7 +146,7 @@
             </span>
           </ng-container>
         </mat-toolbar>
-      </div>
+      </nav>
 
       <!-- Content that covers the area under the toolbar -->
       <div
@@ -158,9 +159,9 @@
       >
         <!-- Wrapper for page components, restoring relative
 	     position and adding top spacing. -->
-        <div class="content-wrapper">
+        <main class="content-wrapper">
           <router-outlet #o="outlet"></router-outlet>
-        </div>
+        </main>
         <!-- content-wrapper -->
       </div>
       <!-- content -->
