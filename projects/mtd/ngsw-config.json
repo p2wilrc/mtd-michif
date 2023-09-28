@@ -11,19 +11,27 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+          "/assets/i18n/*",
+          "/assets/js/*",
+          "/assets/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     },
     {
-      "name": "assets",
+      "name": "audio",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
-        ]
+        "files": ["/assets/data/audio/*"]
+      }
+    },
+    {
+      "name": "other",
+      "installMode": "lazy",
+      "resources": {
+        "files": ["/assets/**"]
       }
     }
   ]
