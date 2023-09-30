@@ -18,21 +18,6 @@
           "/assets/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
-    },
-    {
-      "name": "audio",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": ["/assets/data/audio/*"]
-      }
-    },
-    {
-      "name": "other",
-      "installMode": "lazy",
-      "resources": {
-        "files": ["/assets/**"]
-      }
     }
   ]
 }
