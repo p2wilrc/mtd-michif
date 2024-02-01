@@ -10,11 +10,13 @@ from typing import Iterator
 
 from tqdm import tqdm  # type: ignore
 
+from .add_clarifications import add_clarifications
 from .create_channel_mapping import create_channel_mapping
 from .create_file_mapping import ElanUntangler
 from .create_session_mapping import find_sessions
 from .dictionary import Dictionary
 from .elan_to_json import AudioExtractor
+from .force_align import force_align
 from .read_metadata import read_metadata
 
 LOGGER = logging.getLogger("mtd-michif")
@@ -44,13 +46,18 @@ def make_argparse() -> argparse.ArgumentParser:
         help="Directory for intermediate files",
         default=Path.cwd() / "build",
     )
+    parser.add_argument(
+        "-A",
+        "--output-audio-dir",
+        help="Directory for output audio files",
+        default=Path.cwd() / "projects" / "mtd" / "src" / "assets" / "data" / "audio",
+    )
     return parser
 
 
 DICT_TXT = Path("txt") / "laverdure_allard_1983_revised.txt"
 METADATA = Path("metadata") / "TMD Metadata.xlsx"
 UNCORRECTABLES = Path(__file__).parent / "models" / "uncorrectables.json"
-AUDIO_OUTPUT_DIR = Path("projects") / "mtd" / "src" / "assets" / "data" / "audio"
 
 
 def check_directories(parser: argparse.ArgumentParser, args: argparse.Namespace):
@@ -209,7 +216,7 @@ def main() -> None:
     dictionary.save_json(args.build / "laverdure.json")
 
     LOGGER.info("Matching annotated audio to dictionary entries...")
-    matcher = AudioExtractor(dictionary, output_audio_dir=AUDIO_OUTPUT_DIR)
+    matcher = AudioExtractor(dictionary, output_audio_dir=args.output_audio_dir)
     elan_files = list(find_annotations(args, session_data, channel_mapping))
     for elan_file, audio, eaf in tqdm(elan_files):
         LOGGER.info("Processing ELAN file %s", elan_file)
@@ -229,4 +236,9 @@ def main() -> None:
     dictionary_stats(dictionary)
 
     LOGGER.info("Force-aligning for read-alongs...")
+    force_align(dictionary)
+    dictionary.save_json(args.build / "laverdure_aligned.json")
 
+    LOGGER.info("Moving clarifications onto headwords...")
+    add_clarifications(dictionary)
+    dictionary.save_json(args.build / "laverdure_clarified.json")
