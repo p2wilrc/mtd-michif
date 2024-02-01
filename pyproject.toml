@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 testpaths = ["tests"]
 
 [project]
-name = "mtd-michif-web"
+name = "mtd-michif"
 dynamic = ["version"]
 description = "On-line version of the Turtle Mountain Michif Dictionary"
 readme = "README.md"
