@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools >= 61.0", "setuptools_scm >= 8"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[project]
+name = "mtd-michif-web"
+dynamic = ["version"]
+description = "On-line version of the Turtle Mountain Michif Dictionary"
+readme = "README.md"
+authors = [
+        {name = "David Huggins-Daines", email = "dhd@ecolingui.ca"}
+]
+keywords = ["nlp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mothertongues @ git+https://github.com/p2wilrc/mothertongues.git",
+    "g2p @ git+https://github.com/p2wilrc/g2p.git@dev.fin-upstream",
+    "tqdm",
+    "openpyxl",
+    "pympi-ling",
+    "tinytag",
+    "fasttext-wheel",
+    "pysbd",
+    "pydantic >= 2",
+    "soundswallower",
+    "Levenshtein",
+]
+requires-python = ">= 3.9"
+
+[project.urls]
+Homepage = "https://github.com/p2wilrc/mtd-michif-web"
+Repository = "https://github.com/p2wilrc/mtd-michif-web.git"
+
+[project.scripts]
+mtd-michif = "mtd_michif:main"
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+extend-ignore = "E203"
+max-line-length = "88"
+
+[tool.setuptools]
+packages = ["mtd_michif", "mtd_michif.models"]
+include-package-data = true
+
+[tool.setuptools_scm]
