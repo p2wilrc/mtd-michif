@@ -137,6 +137,40 @@ def find_annotations(
         yield elan_file, audio, eaf
 
 
+def dictionary_stats(dictionary: Dictionary) -> None:
+    n_examples = 0
+    missing_audio = 0
+    missing_example_audio = 0
+    entries = dictionary.entries.values()
+    for entry in tqdm(entries):
+        if not entry.audio:
+            missing_audio += 1
+        if entry.examples:
+            n_examples += 1
+            if all(not example.audio for example in entry.examples):
+                missing_example_audio += 1
+    LOGGER.info(
+        "Dictionary has %d entries and %d entries with examples:",
+        len(entries),
+        n_examples,
+    )
+    LOGGER.info(
+        "\t%d entries are missing audio (%.2f%%)",
+        missing_audio,
+        missing_audio / len(entries) * 100,
+    )
+    LOGGER.info(
+        "\t%d entries are missing examples (%.2f%%)",
+        len(entries) - n_examples,
+        (len(entries) - n_examples) / len(entries) * 100,
+    )
+    LOGGER.info(
+        "\t%d examples are missing audio (%.2f%%)",
+        missing_example_audio,
+        missing_example_audio / n_examples * 100,
+    )
+
+
 def main() -> None:
     """Entry-point for dictionary build."""
     parser = make_argparse()
@@ -192,3 +226,7 @@ def main() -> None:
                 example.audio.sort(key=lambda x: (x.speaker, x.path), reverse=True)
         entry.examples.sort(key=lambda x: (x.score, x.english, x.michif))
     dictionary.save_json(args.build / "laverdure_matched.json")
+    dictionary_stats(dictionary)
+
+    LOGGER.info("Force-aligning for read-alongs...")
+
