@@ -58,3 +58,6 @@ debug.log
 
 # junk
 *~
+*.egg-info
+__pycache__
+/build
