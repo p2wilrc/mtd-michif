@@ -3,10 +3,8 @@ Functions for parsing the text format of the Laverdure dictionary.
 """
 
 import fileinput
-import json
 import logging
 import re
-from pathlib import Path
 from typing import Optional
 
 import pysbd  # type: ignore
@@ -14,13 +12,11 @@ from pydantic import BaseModel, Field
 
 LOGGER = logging.getLogger("parse-entries")
 SEGMENTER = pysbd.Segmenter(clean=True)
-MODEL_PATH = Path(__file__).parent / "models" / "ocr-hyphenation.json"
-with open(MODEL_PATH, "rt") as infh:
-    SPLITS = json.load(infh)
 
 
 class ParsedEntry(BaseModel):
-    """Single entry in the TMD dictionary (could be multiple on a line with different senses)"""
+    """Single entry in the TMD dictionary (could be multiple on a line
+    with different senses)"""
 
     english: str = Field(description="English headword")
     michif: list[str] = Field(description="Michif translations")
@@ -128,40 +124,6 @@ def parse_definition(
     )
     cleanup_entry(entry)
     return entry
-
-
-def cleanup_line(line: str):
-    """Apply various clean-ups to input text."""
-    # Hyphenation that was transformed into space by bogus postprocessing
-    headword, _, definitions = line.partition("—")
-    if definitions:
-        if headword in SPLITS:
-            LOGGER.info("Found %s in hyphenation table", headword)
-            for split in SPLITS[headword]:
-                joined = split.replace(" ", "")
-                LOGGER.info("Replacing %s with %s", split, joined)
-                line = line.replace(split, joined)
-                LOGGER.info("Now %s", line)
-    # Hyphenation+newline (this seems too general, but it actually works)
-    line = re.sub(r"(\w)- (\w)", r"\1\2", line)
-    # Stray OCR spaces (many others exist as well...)
-    line = line.replace(" ing", "ing")
-    # More OCR artifacts
-    line = re.sub(r"[1I]['’]([aeiouAEIOU])", r"l’\1", line)
-    line = re.sub(r"\bI(a|ee|i)\b", r"l\1", line)
-    # Chapter titles that got tacked onto examples by OCR
-    line = re.sub(r"\s+[A-Z]\s*$", "", line)
-
-    # Semicolons at end of subdefinition
-    line = re.sub(r"; (\d\))", r". \1", line)
-    # Extraneous dashes
-    line = re.sub(r"—([2-9]\))", r" \1", line)
-    # Missing spaces after quoted punctuation (confuses pysbd)
-    line = re.sub(r"([.!?]’)(\w)", r"\1 \2", line)
-    # Extraneous periods at end of line
-    line = re.sub(r"\.? \.$", ".", line)
-
-    return line
 
 
 def cleanup_entry(entry: ParsedEntry):  # noqa: C901
@@ -286,7 +248,6 @@ def cleanup_entry(entry: ParsedEntry):  # noqa: C901
 
 def parse_line(line: str) -> list[ParsedEntry]:
     """Parse a line into one or more dictionary entries."""
-    line = cleanup_line(line)
     segs = SEGMENTER.segment(line)
     headword, sep, definition = segs[0].partition("—")
     # Senses attached to headwords

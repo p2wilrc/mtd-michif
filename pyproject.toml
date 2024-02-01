@@ -45,10 +45,6 @@ mtd-michif = "mtd_michif:main"
 [tool.isort]
 profile = "black"
 
-[tool.flake8]
-extend-ignore = "E203"
-max-line-length = "88"
-
 [tool.setuptools]
 packages = ["mtd_michif", "mtd_michif.models"]
 include-package-data = true

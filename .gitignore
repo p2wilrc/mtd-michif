@@ -50,6 +50,8 @@ Thumbs.db
 
 # debug
 debug.log
+/logs
+
 
 # generated files
 /projects/mtd/src/assets/data/audio
