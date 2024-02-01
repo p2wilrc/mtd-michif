@@ -37,7 +37,7 @@ def make_argparse():
     parser.add_argument(
         "--dictionary",
         "-d",
-        default="data/laverdure.json",
+        default="build/laverdure.json",
         metavar="JSON",
         help="the JSON dictionary base",
     )
@@ -81,14 +81,14 @@ def make_argparse():
     parser.add_argument(
         "--session-metadata",
         "-m",
-        default="data/annotation_sessions.json",
+        default="build/annotation_sessions.json",
         metavar="PATH",
         help="the JSON file with sessions and metadata",
     )
     parser.add_argument(
         "--channel-mapping",
         "-c",
-        default="data/channel_mapping.json",
+        default="build/channel_mapping.json",
         metavar="PATH",
         help="the JSON file with channel mappings for audio files",
     )
@@ -105,14 +105,14 @@ def make_argparse():
     parser.add_argument(
         "--recordings",
         metavar="RECORDINGS_DIR",
-        default="raw/Recordings",
+        default="../mtd-michif-recordings",
         help="Base directory for recordings",
         type=Path,
     )
     parser.add_argument(
         "--annotations",
         metavar="ANNOTATION_DIR",
-        default="raw/Annotations",
+        default="../mtd-michif-annotations",
         help="Base directory for annotations",
         type=Path,
     )
