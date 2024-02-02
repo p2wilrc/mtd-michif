@@ -1,4 +1,4 @@
-# On-line version of the Turtle Mountain Michif Dictionary
+# Electronic version of the Turtle Mountain Michif Dictionary
 
 This repository contains the scripts needed to prepare the data files
 for the Turtle Mountain dictionary of Michif, along with the
