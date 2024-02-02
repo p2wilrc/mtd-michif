@@ -1,0 +1,13 @@
+mappings:
+  - display_name: Michif approximate search
+    rules_path: michif-approx.csv
+    type: mapping
+    norm_form: NFC
+    escape_special: true
+    case_sensitive: false
+    authors:
+      - Fineen Davis
+      - Olivia Sammons
+      - Heather Souter
+      - Christopher Cox
+      - Jacob Collard

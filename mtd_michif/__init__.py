@@ -10,6 +10,11 @@ from typing import Iterator
 
 from tqdm import tqdm  # type: ignore
 
+from mtd.languages import LanguageConfig
+from mtd.languages.suites import LanguageSuite
+
+from click.testing import CliRunner
+
 from .add_clarifications import add_clarifications
 from .create_channel_mapping import create_channel_mapping
 from .create_file_mapping import ElanUntangler
@@ -47,10 +52,11 @@ def make_argparse() -> argparse.ArgumentParser:
         default=Path.cwd() / "build",
     )
     parser.add_argument(
-        "-A",
-        "--output-audio-dir",
-        help="Directory for output audio files",
-        default=Path.cwd() / "projects" / "mtd" / "src" / "assets" / "data" / "audio",
+        "-o",
+        "--assets-dir",
+        help="Output directory for dictionary assets",
+        type=Path,
+        default=Path.cwd() / "projects" / "mtd" / "src" / "assets",
     )
     return parser
 
@@ -178,6 +184,18 @@ def dictionary_stats(dictionary: Dictionary) -> None:
     )
 
 
+def fix_dictionary(dictionary: Dictionary, relpath: str) -> None:
+    for entry in dictionary.entries.values():
+        for audio in entry.audio:
+            audio.path = "/".join((relpath, Path(audio.path).name))
+        entry.audio.sort(key=lambda x: (x.speaker, x.path), reverse=True)
+        for example in entry.examples:
+            for audio in example.audio:
+                audio.path = "/".join((relpath, Path(audio.path).name))
+            example.audio.sort(key=lambda x: (x.speaker, x.path), reverse=True)
+        entry.examples.sort(key=lambda x: (x.score, x.english, x.michif))
+
+
 def main() -> None:
     """Entry-point for dictionary build."""
     parser = make_argparse()
@@ -211,16 +229,22 @@ def main() -> None:
 
     LOGGER.info("Processing text dictionary...")
     dictionary = Dictionary.from_text(
-        args.annotations / DICT_TXT, uncorrectables=Dictionary.load_json(UNCORRECTABLES)
+        args.annotations / DICT_TXT,
+        uncorrectables=Dictionary.load_json(UNCORRECTABLES),
     )
     dictionary.save_json(args.build / "laverdure.json")
 
     LOGGER.info("Matching annotated audio to dictionary entries...")
-    matcher = AudioExtractor(dictionary, output_audio_dir=args.output_audio_dir)
+    matcher = AudioExtractor(
+        dictionary,
+        output_audio_dir=args.assets_dir / "data" / "audio",
+    )
     elan_files = list(find_annotations(args, session_data, channel_mapping))
     for elan_file, audio, eaf in tqdm(elan_files):
         LOGGER.info("Processing ELAN file %s", elan_file)
-        updated_entries = matcher.extract_audio(eaf_path=elan_file, audio_info=audio)
+        updated_entries = matcher.extract_audio(
+            eaf_path=elan_file, audio_info=audio
+        )
         LOGGER.info("Updated %d entries", len(updated_entries))
 
     LOGGER.info("Finding fallback audio...")
@@ -242,3 +266,20 @@ def main() -> None:
     LOGGER.info("Moving clarifications onto headwords...")
     add_clarifications(dictionary)
     dictionary.save_json(args.build / "laverdure_clarified.json")
+
+    LOGGER.info("Final dictionary preprocessing for MotherTongues...")
+    fix_dictionary(dictionary, "data/audio")
+    dictionary.save_json(args.build / "laverdure_final.json")
+
+    LOGGER.info("Exporting dictionary for MotherTongues...")
+    config_json = Path(__file__).parent.parent / "config" / "config.json"
+    config = LanguageConfig(str(config_json))
+    ls = LanguageSuite([config])
+    # There should be only one dictionary
+    d = ls.dictionaries[0]
+    # FIXME: MTD reallly should indent these... currently doesn't...
+    with open(args.assets_dir / "js" / "config-michif.js", "wt") as outfh:
+        outfh.write(d.return_formatted_config(form="js"))
+    with open(args.assets_dir / "js" / "dict_cached-michif.js", "wt") as outfh:
+        outfh.write(d.return_formatted_data(form="js"))
+    LOGGER.info("Done!  You may test the dictionary with `npm start`.")
