@@ -216,9 +216,11 @@ class AudioExtractor(AnnotationMatcher):
         force_audio=False,
     ):
         self.force_audio = force_audio
-        self.output_audio_dir = (
-            None if output_audio_dir is None else Path(output_audio_dir)
-        )
+        if output_audio_dir is not None:
+            self.output_audio_dir = Path(output_audio_dir)
+            self.output_audio_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            self.output_audio_dir = None
         self.audio_info = {"name": "UNKNOWN", "path": "UNKNOWN"}
         self.bad_audios: list[dict] = []
         super().__init__(dictionary)
