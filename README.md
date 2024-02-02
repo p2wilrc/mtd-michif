@@ -1,24 +1,69 @@
-# Turtle Mountain Michif Dictionary Web UI
+# On-line version of the Turtle Mountain Michif Dictionary
 
-MTD is the second of two open-source tools that allow language
-communities and developers to quickly and inexpensively make their
-dictionary data digitally accessible. MTD-UI is a tool that visualizes
-dictionary data that is prepared with
-[MTD](https://github.com/roedoejet/mothertongues). This is a web
-version constructed for the Michif language.
+This repository contains the scripts needed to prepare the data files
+for the Turtle Mountain dictionary of Michif, along with the
+Progressive Web App frontent itself.
 
-Please visit the [website](https://www.mothertongues.org) or
-[docs](https://mother-tongues-dictionaries.readthedocs.io/en/latest/)
-for more information.
+## Software Requirements
 
-## Requirements
+The dictionary build requires Python 3.9 or newer. If you don't have
+this the easiest thing to do is to install
+[Anaconda](https://www.anaconda.com/download).
 
-You should have [Node.js 18](https://nodejs.org/en) installed. Now
-you can install the dependencies with:
+It also requires SoX with FLAC and MP3 support, which can be done on
+Ubuntu with:
+
+    sudo apt-get install sox libsox-fmt-all
+
+Or under Anaconda with:
+
+    conda install -c conda-forge sox
+
+Now install the dictionary building tools in a "virtual environment":
+
+    python -m venv venv && . venv/bin/activate
+    pip install -e .
+
+To verify that it works, you can run the test suite:
+
+    pip install pytest
+    pytest
+
+You will need [Node.js 18](https://nodejs.org/en) to build the web
+front-end. You can install the dependencies with:
 
     npm install
 
-To run a local development server:
+## Data Requirements
+
+Building the actual dictionary requires:
+
+- the metadata spreadsheet with session and speaker metadata
+- the (revised and cleaned up) text format dictionary
+- the annotations for the audio recordings
+- the original recordings
+
+While the source code for building the dictionary is freely
+distributable under an open-source license, the data is not. Please
+contact [P2WILRC](mailto:info@p2wilr.org) if you wish to access the
+data for research purposes.
+
+The data is available as two separate components:
+`mtd-michif-annotations`, which contains the metadata, text, and ELAN
+format annotations, and `mtd-michif-recordings`, which is the audio
+recordings themselves. This repository contains a tiny sample of the
+full data for testing purposes.
+
+# Building the dictionary
+
+To build the dictionary, we assume that you have
+`mtd-michif-annotations` and `mtd-michif-recordings` in the same
+parent directory as this repository. Assuming you have installed
+everything as mentioned above, you can then simply run:
+
+    mtd-michif
+
+Once this has succeeded, you can launch the website locally with:
 
     npm start
 
@@ -44,11 +89,7 @@ As well as institutional support from the [First Peoples' Cultural
 Council](http://www.fpcc.ca/) and SSHRC Insight Grant 435-2016-1694,
 ‘Enhancing Lexical Resources for BC First Nations Languages’.
 
-This version of MTD Web UI was built using the _incredible_ [Angular
-NgRx
-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)
-by Tomas Trajan. If you're an Angular developer, go check it out!
-
 ## License
 
-[MIT © Aidan Pine.](LICENSE)
+© 2023 Prairies to Woodlands Indigenous Language Revitalization Circle
+and Aidan Pine. [MIT license](LICENSE)

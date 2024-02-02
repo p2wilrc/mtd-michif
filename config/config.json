@@ -1,0 +1,15 @@
+{
+  "config": {
+    "L1": "Michif",
+    "L2": "English",
+    "optional_field_title": "Optional Info",
+    "alphabet": "./alphabet_tmd.csv",
+    "audio_path": "assets/"
+  },
+  "data": [
+    {
+      "manifest": "./manifest_json.json",
+      "resource": "../build/laverdure_final.json"
+    }
+  ]
+}

@@ -50,6 +50,8 @@ Thumbs.db
 
 # debug
 debug.log
+/logs
+
 
 # generated files
 /projects/mtd/src/assets/data/audio
@@ -58,3 +60,6 @@ debug.log
 
 # junk
 *~
+*.egg-info
+__pycache__
+/build
