@@ -16,8 +16,8 @@ import Levenshtein
 from pympi.Elan import Eaf  # type: ignore
 
 from .dictionary import Dictionary
-from .textnorm import normalize_english, normalize_michif
 from .pydantic_models import Entry, Example
+from .textnorm import normalize_english, normalize_michif
 
 LOOSE_PARENTHETICALS = re.compile(r"\((.*?)\)\w*\.?$")
 EXTRA_INFO = re.compile(r"\s-.*")

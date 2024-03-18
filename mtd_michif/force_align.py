@@ -137,6 +137,36 @@ def force_align(dictionary):  # noqa: C901
     return bad_annotations
 
 
+def save_bad_annotations(bad_annotations: list[tuple], path: Path):
+    with open(path, "wt") as outfh:
+        writer = csv.DictWriter(
+            outfh, ["ID", "Text", "Session", "Start", "End", "MP3", "Details"]
+        )
+        writer.writeheader()
+        for michif, clip, entry in bad_annotations:
+            # Session ID, possibly a track number (ignored), start, end
+            # FIXME: we should have used underscores or spaces or something
+            m = re.match(
+                r"(.*-\d\d\d\d-?\d\d-?\d\d(?:-\d\d)?).*-(\d+\.\d+)-(\d+\.\d+)\.\w+$",
+                clip.path.name,
+            )
+            assert m is not None
+            session, start, end = m.groups()
+            dstart = str(round(float(start) * 1000))
+            dend = str(round(float(end) * 1000))
+            writer.writerow(
+                {
+                    "ID": entry.id,
+                    "Text": michif,
+                    "Session": session,
+                    "Start": dstart,
+                    "End": dend,
+                    "MP3": clip.path,
+                    "Details": "Alignment failed",
+                }
+            )
+
+
 def main():
     parser = make_argparse()
     args = parser.parse_args()
@@ -146,32 +176,7 @@ def main():
     if args.output:
         dictionary.save_json(args.output)
     if args.bad_annotations:
-        with open(args.bad_annotations, "wt") as outfh:
-            writer = csv.DictWriter(
-                outfh, ["ID", "Text", "Session", "Start", "End", "MP3", "Details"]
-            )
-            writer.writeheader()
-            for michif, clip, entry in bad_annotations:
-                # Session ID, possibly a track number (ignored), start, end
-                # FIXME: we should have used underscores or spaces or something
-                m = re.match(
-                    r"(.*-\d\d\d\d-?\d\d-?\d\d(?:-\d\d)?).*-(\d+\.\d+)-(\d+\.\d+)\.\w+$",
-                    clip.path.name,
-                )
-                session, start, end = m.groups()
-                dstart = str(round(float(start) * 1000))
-                dend = str(round(float(end) * 1000))
-                writer.writerow(
-                    {
-                        "ID": entry.id,
-                        "Text": michif,
-                        "Session": session,
-                        "Start": dstart,
-                        "End": dend,
-                        "MP3": clip.path,
-                        "Details": "Alignment failed",
-                    }
-                )
+        save_bad_annotations(bad_annotations, args.bad_annotations)
     else:
         for michif, clip, entry in bad_annotations:
             print(f"{entry.id} ({entry.english}): {michif} ({clip.path.name})")
