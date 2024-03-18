@@ -17,7 +17,7 @@ from pympi.Elan import Eaf  # type: ignore
 
 from .dictionary import Dictionary
 from .textnorm import normalize_english, normalize_michif
-from .types import Entry, Example
+from .pydantic_models import Entry, Example
 
 LOOSE_PARENTHETICALS = re.compile(r"\((.*?)\)\w*\.?$")
 EXTRA_INFO = re.compile(r"\s-.*")

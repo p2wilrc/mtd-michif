@@ -11,7 +11,7 @@ from typing import Optional
 from pydantic import RootModel
 
 from . import extract_examples, parse_entries
-from .types import Entry
+from .pydantic_models import Entry
 
 LOGGER = logging.getLogger("mtd-michif")
 
