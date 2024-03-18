@@ -71,6 +71,7 @@ cov = [
   "test-cov",
   "cov-report",
 ]
+build = "mtd-michif"
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
@@ -100,3 +101,6 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]

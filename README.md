@@ -19,15 +19,9 @@ Or under Anaconda with:
 
     conda install -c conda-forge sox
 
-Now install the dictionary building tools in a "virtual environment":
-
-    python -m venv venv && . venv/bin/activate
-    pip install -e .
-
-To verify that it works, you can run the test suite:
-
-    pip install pytest
-    pytest
+We use [hatch](https://hatch.pypa.io/latest/) to manage environments
+and dependencies. You can install it using [these
+directions](https://hatch.pypa.io/latest/install/).
 
 You will need [Node.js 18](https://nodejs.org/en) to build the web
 front-end. You can install the dependencies with:
@@ -58,10 +52,10 @@ full data for testing purposes.
 
 To build the dictionary, we assume that you have
 `mtd-michif-annotations` and `mtd-michif-recordings` in the same
-parent directory as this repository. Assuming you have installed
-everything as mentioned above, you can then simply run:
+parent directory as this repository. Assuming you have installed Hatch
+as mentioned above, you can then simply run, from this directory:
 
-    mtd-michif
+    hatch run build
 
 Once this has succeeded, you can launch the website locally with:
 
