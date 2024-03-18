@@ -5,6 +5,7 @@ Package for building the Turtle Mountain Dictionary of Michif.
 import argparse
 import json
 import logging
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterator
 
@@ -13,6 +14,7 @@ from mtd.languages.suites import LanguageSuite  # type: ignore
 from tqdm import tqdm  # type: ignore
 
 from .add_clarifications import add_clarifications
+from .bad_annotations_to_elan import bad_annotations_to_elan
 from .create_channel_mapping import create_channel_mapping
 from .create_file_mapping import ElanUntangler
 from .create_session_mapping import find_sessions
@@ -55,6 +57,12 @@ def make_argparse() -> argparse.ArgumentParser:
         type=Path,
         default=Path.cwd() / "projects" / "mtd" / "src" / "assets",
     )
+    parser.add_argument(
+        "-w",
+        "--website",
+        help="Base URL of dictionary website",
+        default="https://dictionary.michif.org",
+    )
     return parser
 
 
@@ -69,8 +77,10 @@ def check_directories(parser: argparse.ArgumentParser, args: argparse.Namespace)
         parser.error("Dictionary text not found in %s" % args.annotations)
     if not (args.annotations / METADATA).exists():
         parser.error("Metadata not found in %s" % args.annotations)
+    # Prefer reorganized but the old format works too
     if not (args.annotations / "eaf").exists():
-        parser.error("EAF directory not found in %s" % args.annotations)
+        if not (args.annotations / "DONE").exists():
+            parser.error("EAF directory/directories not found in %s" % args.annotations)
     if not args.recordings.glob("*.flac"):
         parser.error("No audio found in %s" % args.recordings)
 
@@ -239,9 +249,7 @@ def main() -> None:
     elan_files = list(find_annotations(args, session_data, channel_mapping))
     for elan_file, audio, eaf in tqdm(elan_files):
         LOGGER.info("Processing ELAN file %s", elan_file)
-        updated_entries = matcher.extract_audio(
-            eaf_path=elan_file, audio_info=audio
-        )
+        updated_entries = matcher.extract_audio(eaf_path=elan_file, audio_info=audio)
         LOGGER.info("Updated %d entries", len(updated_entries))
 
     LOGGER.info("Finding fallback audio...")
@@ -260,6 +268,17 @@ def main() -> None:
     bad_annotations = force_align(dictionary)
     dictionary.save_json(args.build / "laverdure_aligned.json")
     save_bad_annotations(bad_annotations, args.build / "bad_annotations.csv")
+
+    LOGGER.info("Creating ELAN files for post-correction...")
+    elandir = datetime.now().strftime("elan-%Y%m%d")
+    bad_annotations_to_elan(
+        sessions,
+        args.recordings,
+        args.annotations,
+        [args.build / "bad_annotations.csv"],
+        args.build / elandir,
+        args.website,
+    )
 
     LOGGER.info("Moving clarifications onto headwords...")
     add_clarifications(dictionary)
