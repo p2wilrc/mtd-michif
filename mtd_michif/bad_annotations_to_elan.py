@@ -155,14 +155,17 @@ def create_elan_files(outdir, session_info, recordings, annotations, start, end)
         )
     )
     # Create or copy reduced audio
+    mp3_path = None
     flac_path = recordings / audio_info["path"]
-    mp3_path = recordings / f"{flac_path.stem}-elan.mp3"
-    if mp3_path.exists():
-        mp3_out_path = outdir / f"{eaf_path.stem}-elan.mp3"
-        LOGGER.info("Copying MP3 from %s to %s", mp3_path, mp3_out_path)
-        shutil.copy(mp3_path, mp3_out_path)
-        mp3_path = mp3_out_path
-    else:
+    for path in [
+        recordings / f"{flac_path.stem}-elan.mp3",
+        eaf_path.parent / f"{eaf_path.stem}-elan.mp3",
+    ]:
+        if path.exists():
+            mp3_path = outdir / f"{eaf_path.stem}-elan.mp3"
+            LOGGER.info("Copying MP3 from %s to %s", path, mp3_path)
+            shutil.copy(path, mp3_path)
+    if mp3_path is None:
         mp3_path = outdir / f"{eaf_path.stem}-elan.mp3"
         if not mp3_path.exists():
             LOGGER.info("Creating MP3 in %s", mp3_path)
