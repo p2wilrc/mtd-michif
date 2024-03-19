@@ -121,8 +121,8 @@ def make_argparse():
     parser.add_argument(
         "-w",
         "--website",
-        help="Base URL of dictionary website",
-        default="https://dictionary.michif.org",
+        help="Base URL of dictionary for ELAN reannotation packages",
+        default="https://localhost:4200",
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Verbose debug output"

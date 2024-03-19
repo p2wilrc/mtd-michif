@@ -60,8 +60,8 @@ def make_argparse() -> argparse.ArgumentParser:
     parser.add_argument(
         "-w",
         "--website",
-        help="Base URL of dictionary website",
-        default="https://dictionary.michif.org",
+        help="Base URL of dictionary for ELAN reannotation packages",
+        default="https://localhost:4200",
     )
     return parser
 
