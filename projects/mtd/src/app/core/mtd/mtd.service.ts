@@ -7,12 +7,25 @@ import { META } from '../../../config/config';
 import { uniq } from 'lodash';
 // import { AlertController } from '@ionic/angular';
 
+// Not sure exactly how to inject this in headless testing
+var TESTCONFIG: Config = {
+  L1: {
+    name: 'foo',
+    lettersInLanguage: ['f', 'o']
+  },
+  L2: {
+    name: 'bar'
+  },
+  build: 'baz'
+};
+
 @Injectable({ providedIn: 'root' })
 export class MtdService {
   _dictionary_data$ = new BehaviorSubject<DictionaryData[]>(
     window['dataDict'] || []
   );
-  _config$ = new BehaviorSubject<Config>(window['config'] || {});
+  // FIXME: should get `window` otherwise so we can mock it
+  _config$ = new BehaviorSubject<Config>(window['config'] || TESTCONFIG);
   remoteData$: any;
   remoteConfig$: any;
   base: string = environment.apiBaseURL;
@@ -79,7 +92,6 @@ export class MtdService {
   }
 
   get config_value() {
-    console.log('CONFIG IS', this._config$.value);
     return this._config$.value;
   }
 
