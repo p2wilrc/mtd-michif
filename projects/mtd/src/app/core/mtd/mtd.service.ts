@@ -10,7 +10,7 @@ import { uniq } from 'lodash';
 @Injectable({ providedIn: 'root' })
 export class MtdService {
   _dictionary_data$ = new BehaviorSubject<DictionaryData[]>(
-    window['dataDict'] || {}
+    window['dataDict'] || []
   );
   _config$ = new BehaviorSubject<Config>(window['config'] || {});
   remoteData$: any;
