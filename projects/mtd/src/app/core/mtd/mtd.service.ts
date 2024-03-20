@@ -79,11 +79,12 @@ export class MtdService {
   }
 
   get config_value() {
-    return this._config$.getValue();
+    console.log('CONFIG IS', this._config$.value);
+    return this._config$.value;
   }
 
   get dataDict_value() {
-    return this._dictionary_data$.getValue();
+    return this._dictionary_data$.value;
   }
 
   get categories$(): Observable<object> {
