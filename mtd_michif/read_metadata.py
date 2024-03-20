@@ -28,39 +28,39 @@ def read_metadata(path: PathLike) -> dict[str, dict | list]:
     people = {}
     hdr = list(next(wb["People"].iter_rows(1, 1, values_only=True)))
     for row in wb["People"].iter_rows(2, values_only=True):
-        row = {hdr[i]: x for i, x in enumerate(row)}
-        people[row["ID"]] = row
+        people_data = {hdr[i]: x for i, x in enumerate(row)}
+        people[people_data["ID"]] = people_data
     sessions: defaultdict[str, dict] = defaultdict(dict)
     hdr = list(next(wb["Sessions"].iter_rows(1, 1, values_only=True)))
     for row_idx in range(2, wb["Sessions"].max_row + 1):
-        row = {hdr[i]: x.value for i, x in enumerate(wb["Sessions"][row_idx])}
-        if row["FileName"] is None:
+        row_data = {hdr[i]: x.value for i, x in enumerate(wb["Sessions"][row_idx])}
+        if row_data["FileName"] is None:
             continue
         for col in ("SessionDate", "StatusDate"):
-            if row[col] is not None:
-                if isinstance(row[col], datetime):
-                    row[col] = row[col].strftime("%Y-%m-%d")
+            if row_data[col] is not None:
+                if isinstance(row_data[col], datetime):
+                    row_data[col] = row_data[col].strftime("%Y-%m-%d")  # type: ignore
                 else:
-                    LOGGER.info("%s is not datetime: %s", col, row[col])
-        filename, _ = os.path.splitext(row["FileName"])
+                    LOGGER.info("%s is not datetime: %s", col, row_data[col])
+        filename, _ = os.path.splitext(str(row_data["FileName"]))
         if filename in sessions:
             LOGGER.warning("Duplicate file %s", filename)
-        sessions[filename] = row
+        sessions[filename] = row_data
     notes = []
     hdr = list(
         next(wb["Annotator Notes & Missed Words"].iter_rows(1, 1, values_only=True))
     )
     for row in wb["Annotator Notes & Missed Words"].iter_rows(2, values_only=True):
-        row = {hdr[i]: x for i, x in enumerate(row)}
-        if row["FileName"] is None:
+        row_data = {hdr[i]: x for i, x in enumerate(row)}
+        if row_data["FileName"] is None:
             continue
         for col in ("StatusDate",):
-            if row[col] is not None:
-                if isinstance(row[col], datetime):
-                    row[col] = row[col].strftime("%Y-%m-%d")
+            if row_data[col] is not None:
+                if isinstance(row_data[col], datetime):
+                    row_data[col] = row_data[col].strftime("%Y-%m-%d")  # type: ignore
                 else:
-                    LOGGER.info("%s is not datetime: %s", col, row[col])
-        notes.append(row)
+                    LOGGER.info("%s is not datetime: %s", col, row_data[col])
+        notes.append(row_data)
     return {"people": people, "sessions": sessions, "notes": notes}
 
 

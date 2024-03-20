@@ -5,23 +5,22 @@ Package for building the Turtle Mountain Dictionary of Michif.
 import argparse
 import json
 import logging
+from datetime import datetime
 from pathlib import Path
-from typing import Iterator
+from typing import Any, Iterator
 
+from mtd.languages import LanguageConfig  # type: ignore
+from mtd.languages.suites import LanguageSuite  # type: ignore
 from tqdm import tqdm  # type: ignore
 
-from mtd.languages import LanguageConfig
-from mtd.languages.suites import LanguageSuite
-
-from click.testing import CliRunner
-
 from .add_clarifications import add_clarifications
+from .bad_annotations_to_elan import bad_annotations_to_elan
 from .create_channel_mapping import create_channel_mapping
 from .create_file_mapping import ElanUntangler
 from .create_session_mapping import find_sessions
 from .dictionary import Dictionary
 from .elan_to_json import AudioExtractor
-from .force_align import force_align
+from .force_align import force_align, save_bad_annotations
 from .read_metadata import read_metadata
 
 LOGGER = logging.getLogger("mtd-michif")
@@ -58,6 +57,12 @@ def make_argparse() -> argparse.ArgumentParser:
         type=Path,
         default=Path.cwd() / "projects" / "mtd" / "src" / "assets",
     )
+    parser.add_argument(
+        "-w",
+        "--website",
+        help="Base URL of dictionary for ELAN reannotation packages",
+        default="https://localhost:4200",
+    )
     return parser
 
 
@@ -72,13 +77,15 @@ def check_directories(parser: argparse.ArgumentParser, args: argparse.Namespace)
         parser.error("Dictionary text not found in %s" % args.annotations)
     if not (args.annotations / METADATA).exists():
         parser.error("Metadata not found in %s" % args.annotations)
+    # Prefer reorganized but the old format works too
     if not (args.annotations / "eaf").exists():
-        parser.error("EAF directory not found in %s" % args.annotations)
+        if not (args.annotations / "DONE").exists():
+            parser.error("EAF directory/directories not found in %s" % args.annotations)
     if not args.recordings.glob("*.flac"):
         parser.error("No audio found in %s" % args.recordings)
 
 
-def write_json(data: any, outfile: Path) -> None:
+def write_json(data: Any, outfile: Path) -> None:
     with open(outfile, "wt") as outfh:
         json.dump(data, outfh, indent=2, ensure_ascii=False)
 
@@ -213,7 +220,7 @@ def main() -> None:
     untangler.add_recordings(args.recordings)
     untangler.add_annotations(args.annotations)
     untangler.resolve_annotations()
-    annotation_data = sorted(untangler.annodirs.items())
+    annotation_data = sorted([k, v] for k, v in untangler.annodirs.items())
     write_json(annotation_data, args.build / "annotation_dirs.json")
 
     LOGGER.info("Finding recording sessions...")
@@ -242,9 +249,7 @@ def main() -> None:
     elan_files = list(find_annotations(args, session_data, channel_mapping))
     for elan_file, audio, eaf in tqdm(elan_files):
         LOGGER.info("Processing ELAN file %s", elan_file)
-        updated_entries = matcher.extract_audio(
-            eaf_path=elan_file, audio_info=audio
-        )
+        updated_entries = matcher.extract_audio(eaf_path=elan_file, audio_info=audio)
         LOGGER.info("Updated %d entries", len(updated_entries))
 
     LOGGER.info("Finding fallback audio...")
@@ -260,8 +265,20 @@ def main() -> None:
     dictionary_stats(dictionary)
 
     LOGGER.info("Force-aligning for read-alongs...")
-    force_align(dictionary)
+    bad_annotations = force_align(dictionary)
     dictionary.save_json(args.build / "laverdure_aligned.json")
+    save_bad_annotations(bad_annotations, args.build / "bad_annotations.csv")
+
+    LOGGER.info("Creating ELAN files for post-correction...")
+    elandir = datetime.now().strftime("elan-%Y%m%d")
+    bad_annotations_to_elan(
+        sessions,
+        args.recordings,
+        args.annotations,
+        [args.build / "bad_annotations.csv"],
+        args.build / elandir,
+        args.website,
+    )
 
     LOGGER.info("Moving clarifications onto headwords...")
     add_clarifications(dictionary)

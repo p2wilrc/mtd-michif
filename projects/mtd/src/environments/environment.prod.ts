@@ -7,8 +7,6 @@ export const environment = {
   test: false,
   i18nPrefix: '.',
   apiBaseURL: 'http://dictionary.michif.org/',
-  remoteData: false,
-  remoteConfig: false,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies['@angular/core'],

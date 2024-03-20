@@ -26,8 +26,8 @@ from tqdm import tqdm  # type: ignore
 
 from mtd_michif.dictionary import Dictionary
 from mtd_michif.elan import AnnotationMatcher, Span, SpanExtractor
+from mtd_michif.pydantic_models import Clip, Entry, Example
 from mtd_michif.textnorm import normalize_michif
-from mtd_michif.types import Clip, Entry, Example
 
 LOGGER = logging.getLogger("elan-to-json")
 
@@ -208,6 +208,7 @@ def get_speaker_name(audio_info, path) -> str:
 
 class AudioExtractor(AnnotationMatcher):
     """A matcher for extracting audio clips"""
+    output_audio_dir: Optional[Path]
 
     def __init__(
         self,

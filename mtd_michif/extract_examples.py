@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field
 
 from mtd_michif.language_id import language_id
 from mtd_michif.parse_entries import ParsedEntry
-from mtd_michif.types import Entry, Example
+from mtd_michif.pydantic_models import Entry, Example
 
 LOGGER = logging.getLogger("extract-examples")
 

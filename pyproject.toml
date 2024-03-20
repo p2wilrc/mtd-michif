@@ -1,9 +1,6 @@
 [build-system]
-requires = ["setuptools >= 61.0", "setuptools_scm >= 8"]
-build-backend = "setuptools.build_meta"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "mtd-michif"
@@ -42,11 +39,68 @@ Repository = "https://github.com/p2wilrc/mtd-michif-web.git"
 [project.scripts]
 mtd-michif = "mtd_michif:main"
 
-[tool.isort]
-profile = "black"
-
 [tool.setuptools]
 packages = ["mtd_michif", "mtd_michif.models"]
 include-package-data = true
 
-[tool.setuptools_scm]
+[tool.hatch.version]
+path = "mtd_michif/__about__.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+build = "mtd-michif"
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:mtd_michif tests}"
+
+[tool.coverage.run]
+source_pkgs = ["mtd_michif", "tests"]
+branch = true
+parallel = true
+omit = [
+  "mtd_michif/__about__.py",
+]
+
+[tool.coverage.paths]
+mtd_michif = ["mtd_michif"]
+tests = ["tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]

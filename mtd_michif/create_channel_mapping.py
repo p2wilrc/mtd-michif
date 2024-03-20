@@ -31,11 +31,11 @@ def make_argparse() -> argparse.ArgumentParser:
 
 
 def create_channel_mapping(
-    recdir: PathLike, annodir: PathLike, metadata: list[dict]
+    recdir: PathLike, annodir: PathLike, sessions: list[list]
 ) -> dict:
     all_recordings = {}
     error = False
-    for session, session_data in metadata:
+    for session, session_data in sessions:
         recordings = {}
         for recording in session_data["recordings"]:
             metadata = session_data["metadata"][recording["metadata_id"]]

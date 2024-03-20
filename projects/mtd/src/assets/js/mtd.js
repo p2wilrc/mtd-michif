@@ -5,6 +5,7 @@
 'use strict';
 
 var mtd = {};
+var config = window.config;
 
 mtd.transducers = {};
 
