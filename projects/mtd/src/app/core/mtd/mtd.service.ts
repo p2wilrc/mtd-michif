@@ -22,9 +22,9 @@ var TESTCONFIG: Config = {
 @Injectable({ providedIn: 'root' })
 export class MtdService {
   _dictionary_data$ = new BehaviorSubject<DictionaryData[]>(
+    // FIXME: should get `window` otherwise so we can mock it
     window['dataDict'] || []
   );
-  // FIXME: should get `window` otherwise so we can mock it
   _config$ = new BehaviorSubject<Config>(window['config'] || TESTCONFIG);
   remoteData$: any;
   remoteConfig$: any;
