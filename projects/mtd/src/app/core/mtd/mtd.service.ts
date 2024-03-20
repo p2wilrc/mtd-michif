@@ -9,8 +9,10 @@ import { uniq } from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class MtdService {
-  _dictionary_data$ = new BehaviorSubject<DictionaryData[]>(window['dataDict']);
-  _config$ = new BehaviorSubject<Config>(window['config']);
+  _dictionary_data$ = new BehaviorSubject<DictionaryData[]>(
+    window['dataDict'] || {}
+  );
+  _config$ = new BehaviorSubject<Config>(window['config'] || {});
   remoteData$: any;
   remoteConfig$: any;
   base: string = environment.apiBaseURL;
