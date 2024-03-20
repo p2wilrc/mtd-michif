@@ -7,8 +7,6 @@ export const environment = {
   test: true,
   i18nPrefix: '.',
   apiBaseURL: 'http://localhost:4200',
-  remoteData: false,
-  remoteConfig: false,
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies['@angular/core'],
