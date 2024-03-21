@@ -14,13 +14,13 @@ from mtd.languages.suites import LanguageSuite  # type: ignore
 from tqdm import tqdm  # type: ignore
 
 from .add_clarifications import add_clarifications
-from .bad_annotations_to_elan import bad_annotations_to_elan
+from .problem_annotations_to_elan import problem_annotations_to_elan
 from .create_channel_mapping import create_channel_mapping
 from .create_file_mapping import ElanUntangler
 from .create_session_mapping import find_sessions
 from .dictionary import Dictionary
 from .elan_to_json import AudioExtractor
-from .force_align import force_align, save_bad_annotations
+from .force_align import force_align, save_problem_annotations
 from .read_metadata import read_metadata
 
 LOGGER = logging.getLogger("mtd-michif")
@@ -265,17 +265,17 @@ def main() -> None:
     dictionary_stats(dictionary)
 
     LOGGER.info("Force-aligning for read-alongs...")
-    bad_annotations = force_align(dictionary)
+    problem_annotations = force_align(dictionary)
     dictionary.save_json(args.build / "laverdure_aligned.json")
-    save_bad_annotations(bad_annotations, args.build / "bad_annotations.csv")
+    save_problem_annotations(problem_annotations, args.build / "problem_annotations.csv")
 
     LOGGER.info("Creating ELAN files for post-correction...")
     elandir = datetime.now().strftime("elan-%Y%m%d")
-    bad_annotations_to_elan(
+    problem_annotations_to_elan(
         sessions,
         args.recordings,
         args.annotations,
-        [args.build / "bad_annotations.csv"],
+        [args.build / "problem_annotations.csv"],
         args.build / elandir,
         args.website,
     )

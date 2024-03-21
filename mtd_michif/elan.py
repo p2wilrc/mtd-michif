@@ -341,7 +341,7 @@ class AnnotationMatcher:
         self.english_index: defaultdict[str, set[Entry]] = defaultdict(set)
         self.michif_index: defaultdict[str, set[Entry]] = defaultdict(set)
         self.max_distance = max_distance
-        self.bad_annotations: list[Span] = []
+        self.problem_annotations: list[Span] = []
         for entry in dictionary.entries.values():
             michif = clean_definition(entry.michif)
             overcrg = normalize_michif(michif)
@@ -567,10 +567,10 @@ class AnnotationMatcher:
             new_group()
         return groups
 
-    def write_bad_annotations(self, outfh: TextIO):
+    def write_problem_annotations(self, outfh: TextIO):
         writer = csv.DictWriter(outfh, ["EAF", "RefID", "Text", "Start", "End"])
         writer.writeheader()
-        for span in self.bad_annotations:
+        for span in self.problem_annotations:
             message = ":".join(
                 (
                     str(span.annotation_type),

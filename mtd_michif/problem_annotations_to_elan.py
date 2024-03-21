@@ -205,7 +205,7 @@ def create_elan_files(outdir, session_info, recordings, annotations, start, end)
 
 
 def create_elan_directory(
-    bad_annotations,
+    problem_annotations,
     session_metadata,
     recordings: Path,
     annotations: Path,
@@ -220,7 +220,7 @@ def create_elan_directory(
     with open(outdir / "index.html", "wt") as outfh:
         outfh.write(HTML_HEADER)
         for session in sessions:
-            infos = bad_annotations[session]
+            infos = problem_annotations[session]
             session_info = session_metadata[session]
             eaf_info = session_info["annotations"][0]
             eaf_name = Path(eaf_info["path"]).name
@@ -290,7 +290,7 @@ def create_elan_directory(
     return elan_files, assignments
 
 
-def bad_annotations_to_elan(
+def problem_annotations_to_elan(
     session_metadata: dict[str, dict],
     recordings: Path,
     annotations: Path,
@@ -305,7 +305,7 @@ def bad_annotations_to_elan(
         eaf_name = Path(eaf_info["path"]).name
         eaf_map[eaf_name] = session
 
-    bad_annotations = defaultdict(list)
+    problem_annotations = defaultdict(list)
     for path in csvs:
         with open(path) as infh:
             reader = csv.DictReader(infh)
@@ -319,9 +319,9 @@ def bad_annotations_to_elan(
                         row["EAF"] in eaf_map
                     ), f"EAF {row['EAF']} not found in metadata"
                     row["Session"] = eaf_map[row["EAF"]]
-                bad_annotations[row["Session"]].append(row)
+                problem_annotations[row["Session"]].append(row)
 
-    for session, to_check in bad_annotations.items():
+    for session, to_check in problem_annotations.items():
 
         def row_key(row):
             return row["Start"], row["End"]
@@ -333,14 +333,14 @@ def bad_annotations_to_elan(
             details = [r["Details"] for r in rows if "Details" in r]
             rows[0]["Details"] = ",".join(details)
             new_to_check.append(rows[0])
-        bad_annotations[session] = new_to_check
+        problem_annotations[session] = new_to_check
 
-    sessions = sorted(bad_annotations.keys())
+    sessions = sorted(problem_annotations.keys())
     today = datetime.date.today().strftime("%Y%m%d")
     if num_sessions == 0:
         LOGGER.info("Creating ELAN files in %s", output)
         elan_files, assignments = create_elan_directory(
-            bad_annotations,
+            problem_annotations,
             session_metadata,
             recordings,
             annotations,
@@ -355,7 +355,7 @@ def bad_annotations_to_elan(
             outdir = output / ("elan_files_%s_%d" % (today, idx))
             LOGGER.info("Creating ELAN files in %s", outdir)
             f, a = create_elan_directory(
-                bad_annotations,
+                problem_annotations,
                 session_metadata,
                 recordings,
                 annotations,
@@ -394,7 +394,7 @@ def main(args):
         for session, session_info in json.load(infh):
             session_metadata[session] = session_info
 
-    bad_annotations_to_elan(
+    problem_annotations_to_elan(
         session_metadata,
         args.recordings,
         args.annotations,
