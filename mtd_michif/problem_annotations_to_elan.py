@@ -135,7 +135,7 @@ def make_argparse():
     )
     parser.add_argument(
         "csvs",
-        help="CSV files of individual bad annotation spans (without audio/entries)",
+        help="CSV files of individual problem annotation spans (without audio/entries)",
         type=Path,
         nargs="+",
     )

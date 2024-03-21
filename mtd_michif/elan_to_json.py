@@ -48,7 +48,7 @@ def make_argparse():
         help="the output JSON file",
     )
     parser.add_argument(
-        "--bad-annotations",
+        "--problem-annotations",
         type=Path,
         help="Path to write CSV of annotations to be manually checked.",
     )

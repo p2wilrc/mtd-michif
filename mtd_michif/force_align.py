@@ -35,7 +35,7 @@ def make_argparse():
     )
     parser.add_argument(
         "-b",
-        "--bad-annotations",
+        "--problem-annotations",
         type=Path,
         help="Path to write CSV of bad annotations.",
     )
