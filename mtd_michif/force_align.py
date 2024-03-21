@@ -113,7 +113,7 @@ def force_align(dictionary):  # noqa: C901
             loglevel="FATAL",
         )  # Silence!
 
-    bad_annotations = []
+    problem_annotations = []
     for orig_text, text, clip, entry, result_text in zip(
         orig_texts,
         texts,
@@ -133,17 +133,17 @@ def force_align(dictionary):  # noqa: C901
             clip.starts = starts[1:]
         elif len(starts) == 0:
             # Oops, this failed
-            bad_annotations.append((orig_text, clip, entry))
-    return bad_annotations
+            problem_annotations.append((orig_text, clip, entry))
+    return problem_annotations
 
 
-def save_bad_annotations(bad_annotations: list[tuple], path: Path):
+def save_problem_annotations(problem_annotations: list[tuple], path: Path):
     with open(path, "wt") as outfh:
         writer = csv.DictWriter(
             outfh, ["ID", "Text", "Session", "Start", "End", "MP3", "Details"]
         )
         writer.writeheader()
-        for michif, clip, entry in bad_annotations:
+        for michif, clip, entry in problem_annotations:
             # Session ID, possibly a track number (ignored), start, end
             # FIXME: we should have used underscores or spaces or something
             m = re.match(
@@ -171,14 +171,14 @@ def main():
     parser = make_argparse()
     args = parser.parse_args()
     dictionary = Dictionary.load_json(args.dictionary)
-    bad_annotations = force_align(dictionary)
+    problem_annotations = force_align(dictionary)
 
     if args.output:
         dictionary.save_json(args.output)
-    if args.bad_annotations:
-        save_bad_annotations(bad_annotations, args.bad_annotations)
+    if args.problem_annotations:
+        save_problem_annotations(problem_annotations, args.problem_annotations)
     else:
-        for michif, clip, entry in bad_annotations:
+        for michif, clip, entry in problem_annotations:
             print(f"{entry.id} ({entry.english}): {michif} ({clip.path.name})")
 
 

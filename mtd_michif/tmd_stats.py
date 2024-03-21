@@ -5,7 +5,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from mtd_michif.dictionary import Dictionary
-from mtd_michif.types import Entry, Example
+from mtd_michif.pydantic_models import Entry, Example
 
 parser = argparse.ArgumentParser(
     description="Get statistics of built dictionary",

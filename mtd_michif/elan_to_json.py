@@ -261,7 +261,7 @@ class AudioExtractor(AnnotationMatcher):
             matches = self.match_span(span)
             if not matches:
                 LOGGER.error("NO MATCHES: %s", span)
-                self.bad_annotations.append(span)
+                self.problem_annotations.append(span)
                 continue
             # Take only the *best* match to avoid having zillions of
             # audio clips for common words!
@@ -365,7 +365,7 @@ class AudioExtractor(AnnotationMatcher):
             LOGGER.error("Clip is much too long: %s", fileid)
             for span in spans:
                 LOGGER.error("    %s", span)
-                self.bad_annotations.append(span)
+                self.problem_annotations.append(span)
             return None
         if self.output_audio_dir is None:
             return Clip(speaker=speaker_name, path=("%s.mp3" % fileid))
@@ -525,9 +525,9 @@ def main():
         entry.examples.sort(key=lambda x: (x.score, x.english, x.michif))
     if args.output:
         dictionary.save_json(args.output)
-    if args.bad_annotations:
-        with open(args.bad_annotations, "wt") as outfh:
-            matcher.write_bad_annotations(outfh)
+    if args.problem_annotations:
+        with open(args.problem_annotations, "wt") as outfh:
+            matcher.write_problem_annotations(outfh)
     if args.bad_audios:
         with open(args.bad_audios, "wt") as outfh:
             matcher.write_bad_audios(outfh)
